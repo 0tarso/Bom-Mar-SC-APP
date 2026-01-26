@@ -2,9 +2,12 @@ import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { Animated, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import React, { useEffect, useRef } from "react";
+import LottieView from 'lottie-react-native'
 
 import { NavigationRoute, ParamListBase } from "@react-navigation/native";
 import { COLORS } from "@/src/Theme/Colors"
+import praia_icon from "@/assets/animations/praias_icon.json"
+import favorites_icon from "@/assets/animations/favorites_icon.json"
 
 interface TabItemProps {
   state: BottomTabBarProps["state"];
@@ -14,14 +17,15 @@ interface TabItemProps {
   index: number;
 }
 
+
 export default function TabItem({ state, descriptors, navigation, route, index }: TabItemProps) {
   const { options } = descriptors[route.key];
   const label = options.tabBarLabel ?? options.title ?? route.name;
 
-  const iconName = {
-    "home": "umbrella-beach",
-    "favorites": "heart",
-  }[route.name] || "ellipse-outline";
+  const lottieIcon = {
+    home: praia_icon,
+    favorites: favorites_icon,
+  }[route.name];
 
   const isFocused = state.index === index;
 
@@ -59,19 +63,24 @@ export default function TabItem({ state, descriptors, navigation, route, index }
 
 
       <Animated.View style={
-        [route.name === 'home' ? { alignItems: "center", transform: [{ scale }] }
-          : { alignItems: "center", transform: [{ scale }] }]}>
-        <FontAwesome5
-          name={iconName as any}
-          size={24}
-          color={(isFocused) ? COLORS.BLUE_ENABLE : COLORS.BLUE_DISABLE}
+        { alignItems: "center", transform: [{ scale }] }}>
+        <LottieView
+          source={lottieIcon}
+          autoPlay={isFocused}
+          loop={false}
+          speed={0.7}
+          style={[
+            { width: 50, height: 50, aspectRatio: 1 },
+            isFocused ? { opacity: 1 } : { opacity: 0.5 }
+          ]}
         />
+
         <Text
-          style={[{
+          style={{
             color: (isFocused) ? COLORS.BLUE_ENABLE : COLORS.BLUE_DISABLE,
-            fontSize: 10,
+            fontSize: 12,
             fontWeight: (isFocused) ? "800" : "400"
-          }, styles.tabText]}
+          }}
         >
           {label as string}
         </Text>
@@ -88,10 +97,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  tabText: {
-    fontFamily: 'MontserratBold'
-  },
-  tabArea: {
 
-  }
 })

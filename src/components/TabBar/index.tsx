@@ -5,6 +5,7 @@ import TabItem from '../TabItem'
 
 import { styles } from "./styles"
 import { COLORS } from '@/src/Theme/Colors'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function TabBar(props: BottomTabBarProps) {
 
@@ -28,7 +29,11 @@ export default function TabBar(props: BottomTabBarProps) {
 
 
   return (
-    <View style={{ backgroundColor: COLORS.GRAY_BACKGROUND }}>
+    <SafeAreaView style={{
+      backgroundColor: COLORS.GRAY_BACKGROUND,
+      position: 'relative',
+      alignItems: 'center'
+    }}>
 
       <View style={styles.container}>
 
@@ -45,7 +50,7 @@ export default function TabBar(props: BottomTabBarProps) {
 
 
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 
