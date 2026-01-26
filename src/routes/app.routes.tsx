@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeScreen from '../screens/Home'
 import { FontAwesome5 } from '@expo/vector-icons';
 import FavoritesScreen from '../screens/Favorites';
+import TabBar from '../components/TabBar';
 
 export type RootTabParamList = {
   Root: undefined,
@@ -16,8 +17,10 @@ const AppRoutes = () => {
   return (
     <Tab.Navigator id="main-tabs"
       screenOptions={{
-        headerShown: false
+        headerShown: false,
       }}
+      tabBar={(props) => <TabBar {...props} />}
+
     >
 
       <Tab.Screen name="home" component={HomeScreen} options={{
