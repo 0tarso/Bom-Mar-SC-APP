@@ -1,0 +1,14 @@
+export const COLORS = {
+  BLUE_PRIMARY: "#4085cb",
+
+  BLUE_DISABLE: "#82B7EE",
+  BLUE_ENABLE: "#4085cb",
+
+  GRAY_BACKGROUND: "#f5f5f5",
+
+  CARD_TEXT_PRIMARY: "#4085cb",
+  CARD_BORDER: "#4085cb",
+  CARD_BORDER_CAUTION: "#DE6969",
+
+  FULL_WHITE: "#ffff"
+}
