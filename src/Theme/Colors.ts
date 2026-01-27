@@ -9,6 +9,10 @@ export const COLORS = {
   CARD_TEXT_PRIMARY: "#4085cb",
   CARD_BORDER: "#4085cb",
   CARD_BORDER_CAUTION: "#DE6969",
+  RED_CAUTION: "#DE6969",
 
-  FULL_WHITE: "#ffff"
+  FULL_WHITE: "#ffff",
+
+  TEXT_WHITE: "#ffff",
+  TEXT_GRAY: "#acacac"
 }
