@@ -4,11 +4,11 @@
     "slug": "bom-mar-sc",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logoSC.png",
+    "icon": "./assets/splash-icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/logoSC.png",
+      "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,14 +17,17 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logoSC.png",
+        "foregroundImage": "./assets/splash-icon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/logoSC.png"
-    }
+      "favicon": "./assets/splash-icon.png"
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }

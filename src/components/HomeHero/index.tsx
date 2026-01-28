@@ -16,7 +16,7 @@ const HomeHero = () => {
         backgroundColor: COLORS.FULL_WHITE,
         position: 'absolute',
         zIndex: 20,
-        bottom: 20,
+        bottom: 10,
         left: 20,
         padding: 20,
         borderTopRightRadius: 30,

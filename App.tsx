@@ -3,7 +3,9 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import Routes from './src/routes';
 import { useEffect, useState } from 'react';
 import SplashScreen from './src/screens/Splash';
-
+import * as NavigationBar from "expo-navigation-bar"
+import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { UserBeachsProvider } from './src/contexts/UserBeachsContext';
 
 export default function App() {
 
@@ -13,6 +15,8 @@ export default function App() {
     setTimeout(() => {
       setOpenApp(true)
     }, 2000)
+
+    NavigationBar.setVisibilityAsync('hidden')
   })
 
   if (!openApp) {
@@ -26,9 +30,12 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Routes />
-    </View>
+    <SafeAreaProvider style={styles.container}>
+      <UserBeachsProvider>
+
+        <Routes />
+      </UserBeachsProvider>
+    </SafeAreaProvider>
   );
 }
 

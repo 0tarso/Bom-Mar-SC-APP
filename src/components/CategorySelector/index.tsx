@@ -8,7 +8,7 @@ import {
   Animated,
 } from "react-native";
 
-type Category = "proprias" | "improprias";
+type Category = "PRÓPRIA" | "IMPRÓPRIA";
 
 interface Props {
   value: Category;
@@ -22,7 +22,7 @@ export function CategorySelector({ value, onChange }: Props) {
 
   useEffect(() => {
     Animated.timing(translateX, {
-      toValue: value === "proprias" ? 0 : BUTTON_WIDTH,
+      toValue: value === "PRÓPRIA" ? 0 : BUTTON_WIDTH,
       duration: 150,
       useNativeDriver: true,
     }).start();
@@ -38,20 +38,20 @@ export function CategorySelector({ value, onChange }: Props) {
             width: BUTTON_WIDTH,
             transform: [{ translateX }],
             backgroundColor:
-              value === "proprias" ? COLORS.BLUE_ENABLE : COLORS.RED_CAUTION,
+              value === "PRÓPRIA" ? COLORS.BLUE_ENABLE : COLORS.RED_CAUTION,
           },
         ]}
       />
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => onChange("proprias")}
+        onPress={() => onChange("PRÓPRIA")}
         activeOpacity={0.8}
       >
         <Text
           style={[
             styles.text,
-            value === "proprias" && styles.activeText,
+            value === "PRÓPRIA" && styles.activeText,
           ]}
         >
           próprias
@@ -60,13 +60,13 @@ export function CategorySelector({ value, onChange }: Props) {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => onChange("improprias")}
+        onPress={() => onChange("IMPRÓPRIA")}
         activeOpacity={0.8}
       >
         <Text
           style={[
             styles.text,
-            value === "improprias" && styles.activeText,
+            value === "IMPRÓPRIA" && styles.activeText,
           ]}
         >
           impróprias
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     padding: 4,
     alignItems: "center",
+    // backgroundColor: 'black'
   },
 
   slider: {
@@ -92,7 +93,6 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#3B82F6",
     borderRadius: 20,
-    elevation: 5,
     zIndex: -10
 
   },

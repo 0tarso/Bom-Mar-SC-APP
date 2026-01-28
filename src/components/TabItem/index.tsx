@@ -18,7 +18,13 @@ interface TabItemProps {
 }
 
 
-export default function TabItem({ state, descriptors, navigation, route, index }: TabItemProps) {
+export default function TabItem({
+  state,
+  descriptors,
+  navigation,
+  route,
+  index,
+}: TabItemProps) {
   const { options } = descriptors[route.key];
   const label = options.tabBarLabel ?? options.title ?? route.name;
 
@@ -30,12 +36,47 @@ export default function TabItem({ state, descriptors, navigation, route, index }
   const isFocused = state.index === index;
 
   const scale = useRef(new Animated.Value(isFocused ? 1.2 : 1)).current;
+  const labelOpacity = useRef(new Animated.Value(0)).current;
+  const labelHeight = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.spring(scale, {
       toValue: isFocused ? 1.2 : 1,
       useNativeDriver: true,
     }).start();
+
+    if (isFocused) {
+      Animated.sequence([
+        Animated.parallel([
+          Animated.timing(labelOpacity, {
+            toValue: 1,
+            duration: 200,
+            useNativeDriver: true,
+          }),
+          Animated.timing(labelHeight, {
+            toValue: 16,
+            duration: 200,
+            useNativeDriver: false,
+          }),
+        ]),
+        Animated.delay(1200),
+        Animated.parallel([
+          Animated.timing(labelOpacity, {
+            toValue: 0,
+            duration: 200,
+            useNativeDriver: true,
+          }),
+          Animated.timing(labelHeight, {
+            toValue: 0,
+            duration: 200,
+            useNativeDriver: false,
+          }),
+        ]),
+      ]).start();
+    } else {
+      labelOpacity.setValue(0);
+      labelHeight.setValue(0);
+    }
   }, [isFocused]);
 
   const onPress = () => {
@@ -59,35 +100,43 @@ export default function TabItem({ state, descriptors, navigation, route, index }
       style={styles.tab}
       activeOpacity={0.8}
     >
-
-
-
-      <Animated.View style={
-        { alignItems: "center", transform: [{ scale }] }}>
+      <Animated.View
+        style={{
+          alignItems: "center",
+          transform: [{ scale }],
+        }}
+      >
         <LottieView
           source={lottieIcon}
           autoPlay={isFocused}
-          loop={false}
+          loop={isFocused ? true : false}
           speed={0.7}
           style={[
-            { width: 50, height: 50, aspectRatio: 1 },
-            isFocused ? { opacity: 1 } : { opacity: 0.5 }
+            { width: 50, height: 50 },
+            isFocused ? { opacity: 1 } : { opacity: 0.5 },
           ]}
         />
 
-        <Text
+        <Animated.View
           style={{
-            color: (isFocused) ? COLORS.BLUE_ENABLE : COLORS.BLUE_DISABLE,
-            fontSize: 12,
-            fontWeight: (isFocused) ? "800" : "400"
+            height: labelHeight,
+            overflow: "hidden",
           }}
         >
-          {label as string}
-        </Text>
+          <Animated.Text
+            style={{
+              opacity: labelOpacity,
+              color: isFocused
+                ? COLORS.BLUE_ENABLE
+                : COLORS.BLUE_DISABLE,
+              fontSize: 12,
+              fontWeight: isFocused ? "800" : "400",
+            }}
+          >
+            {label as string}
+          </Animated.Text>
+        </Animated.View>
       </Animated.View>
-
-
-
     </TouchableOpacity>
   );
 }

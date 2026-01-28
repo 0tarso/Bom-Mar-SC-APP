@@ -4,6 +4,8 @@ import HomeScreen from '../screens/Home'
 import { FontAwesome5 } from '@expo/vector-icons';
 import FavoritesScreen from '../screens/Favorites';
 import TabBar from '../components/TabBar';
+import { Text, View } from 'react-native';
+import TabHeader from '../components/TabHeader';
 
 export type RootTabParamList = {
   Root: undefined,
@@ -18,6 +20,8 @@ const AppRoutes = () => {
     <Tab.Navigator id="main-tabs"
       screenOptions={{
         headerShown: false,
+        tabBarPosition: 'bottom',
+        animation: 'fade',
       }}
       tabBar={(props) => <TabBar {...props} />}
 
@@ -25,13 +29,15 @@ const AppRoutes = () => {
 
       <Tab.Screen name="home" component={HomeScreen} options={{
         tabBarLabel: "Praias",
-        tabBarIcon: (props) => <FontAwesome5 name="umbrella-beach" size={24} color="black" />
       }} />
 
       <Tab.Screen name="favorites" component={FavoritesScreen} options={{
         tabBarLabel: "Favoritos",
-        tabBarIcon: (props) => <FontAwesome5 name="heart" size={24} color="black" />
-      }} />
+        headerShown: true,
+        header: (props) => (<TabHeader {...props} />)
+      }}
+
+      />
 
     </Tab.Navigator>
   )

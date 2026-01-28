@@ -4,19 +4,21 @@ import { StatusBar } from 'expo-status-bar';
 import { COLORS } from '@/src/Theme/Colors';
 import HomeHero from '@/src/components/HomeHero';
 import BeachList from '@/src/components/BeachList';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const HomeScreen = () => {
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, }}>
       <StatusBar translucent />
-      <View style={{ marginTop: 40, height: 220 }}>
 
+      <View style={{ height: 150 }}>
         <HomeHero />
-
-        <BeachList />
-
       </View>
-    </View>
+
+
+      <BeachList />
+
+    </SafeAreaView>
   )
 }
 
