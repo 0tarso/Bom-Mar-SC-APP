@@ -3,14 +3,8 @@ import React, { useState } from 'react'
 import { COLORS } from '@/src/Theme/Colors'
 
 import { FontAwesome } from "@expo/vector-icons"
+import { Beach } from '@/src/types'
 
-type Beach = {
-  local: string
-  praia: string
-  situacao: string
-  complemento: string
-  data_coleta: string
-}
 
 interface Props {
   beach: Beach
@@ -21,7 +15,7 @@ const BeachCard = (props: Props) => {
 
   const [loading, setLoading] = useState(false)
 
-  const handleLoadingAction = () => {
+  const timeoutLoadingAction = () => {
     setLoading(true)
 
     setTimeout(() => setLoading(false), 1000)
@@ -42,7 +36,7 @@ const BeachCard = (props: Props) => {
         zIndex: 9
       }}
         onPress={props.onPress}
-        onPressOut={() => handleLoadingAction()}
+        onPressOut={() => timeoutLoadingAction()}
         hitSlop={10}
       >
 

@@ -6,6 +6,7 @@ import BeachSectionList from '../BeachSectionList';
 import LoadingWave from '../LoadingWave';
 import { filterData } from './actions';
 import { useUserBeachs } from '@/src/contexts/UserBeachsContext';
+import { BeachLocalization } from '@/src/types';
 
 
 
@@ -19,11 +20,11 @@ const BeachList = () => {
 
   const sectionListRef = useRef<SectionList>(null);
 
-  const [category, setCategory] = useState<"PRÓPRIA" | "IMPRÓPRIA">(
+  const [beachSituationSelected, setBeachSituationSelected] = useState<"PRÓPRIA" | "IMPRÓPRIA">(
     "PRÓPRIA"
   );
 
-  const [filteredBeachs, setFilteredBeachs] = useState([])
+  const [filteredBeachs, setFilteredBeachs] = useState<BeachLocalization[] | []>([])
 
   useEffect(() => {
     if (!sectionListRef.current) return;
@@ -38,14 +39,14 @@ const BeachList = () => {
     }, 50);
 
     return () => clearTimeout(timeout);
-  }, [category]);
+  }, [beachSituationSelected]);
 
 
   useEffect(() => {
     // console.log(beachs)
 
-    filterData(beachs, setFilteredBeachs, category)
-  }, [category, beachs]);
+    filterData(beachs, setFilteredBeachs, beachSituationSelected)
+  }, [beachSituationSelected, beachs]);
 
 
 
@@ -63,7 +64,7 @@ const BeachList = () => {
         marginTop: 10
       }}>Praias</Text>
 
-      <CategorySelector value={category} onChange={setCategory} />
+      <CategorySelector value={beachSituationSelected} onChange={setBeachSituationSelected} />
 
       <View style={{ flex: 1, }}>
 

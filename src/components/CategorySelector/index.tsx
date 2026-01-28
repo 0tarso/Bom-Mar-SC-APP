@@ -1,4 +1,5 @@
 import { COLORS } from "@/src/Theme/Colors";
+import { BeachSituation } from "@/src/types";
 import React, { useEffect, useRef } from "react";
 import {
   View,
@@ -8,11 +9,10 @@ import {
   Animated,
 } from "react-native";
 
-type Category = "PRÓPRIA" | "IMPRÓPRIA";
 
 interface Props {
-  value: Category;
-  onChange: (value: Category) => void;
+  value: BeachSituation;
+  onChange: (value: BeachSituation) => void;
 }
 
 export function CategorySelector({ value, onChange }: Props) {

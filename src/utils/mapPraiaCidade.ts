@@ -1,12 +1,5 @@
-import praiaPorCidade from "../data/praia_por_cidade.json"
-
-type PraiaItem = {
-  praia: string;
-  local: string;
-  complemento: string;
-  data_coleta: string;
-  situacao: string;
-};
+import beachByCity from "../data/praia_por_cidade.json"
+import { Beach, BeachLocalization } from "../types";
 
 
 const normalize = (text: string) =>
@@ -16,7 +9,7 @@ const normalize = (text: string) =>
     .toUpperCase()
     .trim();
 
-const praiaToCidadeMap = praiaPorCidade.reduce(
+const mapBeachByCity = beachByCity.reduce(
   (acc, item) => {
     acc[normalize(item.praia)] = item.cidade;
     return acc;
@@ -25,21 +18,20 @@ const praiaToCidadeMap = praiaPorCidade.reduce(
 );
 
 
-type PraiasPorCidade = Record<string, PraiaItem[]>;
 
-export const mapPraiasPorCidade = (
-  data: PraiaItem[]
-): PraiasPorCidade => {
+export const mapBeachesByCity = (
+  data: Beach[]
+): BeachLocalization => {
   return data.reduce((acc, item) => {
-    const cidade =
-      praiaToCidadeMap[item.praia] ?? "Outros";
+    const city =
+      mapBeachByCity[item.praia] ?? "Outros";
 
-    if (!acc[cidade]) {
-      acc[cidade] = [];
+    if (!acc[city]) {
+      acc[city] = [];
     }
 
-    acc[cidade].push(item);
+    acc[city].push(item);
 
     return acc;
-  }, {} as PraiasPorCidade);
+  }, {} as BeachLocalization);
 };

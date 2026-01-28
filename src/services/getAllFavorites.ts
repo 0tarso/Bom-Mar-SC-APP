@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { mapPraiasPorCidade } from "../utils/mapPraiaCidade"
+import { mapBeachesByCity } from "../utils/mapPraiaCidade"
+import { BeachLocalization } from "../types"
 
 export const getAllFavorites = async () => {
   let filteredByCityData
@@ -10,8 +11,9 @@ export const getAllFavorites = async () => {
 
     const convertedJSON = JSON.parse(beachs)
 
-    filteredByCityData = mapPraiasPorCidade(convertedJSON)
+    filteredByCityData = mapBeachesByCity(convertedJSON)
 
+    console.log("Filtrados por cidade favoritos =======")
     console.log(filteredByCityData)
   } catch (error) {
     console.error("Erro ao buscar favoritos")
@@ -20,5 +22,5 @@ export const getAllFavorites = async () => {
   }
 
 
-  return filteredByCityData
+  return filteredByCityData as BeachLocalization[]
 }

@@ -2,10 +2,11 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import { getAllBeachs } from "../services/getAllBeachs";
 import { getAllFavorites } from "../services/getAllFavorites";
 import { updateFavorite } from "../services/updateFavorite";
+import { BeachLocalization } from "../types";
 
 interface UserBeachsContext {
-  beachs: { title: string; data: any[] }[],
-  beachsFavorite: { title: string; data: any[] }[],
+  beachs: BeachLocalization[],
+  beachsFavorite: BeachLocalization[],
   loadingFavorites: boolean,
   loadingBeachs: boolean,
   loadingUpdateFavorite: boolean,
@@ -26,15 +27,13 @@ export function useUserBeachs() {
 }
 
 
+
+
 export function UserBeachsProvider({ children }: { children: ReactNode }) {
 
-  const [beachs, setBeachs] = useState<
-    { title: string; data: any[] }[]
-  >([]);
+  const [beachs, setBeachs] = useState<BeachLocalization[]>([]);
 
-  const [beachsFavorite, setBeachsFavorite] = useState<
-    { title: string; data: any[] }[]
-  >([]);
+  const [beachsFavorite, setBeachsFavorite] = useState<BeachLocalization[]>([]);
 
   const [loadingFavorites, setLoadingFavorites] = useState(false)
   const [loadingBeachs, setLoadingBeachs] = useState(false)

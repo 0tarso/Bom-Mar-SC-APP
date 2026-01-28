@@ -6,12 +6,13 @@ import LoadingWave from '@/src/components/LoadingWave'
 import { filterData } from '@/src/components/BeachList/actions'
 import { COLORS } from '@/src/Theme/Colors'
 import EmptyFavorites from '@/src/components/EmptyFavorites'
+import { BeachLocalization } from '@/src/types'
 
 const FavoritesScreen = () => {
   const { beachsFavorite, loadingFavorites } = useUserBeachs()
 
 
-  const [filteredBeachs, setFilteredBeachs] = useState([])
+  const [filteredBeachs, setFilteredBeachs] = useState<BeachLocalization[] | []>([])
 
   useEffect(() => {
     console.log("effect em favorites")

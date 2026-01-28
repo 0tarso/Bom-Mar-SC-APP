@@ -16,7 +16,8 @@ const TabHeader = (props: BottomTabHeaderProps) => {
       width: "100%",
       padding: 20,
       paddingTop: 60,
-      backgroundColor: COLORS.FULL_WHITE
+      backgroundColor: COLORS.FULL_WHITE,
+      elevation: 3
     }}>
       <Text style={{
         color: COLORS.BLUE_PRIMARY,

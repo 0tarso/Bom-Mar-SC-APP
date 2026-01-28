@@ -1,15 +1,9 @@
-import api from "@/src/api/api";
-import AsyncStorage from "@react-native-async-storage/async-storage"
-
-type FavoriteItem = {
-  praia: string;
-  complemento: string;
-};
+import { BeachLocalization } from "@/src/types";
 
 export const filterData = (
-  rawData: Record<string, any[]>,
+  rawData: BeachLocalization,
   setFilter: (any) => void,
-  category?: string,
+  situation?: string,
 ) => {
 
   if (!rawData) {
@@ -18,15 +12,15 @@ export const filterData = (
   }
 
   const sections = Object.entries(rawData)
-    .map(([cidade, praias]) => ({
-      title: cidade,
-      data: praias.filter(
-        (praia) => {
-          if (category) {
-            return praia.situacao === category
+    .map(([city, beaches]) => ({
+      title: city,
+      data: beaches.filter(
+        (beach) => {
+          if (situation) {
+            return beach.situacao === situation
           }
           else {
-            return praia
+            return beach
           }
         }
       ),
@@ -37,9 +31,5 @@ export const filterData = (
 
   setFilter(sections);
   return
-
-
-
-
 }
 

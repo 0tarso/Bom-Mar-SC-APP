@@ -1,13 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Beach } from "../types";
 
-type FavoriteItem = {
-  praia: string;
-  complemento: string;
-  favorite: boolean
-};
 
 export const updateFavorite = async (
-  item: FavoriteItem
+  item: Beach
 ) => {
 
   if (!item) return;
@@ -15,13 +11,13 @@ export const updateFavorite = async (
   const itemId = item.praia + item.complemento;
 
   const stored = await AsyncStorage.getItem("@favBeachs");
-  const favorites: FavoriteItem[] = stored ? JSON.parse(stored) : [];
+  const favorites: Beach[] = stored ? JSON.parse(stored) : [];
 
   const alreadyExists = favorites.some(
     (fav) => fav.praia + fav.complemento === itemId
   );
 
-  let updatedFavorites: FavoriteItem[];
+  let updatedFavorites: Beach[];
 
   if (alreadyExists) {
     updatedFavorites = favorites.filter(

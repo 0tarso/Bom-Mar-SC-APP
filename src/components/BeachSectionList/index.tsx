@@ -4,13 +4,11 @@ import BeachCard from '../BeachCard';
 import { COLORS } from '@/src/Theme/Colors';
 import { updateFavorite } from '@/src/services/updateFavorite';
 import { useUserBeachs } from '@/src/contexts/UserBeachsContext';
+import { BeachLocalization } from '@/src/types';
 
 
 interface Props extends SectionListProps<any> {
-  data: {
-    title: string,
-    data: any[]
-  }[]
+  data: BeachLocalization[]
 }
 
 
@@ -18,7 +16,7 @@ const BeachSectionList = ({ data, ...rest }: Props) => {
   const { handleUpdateFavorite } = useUserBeachs()
 
 
-  const handleAddToFavorites = async (item) => {
+  const toggleFavorite = async (item) => {
     await handleUpdateFavorite(item)
   }
 
@@ -32,7 +30,7 @@ const BeachSectionList = ({ data, ...rest }: Props) => {
       renderItem={({ item }) => (
         <BeachCard
           beach={item}
-          onPress={() => handleAddToFavorites(item)}
+          onPress={() => toggleFavorite(item)}
         />)}
       renderSectionHeader={({ section }) => (
         <View style={{

@@ -1,4 +1,5 @@
 import api from "../api/api"
+import { BeachLocalization } from "../types"
 
 export const getAllBeachs = async () => {
   try {
@@ -10,7 +11,7 @@ export const getAllBeachs = async () => {
       return
     }
 
-    return dados
+    return dados as BeachLocalization[]
   } catch (error) {
     console.error("Erro ao buscar praias", error)
     throw error
