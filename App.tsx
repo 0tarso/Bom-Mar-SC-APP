@@ -6,7 +6,8 @@ import SplashScreen from './src/screens/Splash';
 import * as NavigationBar from "expo-navigation-bar"
 import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { UserBeachsProvider } from './src/contexts/UserBeachsContext';
-
+import ToastManager, { Toast } from 'toastify-react-native'
+import { toastConfig } from './src/components/Toast';
 export default function App() {
 
   const [openApp, setOpenApp] = useState(false)
@@ -32,7 +33,15 @@ export default function App() {
   return (
     <SafeAreaProvider style={styles.container}>
       <UserBeachsProvider>
+        <ToastManager
+          config={toastConfig}
+          showProgressBar={true}
+          position='top'
+          topOffset={40}
+          duration={10000}
+          useModal={false}
 
+        />
         <Routes />
       </UserBeachsProvider>
     </SafeAreaProvider>

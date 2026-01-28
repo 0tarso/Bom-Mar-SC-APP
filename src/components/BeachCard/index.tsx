@@ -4,7 +4,7 @@ import { COLORS } from '@/src/Theme/Colors'
 
 import { FontAwesome } from "@expo/vector-icons"
 import { Beach } from '@/src/types'
-
+import { styles } from "./styles"
 
 interface Props {
   beach: Beach
@@ -27,14 +27,7 @@ const BeachCard = (props: Props) => {
       (props.beach.situacao === "IMPRÓPRIA") && { borderColor: COLORS.RED_CAUTION }
     ]}>
 
-      <TouchableOpacity style={{
-        position: 'absolute',
-        right: 10,
-        top: 10,
-        // backgroundColor: "black",
-        padding: 10,
-        zIndex: 9
-      }}
+      <TouchableOpacity style={styles.buttonContainer}
         onPress={props.onPress}
         onPressOut={() => timeoutLoadingAction()}
         hitSlop={10}
@@ -74,33 +67,3 @@ const BeachCard = (props: Props) => {
 }
 
 export default BeachCard
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: COLORS.FULL_WHITE,
-    borderColor: COLORS.BLUE_PRIMARY,
-    borderWidth: 1.5,
-    borderRadius: 15,
-    padding: 15,
-    marginBottom: 10,
-
-  },
-  praia: {
-    color: COLORS.BLUE_PRIMARY,
-    fontSize: 14,
-    fontWeight: "700",
-    letterSpacing: 1
-  },
-  complemento: {
-    color: COLORS.BLUE_PRIMARY,
-    letterSpacing: -0.2,
-    maxWidth: 250,
-    fontSize: 12,
-    fontWeight: "600"
-  },
-  dataColeta: {
-    color: COLORS.BLUE_PRIMARY,
-    fontWeight: "bold",
-    marginTop: 10
-  }
-})

@@ -3,6 +3,7 @@ import { getAllBeachs } from "../services/getAllBeachs";
 import { getAllFavorites } from "../services/getAllFavorites";
 import { updateFavorite } from "../services/updateFavorite";
 import { BeachLocalization } from "../types";
+import { Toast } from "toastify-react-native";
 
 interface UserBeachsContext {
   beachs: BeachLocalization[],
@@ -126,6 +127,8 @@ export function UserBeachsProvider({ children }: { children: ReactNode }) {
     try {
       await updateFavorite(item)
       await handleGetFavorites()
+
+      Toast.success("Favoritos atualizados")
     } catch (error) {
       console.error("Erro ao subir favorito", error)
     }

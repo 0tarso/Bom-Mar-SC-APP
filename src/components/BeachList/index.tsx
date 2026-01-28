@@ -7,6 +7,7 @@ import LoadingWave from '../LoadingWave';
 import { filterData } from './actions';
 import { useUserBeachs } from '@/src/contexts/UserBeachsContext';
 import { BeachLocalization } from '@/src/types';
+import { styles } from './styles';
 
 
 
@@ -51,22 +52,12 @@ const BeachList = () => {
 
 
   return (
-    <View style={{
-      // backgroundColor: '#bacdff',
-      paddingHorizontal: 20,
-      flex: 1
-    }}>
-      <Text style={{
-        fontSize: 16,
-        fontWeight: "600",
-        color: COLORS.BLUE_PRIMARY,
-        marginBottom: 10,
-        marginTop: 10
-      }}>Praias</Text>
+    <View style={styles.container}>
+      <Text style={styles.titleHeader}>Praias</Text>
 
       <CategorySelector value={beachSituationSelected} onChange={setBeachSituationSelected} />
 
-      <View style={{ flex: 1, }}>
+      <View style={{ flex: 1 }}>
 
         {loadingBeachs ? (
           <View style={{ flex: 1, justifyContent: 'center', }}>
@@ -96,8 +87,6 @@ const BeachList = () => {
 
           </View>
         )}
-
-
 
       </View>
 

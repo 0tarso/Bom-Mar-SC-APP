@@ -35,9 +35,6 @@ const BeachSectionList = ({ data, ...rest }: Props) => {
       renderSectionHeader={({ section }) => (
         <View style={{
           backgroundColor: "#f3f3f3",
-          // elevation: 1,
-          // zIndex: 1000,
-          // opacity: 0.5
         }}>
           <Text style={{
             fontSize: 20,

@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { COLORS } from '@/src/Theme/Colors'
 import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs'
@@ -12,20 +12,26 @@ const TabHeader = (props: BottomTabHeaderProps) => {
 
   const routeName = props.route.name as keyof typeof RouteLabel;
   return (
-    <View style={{
-      width: "100%",
-      padding: 20,
-      paddingTop: 60,
-      backgroundColor: COLORS.FULL_WHITE,
-      elevation: 3
-    }}>
-      <Text style={{
-        color: COLORS.BLUE_PRIMARY,
-        fontWeight: "700",
-        fontSize: 16
-      }}>{RouteLabel[routeName]}</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>{RouteLabel[routeName]}</Text>
     </View>
   )
 }
 
 export default TabHeader
+
+
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    padding: 20,
+    paddingTop: 60,
+    backgroundColor: COLORS.FULL_WHITE,
+    elevation: 3
+  },
+  text: {
+    color: COLORS.BLUE_PRIMARY,
+    fontWeight: "700",
+    fontSize: 16
+  }
+})
