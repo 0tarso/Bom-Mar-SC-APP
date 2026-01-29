@@ -36,8 +36,8 @@ export default function App() {
         <ToastManager
           config={toastConfig}
           showProgressBar={true}
-          position='top'
-          topOffset={40}
+          position='bottom'
+          bottomOffset={80}
           duration={10000}
           useModal={false}
 

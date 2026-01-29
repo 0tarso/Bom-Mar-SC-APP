@@ -7,9 +7,11 @@ import { filterData } from '@/src/components/BeachList/actions'
 import { COLORS } from '@/src/Theme/Colors'
 import EmptyFavorites from '@/src/components/EmptyFavorites'
 import { BeachLocalization } from '@/src/types'
+import { useLocation } from '@/src/hooks/useLocation'
 
 const FavoritesScreen = () => {
   const { beachsFavorite, loadingFavorites } = useUserBeachs()
+  const { city, location } = useLocation()
 
 
   const [filteredBeachs, setFilteredBeachs] = useState<BeachLocalization[] | []>([])

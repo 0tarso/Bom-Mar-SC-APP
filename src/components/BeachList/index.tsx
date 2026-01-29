@@ -53,7 +53,7 @@ const BeachList = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleHeader}>Praias</Text>
+      {/* <Text style={styles.titleHeader}>Praias</Text> */}
 
       <CategorySelector value={beachSituationSelected} onChange={setBeachSituationSelected} />
 

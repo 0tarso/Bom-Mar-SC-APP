@@ -26,7 +26,7 @@ const InfoModal = () => {
         fontWeight: "600",
         color: COLORS.CARD_TEXT_PRIMARY,
         textAlign: 'center'
-      }}>Este aplicativo foi desenvolvido para informar de forma clara e acessível a balneabilidade das praias de Santa Catarina.
+      }}>Bom Mar Sc foi desenvolvido para informar de forma clara e acessível a balneabilidade das praias de Santa Catarina.
 
       </Text>
       <Text style={{

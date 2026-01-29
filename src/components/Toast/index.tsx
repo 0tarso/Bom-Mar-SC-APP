@@ -103,7 +103,7 @@ const ToastWithProgress = ({
 
       {text2 && <Text style={styles.text}>{text2}</Text>}
 
-      <View style={styles.progressContainer}>
+      {/* <View style={styles.progressContainer}>
         <Animated.View
           style={[
             styles.progressBar,
@@ -116,7 +116,7 @@ const ToastWithProgress = ({
             },
           ]}
         />
-      </View>
+      </View> */}
     </Animated.View>
   )
 }
