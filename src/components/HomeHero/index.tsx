@@ -1,5 +1,5 @@
-import { View, Text, Image as ImageReact } from 'react-native'
-import React from 'react'
+import { View, Text, Image as ImageReact, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
 import Svg, { ClipPath, Defs, Image, Path } from 'react-native-svg'
 
 
@@ -7,13 +7,41 @@ import Svg, { ClipPath, Defs, Image, Path } from 'react-native-svg'
 import beachBackground from "@/assets/beach_background.png"
 import logoSC from "@/assets/logoSC.png"
 
-import { COLORS } from '@/src/Theme/Colors'
 import { styles } from './styles'
-
+import { CustomModal } from '../CustomModal'
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { COLORS } from '@/src/Theme/Colors'
+import InfoModal from '../InfoModal'
 const HomeHero = () => {
+
+  const [showModal, setShowModal] = useState(false)
+
   return (
     <>
+      <TouchableOpacity style={{
+        position: 'absolute',
+        zIndex: 20,
+        right: 10,
+        top: 10,
+        padding: 5,
+        backgroundColor: "#fafafa",
+        borderRadius: 50
+      }}
+        onPress={() => setShowModal(true)}
+      >
+        <FontAwesome5 name="info-circle" size={24} color={COLORS.BLUE_ENABLE} />
+      </TouchableOpacity>
+
       <View style={styles.container}>
+
+        <CustomModal
+          visible={showModal}
+          onClose={() => setShowModal(false)}
+        >
+          <InfoModal />
+
+        </CustomModal>
+
         <Text style={styles.text}>Vem aproveitar</Text>
 
 
