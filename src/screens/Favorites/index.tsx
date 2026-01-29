@@ -17,8 +17,6 @@ const FavoritesScreen = () => {
   const [filteredBeachs, setFilteredBeachs] = useState<BeachLocalization[] | []>([])
 
   useEffect(() => {
-    console.log("effect em favorites")
-    console.log(beachsFavorite)
     filterData(beachsFavorite, setFilteredBeachs)
   }, [beachsFavorite])
 

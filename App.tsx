@@ -13,11 +13,12 @@ export default function App() {
   const [openApp, setOpenApp] = useState(false)
 
   useEffect(() => {
+    NavigationBar.setVisibilityAsync('hidden')
+
     setTimeout(() => {
       setOpenApp(true)
     }, 2000)
 
-    NavigationBar.setVisibilityAsync('hidden')
   })
 
   if (!openApp) {

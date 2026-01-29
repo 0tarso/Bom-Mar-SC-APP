@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Toast } from 'toastify-react-native';
 import { useLocation } from '@/src/hooks/useLocation';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { styles } from './styles';
 
 const HomeScreen = () => {
 
@@ -22,57 +23,41 @@ const HomeScreen = () => {
       }
     }
 
-    console.log(location)
     handleGetUserLocation()
   }, [])
 
 
   return (
-    <SafeAreaView style={{ flex: 1, }}>
-      <StatusBar translucent backgroundColor='#ffff' />
+    <View style={styles.container}>
 
+      <View style={styles.homeHeroContainer}>
+        <HomeHero />
+      </View>
       <View style={{
-        paddingLeft: 20,
+        paddingLeft: 30,
         paddingVertical: 10,
-        backgroundColor: "#ffff"
+        // backgroundColor: "#ffff"
         // flexDirection: "row"
       }}>
-        {/* <Text style={{
-          fontWeight: "400",
-          color: COLORS.BLUE_DISABLE
-        }}>Você está em:</Text> */}
 
-        <View style={{
-          flexDirection: 'row',
+        <View style={styles.locationContainer}>
 
-        }}>
-
-          <Text style={{
-            fontWeight: "600",
-            color: COLORS.BLUE_PRIMARY
-          }}>{city} - {region}</Text>
-
+          <Text style={styles.locationText}>{city} - {region}</Text>
           <TouchableOpacity
-            style={{
-              marginLeft: 10
-            }}
+            style={styles.locationUpdateButton}
             hitSlop={15}
             onPress={(async () => await refreshLocation())}
           >
-            <FontAwesome name="refresh" size={18} color={COLORS.BLUE_ENABLE} />
+            <FontAwesome name="refresh" size={16} color={COLORS.BLUE_ENABLE} />
           </TouchableOpacity>
 
         </View>
 
       </View>
-      <View style={{ height: 120 }}>
-        <HomeHero />
-      </View>
-
 
       <BeachList />
 
-    </SafeAreaView>
+    </View>
   )
 }
 

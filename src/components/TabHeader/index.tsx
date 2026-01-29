@@ -8,12 +8,16 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 const TabHeader = (props: BottomTabHeaderProps) => {
   enum RouteLabel {
     favorites = "Favoritos",
+    home = ""
   }
 
   const routeName = props.route.name as keyof typeof RouteLabel;
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{RouteLabel[routeName]}</Text>
+      {RouteLabel[routeName] === "Favoritos" && (
+
+        <Text style={styles.text}>{RouteLabel[routeName]}</Text>
+      )}
     </View>
   )
 }
@@ -27,7 +31,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 60,
     backgroundColor: COLORS.FULL_WHITE,
-    elevation: 3
+    // elevation: 3
   },
   text: {
     color: COLORS.BLUE_PRIMARY,

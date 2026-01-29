@@ -23,21 +23,21 @@ export const updateFavorite = async (
     updatedFavorites = favorites.filter(
       (fav) => fav.praia + fav.complemento !== itemId
     );
-    console.log("=======================")
+    // console.log("=======================")
 
-    console.log("Removido dos favoritos");
+    // console.log("Removido dos favoritos");
   } else {
     updatedFavorites = [...favorites, {
       ...item,
       favorite: true
     }];
-    console.log("=======================")
+    // console.log("=======================")
 
-    console.log("Adicionado aos favoritos");
-    console.log(updatedFavorites);
+    // console.log("Adicionado aos favoritos");
+    // console.log(updatedFavorites);
   }
 
-  console.log(updatedFavorites)
+  // console.log(updatedFavorites)
 
   await AsyncStorage.setItem(
     "@favBeachs",

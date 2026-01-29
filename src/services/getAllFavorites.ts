@@ -13,11 +13,11 @@ export const getAllFavorites = async () => {
 
     filteredByCityData = mapBeachesByCity(convertedJSON)
 
-    console.log("Filtrados por cidade favoritos =======")
-    console.log(filteredByCityData)
+    // console.log("Filtrados por cidade favoritos =======")
+    // console.log(filteredByCityData)
   } catch (error) {
-    console.error("Erro ao buscar favoritos")
-    console.error(error)
+    // console.error("Erro ao buscar favoritos")
+    // console.error(error)
     throw error
   }
 

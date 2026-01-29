@@ -2,16 +2,30 @@ import { COLORS } from "@/src/Theme/Colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  infoButton: {
+    position: 'absolute',
+    zIndex: 50,
+    right: 16,
+    top: 10,
+    padding: 5,
+    // elevation: 2,
+    backgroundColor: "#fafafa",
+    borderRadius: 50
+  },
   container: {
     backgroundColor: COLORS.FULL_WHITE,
     position: 'absolute',
     zIndex: 20,
-    bottom: 10,
-    left: 20,
+    // top: 0,
+    width: "100%",
+    // left: 20,
     padding: 20,
-    borderTopRightRadius: 30,
-    borderRadius: 10,
-    elevation: 10
+    paddingTop: 0,
+    paddingBottom: 30,
+    // borderTopRightRadius: 30,
+    borderBottomEndRadius: 30,
+    borderBottomStartRadius: 30,
+    // elevation: 10
   },
   text: {
     fontSize: 16,

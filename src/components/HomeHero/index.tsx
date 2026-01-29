@@ -1,11 +1,11 @@
-import { View, Text, Image as ImageReact, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
-import Svg, { ClipPath, Defs, Image, Path } from 'react-native-svg'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import Svg, { ClipPath, Defs, Path } from 'react-native-svg'
 
 
 
 import beachBackground from "@/assets/beach_background.png"
-import logoSC from "@/assets/logoSC.png"
+import logoTextSC from "@/assets/logoTextSC.png"
 
 import { styles } from './styles'
 import { CustomModal } from '../CustomModal'
@@ -16,17 +16,13 @@ const HomeHero = () => {
 
   const [showModal, setShowModal] = useState(false)
 
+  useEffect(() => {
+    setShowModal(true)
+  }, [])
+
   return (
     <>
-      <TouchableOpacity style={{
-        position: 'absolute',
-        zIndex: 20,
-        right: 10,
-        top: 10,
-        padding: 5,
-        backgroundColor: "#fafafa",
-        borderRadius: 50
-      }}
+      <TouchableOpacity style={styles.infoButton}
         onPress={() => setShowModal(true)}
       >
         <FontAwesome5 name="info-circle" size={24} color={COLORS.BLUE_ENABLE} />
@@ -47,43 +43,13 @@ const HomeHero = () => {
 
         <Text style={styles.title}>SANTA CATARINA!</Text>
 
-        <View style={styles.imageContainer}>
-          <ImageReact source={logoSC} style={styles.image} />
-        </View>
+        {/* <View style={{ borderColor: "red", borderWidth: 3, padding: 5, width: '100%' }}>
+          <Image source={logoTextSC} style={{ width: "100%", resizeMode: 'contain', aspectRatio: 1 }} />
+        </View> */}
 
       </View>
 
-      <Svg
-        width="100%"
-        height="80%"
-        viewBox="0 0 360 240"
-        preserveAspectRatio="none"
-      >
-        <Defs>
-          <ClipPath id="clip">
-            <Path
-              d="
-              M20 0
-              H340
-              Q360 0 360 20
-              V180
-              C270 160 90 220 0 180
-              V20
-              Q0 0 20 0
-              Z
-            "
-            />
-          </ClipPath>
-        </Defs>
 
-        <Image
-          href={beachBackground}
-          width="100%"
-          height="100%"
-          preserveAspectRatio="xMidYMid slice"
-          clipPath="url(#clip)"
-        />
-      </Svg>
     </>
   )
 }

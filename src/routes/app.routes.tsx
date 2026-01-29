@@ -29,6 +29,8 @@ const AppRoutes = () => {
 
       <Tab.Screen name="home" component={HomeScreen} options={{
         tabBarLabel: "Praias",
+        headerShown: true,
+        header: (props) => (<TabHeader {...props} />)
       }} />
 
       <Tab.Screen name="favorites" component={FavoritesScreen} options={{

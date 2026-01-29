@@ -1,10 +1,13 @@
-import { View, Text, SectionList, SectionListProps } from 'react-native'
+import { View, Text, SectionList, SectionListProps, TouchableOpacity } from 'react-native'
 import React, { useEffect } from 'react'
 import BeachCard from '../BeachCard';
 import { COLORS } from '@/src/Theme/Colors';
 import { updateFavorite } from '@/src/services/updateFavorite';
 import { useUserBeachs } from '@/src/contexts/UserBeachsContext';
-import { BeachLocalization } from '@/src/types';
+import { Beach, BeachLocalization } from '@/src/types';
+import { openRouteWithCoords } from '@/src/services/openMaps';
+import { useLocation } from '@/src/hooks/useLocation';
+import { styles } from './styles';
 
 
 interface Props extends SectionListProps<any> {
@@ -14,10 +17,25 @@ interface Props extends SectionListProps<any> {
 
 const BeachSectionList = ({ data, ...rest }: Props) => {
   const { handleUpdateFavorite } = useUserBeachs()
+  const { location } = useLocation()
 
 
   const toggleFavorite = async (item) => {
     await handleUpdateFavorite(item)
+  }
+
+
+  const navigateToBeachLocalizationMap = async (item: Beach) => {
+    const beach = `Praia ${item}, Santa Catarina, Brasil`
+
+    // console.log("Praia a visitar======================")
+    // console.log(beach)
+
+    openRouteWithCoords(
+      location.latitude,
+      location.longitude,
+      beach
+    )
   }
 
   return (
@@ -33,27 +51,18 @@ const BeachSectionList = ({ data, ...rest }: Props) => {
           onPress={() => toggleFavorite(item)}
         />)}
       renderSectionHeader={({ section }) => (
-        <View style={{
-          backgroundColor: "#f3f3f3",
-        }}>
-          <Text style={{
-            fontSize: 20,
-            paddingLeft: 10,
-            fontWeight: "900",
-            color: COLORS.BLUE_PRIMARY,
-            paddingTop: 20,
-            paddingBottom: 10
-
-          }}>{section.title}</Text>
+        <View style={styles.sectionHeaderContainer}>
+          <Text style={styles.headerTitle}>{section.title}</Text>
+          <TouchableOpacity style={styles.mapButtonContainer}
+            onPress={() => navigateToBeachLocalizationMap(section.title)}
+          >
+            <Text style={styles.mapButtonText}>Visitar</Text>
+          </TouchableOpacity>
         </View>
       )}
       stickySectionHeadersEnabled
       renderSectionFooter={(props) => (
-        <Text style={{
-          textAlign: 'right',
-          color: COLORS.TEXT_GRAY,
-          paddingRight: 5
-        }}>{props.section.data.length} {props.section.data.length > 1 ? "praias" : "praia"}</Text>)
+        <Text style={styles.sectionFooterText}>{props.section.data.length} {props.section.data.length > 1 ? "praias" : "praia"}</Text>)
       }
       {...rest}
 

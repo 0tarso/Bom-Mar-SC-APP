@@ -70,12 +70,13 @@ export function useLocation() {
         region: address.region,
       };
 
-      console.log("Local Atualizado =====================")
-      console.log(data)
+      // console.log("Local Atualizado =====================")
+      // console.log(data)
 
       setLocation(data);
       await saveLocation(data);
     } catch (err: any) {
+      Toast.error("Erro ao obter local")
       setError(err.message || "Erro ao obter localização");
     } finally {
       setLoading(false);

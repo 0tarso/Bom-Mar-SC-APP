@@ -61,7 +61,7 @@ const BeachCard = (props: Props) => {
       </TouchableOpacity>
       <Text style={styles.praia}>{props.beach.praia}</Text>
       <Text style={styles.complemento}>{props.beach.complemento}</Text>
-      <Text style={styles.dataColeta}>Última coleta: {props.beach.data_coleta}</Text>
+      <Text style={styles.dataColeta}>Última análise: {props.beach.data_coleta}</Text>
     </View>
   )
 }

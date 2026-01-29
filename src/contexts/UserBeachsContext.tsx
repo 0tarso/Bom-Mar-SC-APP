@@ -130,7 +130,7 @@ export function UserBeachsProvider({ children }: { children: ReactNode }) {
 
       Toast.success("Favoritos atualizados")
     } catch (error) {
-      console.error("Erro ao subir favorito", error)
+      Toast.info("Erro ao subir favorito")
     }
 
     finally {

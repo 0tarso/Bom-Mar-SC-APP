@@ -99,6 +99,7 @@ export default function TabItem({
       onPress={onPress}
       style={styles.tab}
       activeOpacity={0.8}
+      hitSlop={15}
     >
       <Animated.View
         style={{

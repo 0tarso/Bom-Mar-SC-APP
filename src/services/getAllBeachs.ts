@@ -13,7 +13,7 @@ export const getAllBeachs = async () => {
 
     return dados as BeachLocalization[]
   } catch (error) {
-    console.error("Erro ao buscar praias", error)
+    // console.error("Erro ao buscar praias", error)
     throw error
   }
 }

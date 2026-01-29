@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   },
   praia: {
     color: COLORS.BLUE_PRIMARY,
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: "700",
     letterSpacing: 1
   },
@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
   },
   dataColeta: {
     color: COLORS.BLUE_PRIMARY,
-    fontWeight: "bold",
+    fontWeight: "700",
     marginTop: 10
   }
 
