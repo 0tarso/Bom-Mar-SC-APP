@@ -12,6 +12,7 @@ const normalize = (text: string) =>
 const mapBeachByCity = beachByCity.reduce(
   (acc, item) => {
     acc[normalize(item.praia)] = item.cidade;
+    // console.log(`Mapping beach "${item.praia}" to city "${item.cidade}"`);
     return acc;
   },
   {} as Record<string, string>
@@ -23,8 +24,10 @@ export const mapBeachesByCity = (
   data: Beach[]
 ): BeachLocalization => {
   return data.reduce((acc, item) => {
+
+    const normalizedBeachName = normalize(item.praia);
     const city =
-      mapBeachByCity[item.praia] ?? "Outros";
+      mapBeachByCity[normalizedBeachName] ?? "Outros";
 
     if (!acc[city]) {
       acc[city] = [];
@@ -32,6 +35,7 @@ export const mapBeachesByCity = (
 
     acc[city].push(item);
 
+    // console.log(`Assigned beach "${item.praia}" to city "${city}"`);
     return acc;
   }, {} as BeachLocalization);
 };

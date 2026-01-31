@@ -48,6 +48,7 @@ export function CategorySelector({ value, onChange }: Props) {
         style={styles.button}
         onPress={() => onChange("PRÓPRIA")}
         activeOpacity={0.8}
+        hitSlop={10}
       >
         <Text
           style={[
@@ -63,10 +64,12 @@ export function CategorySelector({ value, onChange }: Props) {
         style={styles.button}
         onPress={() => onChange("IMPRÓPRIA")}
         activeOpacity={0.8}
+        hitSlop={15}
       >
         <Text
           style={[
             styles.text,
+            { paddingLeft: 5 },
             value === "IMPRÓPRIA" && styles.activeText,
           ]}
         >

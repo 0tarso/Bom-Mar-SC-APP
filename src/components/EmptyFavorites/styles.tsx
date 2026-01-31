@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
   animationContainer: {
     width: 350,
     position: 'absolute',
-    top: 150,
+    top: 100,
     right: -50
   },
   animation: {

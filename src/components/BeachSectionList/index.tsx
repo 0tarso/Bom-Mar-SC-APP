@@ -25,18 +25,7 @@ const BeachSectionList = ({ data, ...rest }: Props) => {
   }
 
 
-  const navigateToBeachLocalizationMap = async (item: Beach) => {
-    const beach = `Praia ${item}, Santa Catarina, Brasil`
 
-    // console.log("Praia a visitar======================")
-    // console.log(beach)
-
-    openRouteWithCoords(
-      location.latitude,
-      location.longitude,
-      beach
-    )
-  }
 
   return (
     <SectionList
@@ -53,17 +42,20 @@ const BeachSectionList = ({ data, ...rest }: Props) => {
       renderSectionHeader={({ section }) => (
         <View style={styles.sectionHeaderContainer}>
           <Text style={styles.headerTitle}>{section.title}</Text>
-          <TouchableOpacity style={styles.mapButtonContainer}
+          <Text style={styles.sectionFooterText}>{section.data.length} {section.data.length > 1 ? "praias" : "praia"}</Text>
+          {/* <TouchableOpacity style={styles.mapButtonContainer}
             onPress={() => navigateToBeachLocalizationMap(section.title)}
           >
             <Text style={styles.mapButtonText}>Visitar</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       )}
       stickySectionHeadersEnabled
-      renderSectionFooter={(props) => (
-        <Text style={styles.sectionFooterText}>{props.section.data.length} {props.section.data.length > 1 ? "praias" : "praia"}</Text>)
-      }
+      initialNumToRender={7}
+      maxToRenderPerBatch={10}
+      windowSize={7}
+      removeClippedSubviews
+
       {...rest}
 
 

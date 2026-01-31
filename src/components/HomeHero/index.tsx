@@ -16,9 +16,9 @@ const HomeHero = () => {
 
   const [showModal, setShowModal] = useState(false)
 
-  useEffect(() => {
-    setShowModal(true)
-  }, [])
+  // useEffect(() => {
+  //   setShowModal(true)
+  // }, [])
 
   return (
     <>
@@ -46,6 +46,14 @@ const HomeHero = () => {
         {/* <View style={{ borderColor: "red", borderWidth: 3, padding: 5, width: '100%' }}>
           <Image source={logoTextSC} style={{ width: "100%", resizeMode: 'contain', aspectRatio: 1 }} />
         </View> */}
+
+        <Image
+          source={beachBackground}
+          style={{
+            position: 'absolute',
+            opacity: 0.8
+          }}
+        />
 
       </View>
 

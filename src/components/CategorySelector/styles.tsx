@@ -13,10 +13,10 @@ export const styles = StyleSheet.create({
 
   slider: {
     position: "absolute",
-    left: 4,
+    left: 5,
     height: "100%",
     backgroundColor: "#3B82F6",
-    borderRadius: 20,
+    borderRadius: 18,
     zIndex: -10
 
   },

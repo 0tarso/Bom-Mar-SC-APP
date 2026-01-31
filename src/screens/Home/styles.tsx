@@ -12,7 +12,8 @@ export const styles = StyleSheet.create({
   },
 
   locationContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop: 30
   },
 
   locationText: {

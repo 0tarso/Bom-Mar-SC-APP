@@ -28,7 +28,6 @@ export const filterData = (
     .filter((section) => section.data.length > 0)
     .sort((a, b) => a.title.localeCompare(b.title, "pt-BR"));
 
-
   setFilter(sections);
   return
 }

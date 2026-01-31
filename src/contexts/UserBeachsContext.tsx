@@ -122,15 +122,14 @@ export function UserBeachsProvider({ children }: { children: ReactNode }) {
     }
   ) => {
 
-    setLoadingUpdateFavorite(true)
-
     try {
+      console.log("Status loading favorite => ", loadingUpdateFavorite)
       await updateFavorite(item)
       await handleGetFavorites()
 
       Toast.success("Favoritos atualizados")
     } catch (error) {
-      Toast.info("Erro ao subir favorito")
+      Toast.info("Erro ao adicionar favorito")
     }
 
     finally {

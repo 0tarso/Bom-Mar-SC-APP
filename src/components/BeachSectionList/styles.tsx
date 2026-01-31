@@ -13,8 +13,10 @@ export const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     paddingLeft: 10,
-    fontWeight: "900",
+    // fontWeight: "900",
     color: COLORS.BLUE_PRIMARY,
+    fontFamily: "MontserratSemiBold",
+    letterSpacing: -0.5
     // paddingTop: 20,
     // paddingBottom: 10
   },

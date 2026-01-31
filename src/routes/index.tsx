@@ -4,12 +4,13 @@ import React from 'react'
 import AppRoutes from './app.routes'
 
 import { NavigationContainer } from "@react-navigation/native"
-import { StatusBar } from 'react-native'
+import { StatusBar } from 'expo-status-bar'
+import { COLORS } from '../Theme/Colors'
 
 const Routes = () => {
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor='#ffffff' barStyle='dark-content' />
+      <StatusBar translucent style='light' />
 
       <AppRoutes />
     </NavigationContainer>

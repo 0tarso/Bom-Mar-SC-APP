@@ -1,12 +1,16 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { COLORS } from '@/src/Theme/Colors'
 import LottieView from 'lottie-react-native'
 
 import empty_animation from "@/assets/animations/empty_favorites_animation.json"
 import { styles } from './styles'
+import { useNavigation } from '@react-navigation/native'
 
 const EmptyFavorites = () => {
+  const navigation = useNavigation()
+
+
   return (
     <View style={styles.container}>
 
@@ -21,7 +25,26 @@ const EmptyFavorites = () => {
           style={styles.animation}
         />
 
+
       </View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('home')}
+        style={{
+          backgroundColor: COLORS.BLUE_PRIMARY,
+          alignItems: 'center',
+          padding: 8,
+          borderRadius: 10,
+          marginTop: 30,
+          elevation: 5
+        }}
+      >
+        <Text style={{
+          fontFamily: "MontserratSemiBold",
+          color: COLORS.TEXT_WHITE,
+          fontSize: 16,
+
+        }}>Adicionar favorita</Text>
+      </TouchableOpacity>
     </View>
   )
 }

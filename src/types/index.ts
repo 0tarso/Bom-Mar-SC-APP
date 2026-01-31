@@ -6,7 +6,9 @@ export type Beach = {
   favorite?: boolean,
   local: string,
   praia: string,
-  situacao: BeachSituation
+  situacao: BeachSituation,
+  latitude: string,
+  longitude: string
 }
 
 export type BeachLocalization = {

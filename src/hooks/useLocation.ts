@@ -18,17 +18,12 @@ export function useLocation() {
   const [error, setError] = useState<string | null>(null);
 
   const saveLocation = async (data: UserLocation) => {
-    await AsyncStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(data)
-    );
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   };
 
-  const loadSavedLocation = async () => {
+  const loadSavedLocation = async (): Promise<UserLocation | null> => {
     const stored = await AsyncStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      setLocation(JSON.parse(stored));
-    }
+    return stored ? JSON.parse(stored) : null;
   };
 
   const getLocation = useCallback(async () => {
@@ -40,7 +35,9 @@ export function useLocation() {
         await Location.requestForegroundPermissionsAsync();
 
       if (status !== "granted") {
-        Toast.error("Localização negada")
+        Toast.error("Permissão de localização negada");
+        setError("Permissão de localização negada");
+        return;
       }
 
       const position =
@@ -50,7 +47,6 @@ export function useLocation() {
 
       const { latitude, longitude } = position.coords;
 
-      // 🔁 Reverse geocoding
       const [address] =
         await Location.reverseGeocodeAsync({
           latitude,
@@ -70,21 +66,32 @@ export function useLocation() {
         region: address.region,
       };
 
-      // console.log("Local Atualizado =====================")
-      // console.log(data)
-
       setLocation(data);
       await saveLocation(data);
     } catch (err: any) {
-      Toast.error("Erro ao obter local")
       setError(err.message || "Erro ao obter localização");
+      Toast.error("Erro ao obter localização");
     } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    loadSavedLocation().finally(getLocation);
+    (async () => {
+      try {
+        const savedLocation = await loadSavedLocation();
+
+        if (savedLocation) {
+          setLocation(savedLocation);
+          setLoading(false);
+          return; // 🚫 não liga o GPS
+        }
+
+        await getLocation();
+      } catch {
+        await getLocation();
+      }
+    })();
   }, [getLocation]);
 
   return {
