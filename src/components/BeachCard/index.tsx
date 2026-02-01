@@ -1,23 +1,19 @@
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native'
-import React, { memo, useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+import React, { memo, useState } from 'react'
 import { COLORS } from '@/src/Theme/Colors'
 
 import { FontAwesome } from "@expo/vector-icons"
 import { Beach } from '@/src/types'
 import { styles } from "./styles"
-import { openRouteWithCoords } from '@/src/services/openMaps'
-import { useLocation } from '@/src/hooks/useLocation'
 import { shareText } from '@/src/services/shareText'
 
 interface Props {
   beach: Beach
   onPressFavorite: () => void
-  onPressCard: () => void
+  onPressShowDetail: () => void
 }
 
 const BeachCard = memo((props: Props) => {
-
-  const { location } = useLocation()
 
   const [loading, setLoading] = useState(false)
 
@@ -27,19 +23,6 @@ const BeachCard = memo((props: Props) => {
     setTimeout(() => setLoading(false), 1000)
   }
 
-  const navigateToBeachLocalizationMap = async () => {
-    const beach = `Praia ${props.beach}, Santa Catarina, Brasil`
-
-    // console.log("Praia a visitar======================")
-    // console.log(beach)
-
-    openRouteWithCoords(
-      location.latitude,
-      location.longitude,
-      Number(props.beach.latitude),
-      Number(props.beach.longitude),
-    )
-  }
 
   const handleShareBeachLocal = async () => {
     await shareText(props.beach, props.beach.situacao)
@@ -48,9 +31,11 @@ const BeachCard = memo((props: Props) => {
   return (
     <TouchableOpacity style={[
       styles.container,
-      (props.beach.situacao === "IMPRÓPRIA") && { borderColor: COLORS.RED_CAUTION }
+      (props.beach.situacao === "IMPRÓPRIA") && {
+        borderColor: COLORS.RED_CAUTION,
+      }
     ]}
-      onPress={props.onPressCard}
+    // onPress={props.onPressCard}
     >
 
       <TouchableOpacity style={{
@@ -82,12 +67,12 @@ const BeachCard = memo((props: Props) => {
         <View style={styles.navigationMapButtonContainer}>
           <TouchableOpacity
             // style={}
-            onPress={() => navigateToBeachLocalizationMap()}
+            onPress={props.onPressShowDetail}
             hitSlop={10}
             style={{ flexDirection: "row", columnGap: 5, alignItems: 'baseline' }}
           >
             <FontAwesome name='map-marker' size={14} color={COLORS.FULL_WHITE} />
-            <Text style={styles.navigationButtonText}>Visitar</Text>
+            <Text style={styles.navigationButtonText}>Visualizar</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.navigationMapButtonContainer}>

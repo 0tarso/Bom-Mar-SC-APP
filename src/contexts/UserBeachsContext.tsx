@@ -88,7 +88,7 @@ export function UserBeachsProvider({ children }: { children: ReactNode }) {
 
       Object.values(favorites).forEach(beachs =>
         beachs.forEach(item => {
-          favoriteIds.add(item.praia + item.complemento)
+          favoriteIds.add(`${item.latitude}${item.longitude}`)
         })
       )
 
@@ -98,9 +98,7 @@ export function UserBeachsProvider({ children }: { children: ReactNode }) {
         Object.entries(prev).forEach(([city, beachs]) => {
           updated[city] = beachs.map(beach => ({
             ...beach,
-            favorite: favoriteIds.has(
-              beach.praia + beach.complemento
-            )
+            favorite: favoriteIds.has(`${beach.latitude}${beach.longitude}`)
           }))
         })
 
@@ -123,7 +121,6 @@ export function UserBeachsProvider({ children }: { children: ReactNode }) {
   ) => {
 
     try {
-      console.log("Status loading favorite => ", loadingUpdateFavorite)
       await updateFavorite(item)
       await handleGetFavorites()
 

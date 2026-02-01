@@ -132,19 +132,22 @@ const BeachInfoModal = memo((props: Props) => {
             </View>
 
             <View style={styles.card}>
-              <Image source={weather_icon} style={{ marginRight: 10, marginLeft: 5, width: 30, height: 30 }} />
-              <View style={{ width: '70%' }}>
-                <Text style={[styles.textValue, { fontSize: 12, width: "100%" }]}>{weather?.atual?.clima?.descricao.toUpperCase()}</Text>
+              <Image source={weather_icon} style={{ width: 40, height: 40 }} />
+              <View style={{}}>
+                <Text style={[styles.textValue, { fontSize: 14, width: "100%" }]}>{weather?.atual?.clima?.descricao.toUpperCase()}</Text>
                 <Text style={[styles.textLabel,]}>Clima</Text>
               </View>
             </View>
 
             <View style={styles.card}>
-              <Image source={wind_icon} style={{ marginRight: 10, marginLeft: 5, width: 30, height: 30 }} />
+              <Image source={wind_icon} style={{ width: 35, height: 35 }} />
               <View>
-                <Text
-                  style={[styles.textValue, { fontSize: 12 }, (weather.atual.vento.label === 'Vento forte') && { color: COLORS.RED_CAUTION }]}>
-                  {weather?.atual?.vento?.velocidade_kmh} Km/h</Text>
+                <View style={{ flexDirection: 'row', alignItems: "baseline" }}>
+                  <Text
+                    style={[styles.textValue, { fontSize: 24 }, (weather.atual.vento.label === 'Vento forte') && { color: COLORS.RED_CAUTION }]}>
+                    {weather?.atual?.vento?.velocidade_kmh}</Text>
+                  <Text style={[styles.textValue, { fontSize: 12 }]}>km/h</Text>
+                </View>
                 <Text style={styles.textLabel}>Vento</Text>
               </View>
             </View>

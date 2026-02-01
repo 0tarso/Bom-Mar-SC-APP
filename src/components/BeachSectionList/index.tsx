@@ -1,5 +1,5 @@
 import { View, Text, SectionList, SectionListProps, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import BeachCard from '../BeachCard';
 import { COLORS } from '@/src/Theme/Colors';
 import { updateFavorite } from '@/src/services/updateFavorite';
@@ -24,14 +24,17 @@ const BeachSectionList = ({ data, ...rest }: Props) => {
   const [showModal, setShowModal] = useState(false)
   const [beachDetailsModal, setBeachDetailsModal] = useState<Beach | null>(null)
 
-  const toggleFavorite = async (item) => {
-    await handleUpdateFavorite(item)
-  }
+  const toggleFavorite = useCallback(
+    async (item: Beach) => {
+      await handleUpdateFavorite(item)
+    },
+    [handleUpdateFavorite]
+  )
 
-  const handleShowBeachDetails = async (item: Beach) => {
+  const handleShowBeachDetails = useCallback((item: Beach) => {
     setBeachDetailsModal(item)
     setShowModal(true)
-  }
+  }, [])
 
   const handleCloseShowBeachDetails = async () => {
     // setBeachDetailsModal(null)
@@ -40,30 +43,28 @@ const BeachSectionList = ({ data, ...rest }: Props) => {
 
   return (
     <>
-      {showModal && (
-        <CustomModal
-          visible={showModal}
-          onClose={() => handleCloseShowBeachDetails()}
-        >
 
-          <BeachInfoModal
-            beach={beachDetailsModal}
-          />
+      <CustomModal
+        visible={showModal}
+        onClose={() => handleCloseShowBeachDetails()}
+      >
+        <BeachInfoModal
+          beach={beachDetailsModal}
+        />
+      </CustomModal>
 
-        </CustomModal>
 
-      )}
       <SectionList
         contentContainerStyle={{ paddingBottom: 150 }}
         sections={data}
         showsVerticalScrollIndicator={false}
 
-        keyExtractor={(item, index) => item.latitude}
+        keyExtractor={(item, index) => `${item.latitude}${item.longitude}`}
         renderItem={({ item }) => (
           <BeachCard
             beach={item}
             onPressFavorite={() => toggleFavorite(item)}
-            onPressCard={() => handleShowBeachDetails(item)}
+            onPressShowDetail={() => handleShowBeachDetails(item)}
           />)}
         renderSectionHeader={({ section }) => (
           <View style={styles.sectionHeaderContainer}>

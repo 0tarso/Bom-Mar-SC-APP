@@ -40,20 +40,25 @@ export const styles = StyleSheet.create({
     elevation: 2,
     borderRadius: 10,
     borderColor: COLORS.BLUE_DISABLE,
-    // justifyContent: 'center',
+    justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: "row",
-    padding: 10,
+    // flexDirection: "row",
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   textValue: {
+    marginTop: 10,
     fontSize: 24,
     fontFamily: "MontserratBold",
     color: COLORS.BLUE_PRIMARY,
+    textAlign: 'center'
 
   },
   textLabel: {
     fontSize: 12,
     fontFamily: "MontserratSemiBold",
-    color: "#afafaf"
+    color: "#afafaf",
+    textAlign: 'center',
+    marginTop: -5
   },
 })

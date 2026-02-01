@@ -8,24 +8,21 @@ export const updateFavorite = async (
 
   if (!item) return;
 
-  const itemId = item.praia + item.complemento;
 
   const stored = await AsyncStorage.getItem("@favBeachs");
   const favorites: Beach[] = stored ? JSON.parse(stored) : [];
 
   const alreadyExists = favorites.some(
-    (fav) => fav.praia + fav.complemento === itemId
+    (fav) => `${fav.latitude}${fav.longitude}` === `${item.latitude}${item.longitude}`
   );
 
   let updatedFavorites: Beach[];
 
   if (alreadyExists) {
     updatedFavorites = favorites.filter(
-      (fav) => fav.praia + fav.complemento !== itemId
+      (fav) => `${fav.latitude}${fav.longitude}` !== `${item.latitude}${item.longitude}`
     );
-    // console.log("=======================")
 
-    // console.log("Removido dos favoritos");
   } else {
     updatedFavorites = [...favorites, {
       ...item,
