@@ -1,28 +1,65 @@
-import { View, Text, SectionList, SectionListProps, TouchableOpacity } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
-import BeachCard from '../BeachCard';
-import { COLORS } from '@/src/Theme/Colors';
-import { updateFavorite } from '@/src/services/updateFavorite';
-import { useUserBeachs } from '@/src/contexts/UserBeachsContext';
-import { Beach, BeachLocalization } from '@/src/types';
-import { openRouteWithCoords } from '@/src/services/openMaps';
-import { useLocation } from '@/src/hooks/useLocation';
-import { styles } from './styles';
-import { CustomModal } from '../CustomModal';
-import axios from 'axios';
-import Constants from 'expo-constants'
-import BeachInfoModal from '../BeachInfoModal';
+import React, { useCallback, useMemo, useState } from 'react'
+import { View, Text } from 'react-native'
+import { FlashList } from '@shopify/flash-list'
 
-interface Props extends SectionListProps<any> {
+import BeachCard from '../BeachCard'
+import { styles } from './styles'
+import { CustomModal } from '../CustomModal'
+import BeachInfoModal from '../BeachInfoModal'
+import { Beach, BeachLocalization } from '@/src/types'
+import { useUserBeachs } from '@/src/contexts/UserBeachsContext'
+
+interface Props {
   data: BeachLocalization[]
 }
 
+type ListItem =
+  | { type: 'header'; title: string; count: number }
+  | { type: 'item'; beach: Beach }
 
-const BeachSectionList = ({ data, ...rest }: Props) => {
+const ESTIMATED_ITEM_SIZE = 140
+const ESTIMATED_HEADER_SIZE = 48
+
+const BeachSectionList = ({ data }: Props) => {
   const { handleUpdateFavorite } = useUserBeachs()
 
   const [showModal, setShowModal] = useState(false)
   const [beachDetailsModal, setBeachDetailsModal] = useState<Beach | null>(null)
+
+  const { listData, stickyHeaderIndices } = useMemo(() => {
+    const flatData: ListItem[] = []
+    const stickyIndices: number[] = []
+
+    let index = 0
+
+    for (const section of data) {
+      // header
+      stickyIndices.push(index)
+
+      flatData.push({
+        type: 'header',
+        title: section.title,
+        count: section.data.length,
+      })
+
+      index++
+
+      // items
+      for (const beach of section.data) {
+        flatData.push({
+          type: 'item',
+          beach,
+        })
+        index++
+      }
+    }
+
+    return {
+      listData: flatData,
+      stickyHeaderIndices: stickyIndices,
+    }
+  }, [data])
+
 
   const toggleFavorite = useCallback(
     async (item: Beach) => {
@@ -36,56 +73,53 @@ const BeachSectionList = ({ data, ...rest }: Props) => {
     setShowModal(true)
   }, [])
 
-  const handleCloseShowBeachDetails = async () => {
-    // setBeachDetailsModal(null)
-    setShowModal(false)
-  }
+
+  const renderItem = useCallback(
+    ({ item }: { item: ListItem }) => {
+      if (item.type === 'header') {
+        return (
+          <View style={styles.sectionHeaderContainer}>
+            <Text style={styles.headerTitle}>{item.title}</Text>
+            <Text style={styles.sectionFooterText}>
+              {item.count} {item.count > 1 ? 'praias' : 'praia'}
+            </Text>
+          </View>
+        )
+      }
+
+      return (
+        <BeachCard
+          beach={item.beach}
+          onPressFavorite={() => toggleFavorite(item.beach)}
+          onPressShowDetail={() => handleShowBeachDetails(item.beach)}
+        />
+      )
+    },
+    [toggleFavorite, handleShowBeachDetails]
+  )
+
+  const keyExtractor = useCallback((item: ListItem, index: number) => {
+    if (item.type === 'header') {
+      return `header-${item.title}-${index}`
+    }
+    return `${item.beach.latitude}-${item.beach.longitude}`
+  }, [])
 
   return (
     <>
 
-      <CustomModal
-        visible={showModal}
-        onClose={() => handleCloseShowBeachDetails()}
-      >
-        <BeachInfoModal
-          beach={beachDetailsModal}
-        />
+      <CustomModal visible={showModal} onClose={() => setShowModal(false)}>
+        <BeachInfoModal beach={beachDetailsModal} />
       </CustomModal>
 
-
-      <SectionList
+      <FlashList
+        data={listData}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        stickyHeaderIndices={stickyHeaderIndices}
+        estimatedItemSize={ESTIMATED_ITEM_SIZE}
         contentContainerStyle={{ paddingBottom: 150 }}
-        sections={data}
         showsVerticalScrollIndicator={false}
-
-        keyExtractor={(item, index) => `${item.latitude}${item.longitude}`}
-        renderItem={({ item }) => (
-          <BeachCard
-            beach={item}
-            onPressFavorite={() => toggleFavorite(item)}
-            onPressShowDetail={() => handleShowBeachDetails(item)}
-          />)}
-        renderSectionHeader={({ section }) => (
-          <View style={styles.sectionHeaderContainer}>
-            <Text style={styles.headerTitle}>{section.title}</Text>
-            <Text style={styles.sectionFooterText}>{section.data.length} {section.data.length > 1 ? "praias" : "praia"}</Text>
-            {/* <TouchableOpacity style={styles.mapButtonContainer}
-            onPress={() => navigateToBeachLocalizationMap(section.title)}
-          >
-          <Text style={styles.mapButtonText}>Visitar</Text>
-          </TouchableOpacity> */}
-          </View>
-        )}
-        stickySectionHeadersEnabled
-        initialNumToRender={7}
-        maxToRenderPerBatch={10}
-        windowSize={7}
-        removeClippedSubviews
-
-        {...rest}
-
-
       />
     </>
   )

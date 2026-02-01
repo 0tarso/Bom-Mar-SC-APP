@@ -17,10 +17,10 @@ const BeachCard = memo((props: Props) => {
 
   const [loading, setLoading] = useState(false)
 
-  const timeoutLoadingAction = () => {
+  const handleFavorite = async () => {
     setLoading(true)
-
-    setTimeout(() => setLoading(false), 1000)
+    await props.onPressFavorite()
+    setLoading(false)
   }
 
 
@@ -29,7 +29,7 @@ const BeachCard = memo((props: Props) => {
   }
 
   return (
-    <TouchableOpacity style={[
+    <View style={[
       styles.container,
       (props.beach.situacao === "IMPRÓPRIA") && {
         borderColor: COLORS.RED_CAUTION,
@@ -59,16 +59,19 @@ const BeachCard = memo((props: Props) => {
 
       <View style={{
         flexDirection: 'row',
-        columnGap: 12,
+        columnGap: 8,
         marginTop: 12,
         justifyContent: 'flex-end',
+        position: 'absolute',
+        bottom: 10,
+        right: 20
 
       }}>
         <View style={styles.navigationMapButtonContainer}>
           <TouchableOpacity
             // style={}
             onPress={props.onPressShowDetail}
-            hitSlop={10}
+            // hitSlop={10}
             style={{ flexDirection: "row", columnGap: 5, alignItems: 'baseline' }}
           >
             <FontAwesome name='map-marker' size={14} color={COLORS.FULL_WHITE} />
@@ -79,42 +82,26 @@ const BeachCard = memo((props: Props) => {
           <TouchableOpacity
             // style={}
             onPress={props.onPressFavorite}
-            onPressOut={() => timeoutLoadingAction()}
-            hitSlop={10}
+            onPressOut={handleFavorite}
+            // hitSlop={10}
             style={{ flexDirection: "row", columnGap: 5, alignItems: 'baseline' }}
           >
-            {loading ? (
-              <ActivityIndicator size={13} color={COLORS.FULL_WHITE} />
-            ) : (
-
-              <View>
-
-                {props.beach.favorite ? (
-                  <FontAwesome
-                    name="heart"
-                    color={COLORS.FULL_WHITE}
-                    size={14}
-                  />
-
-                ) : (
-
-                  <FontAwesome
-                    name="heart-o"
-                    color={COLORS.FULL_WHITE}
-                    size={14}
-                  />
-                )}
-
-              </View>
-
-            )}
+            <View style={{ width: 16, height: 16, alignItems: 'center', justifyContent: 'center' }}>
+              {loading ? (
+                <ActivityIndicator size={12} color={COLORS.FULL_WHITE} />
+              ) : props.beach.favorite ? (
+                <FontAwesome name="heart" size={14} color={COLORS.FULL_WHITE} />
+              ) : (
+                <FontAwesome name="heart-o" size={14} color={COLORS.FULL_WHITE} />
+              )}
+            </View>
             <Text style={styles.navigationButtonText}>Favoritar</Text>
           </TouchableOpacity>
         </View>
 
       </View>
 
-    </TouchableOpacity>
+    </View>
   )
 })
 

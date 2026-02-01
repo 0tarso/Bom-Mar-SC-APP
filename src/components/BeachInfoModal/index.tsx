@@ -47,7 +47,7 @@ const BeachInfoModal = memo((props: Props) => {
           Number(props.beach.latitude),
           Number(props.beach.longitude)
         )
-        console.log(response)
+        // console.log(response)
 
         if (response) {
           setWeather(response)
@@ -115,7 +115,7 @@ const BeachInfoModal = memo((props: Props) => {
 
               <Image source={temperature_icon} style={{ width: 40, height: 40 }} />
               <View>
-                <Text style={styles.textValue}>{weather?.atual?.temperatura}°</Text>
+                <Text style={styles.textValue}>{weather?.atual?.temperatura}°c</Text>
                 <Text style={styles.textLabel}>Temperatura</Text>
               </View>
 
@@ -126,7 +126,7 @@ const BeachInfoModal = memo((props: Props) => {
               <View>
                 <Text
                   style={[styles.textValue, (weather.atual.sensacao > 28) && { color: COLORS.RED_CAUTION }]}
-                >{weather?.atual?.sensacao}°</Text>
+                >{weather?.atual?.sensacao}°c</Text>
                 <Text style={styles.textLabel}>Sensação</Text>
               </View>
             </View>

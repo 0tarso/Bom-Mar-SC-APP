@@ -10,6 +10,22 @@ export const styles = StyleSheet.create({
     borderRadius: 18,
     padding: 15,
     marginBottom: 10,
+    minHeight: 160
+  },
+  sectionHeaderContainer: {
+    backgroundColor: '#FFFFFF', // NUNCA transparente
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+  },
+
+  headerTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+
+  sectionFooterText: {
+    fontSize: 12,
+    opacity: 0.7,
   },
 
   navigationMapButtonContainer: {
@@ -22,7 +38,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 12,
     // padding: 10,
     borderRadius: 8,
-    marginTop: 10
+    marginTop: 10,
     // position: 'absolute',
     // right: 10,
     // bottom: 10
