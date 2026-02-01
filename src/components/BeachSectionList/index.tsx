@@ -1,5 +1,5 @@
 import { View, Text, SectionList, SectionListProps, TouchableOpacity } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import BeachCard from '../BeachCard';
 import { COLORS } from '@/src/Theme/Colors';
 import { updateFavorite } from '@/src/services/updateFavorite';
@@ -8,7 +8,10 @@ import { Beach, BeachLocalization } from '@/src/types';
 import { openRouteWithCoords } from '@/src/services/openMaps';
 import { useLocation } from '@/src/hooks/useLocation';
 import { styles } from './styles';
-
+import { CustomModal } from '../CustomModal';
+import axios from 'axios';
+import Constants from 'expo-constants'
+import BeachInfoModal from '../BeachInfoModal';
 
 interface Props extends SectionListProps<any> {
   data: BeachLocalization[]
@@ -17,49 +20,73 @@ interface Props extends SectionListProps<any> {
 
 const BeachSectionList = ({ data, ...rest }: Props) => {
   const { handleUpdateFavorite } = useUserBeachs()
-  const { location } = useLocation()
 
+  const [showModal, setShowModal] = useState(false)
+  const [beachDetailsModal, setBeachDetailsModal] = useState<Beach | null>(null)
 
   const toggleFavorite = async (item) => {
     await handleUpdateFavorite(item)
   }
 
+  const handleShowBeachDetails = async (item: Beach) => {
+    setBeachDetailsModal(item)
+    setShowModal(true)
+  }
 
-
+  const handleCloseShowBeachDetails = async () => {
+    // setBeachDetailsModal(null)
+    setShowModal(false)
+  }
 
   return (
-    <SectionList
-      contentContainerStyle={{ paddingBottom: 150 }}
-      sections={data}
-      showsVerticalScrollIndicator={false}
+    <>
+      {showModal && (
+        <CustomModal
+          visible={showModal}
+          onClose={() => handleCloseShowBeachDetails()}
+        >
 
-      keyExtractor={(item, index) => item.complemento + item.local}
-      renderItem={({ item }) => (
-        <BeachCard
-          beach={item}
-          onPress={() => toggleFavorite(item)}
-        />)}
-      renderSectionHeader={({ section }) => (
-        <View style={styles.sectionHeaderContainer}>
-          <Text style={styles.headerTitle}>{section.title}</Text>
-          <Text style={styles.sectionFooterText}>{section.data.length} {section.data.length > 1 ? "praias" : "praia"}</Text>
-          {/* <TouchableOpacity style={styles.mapButtonContainer}
+          <BeachInfoModal
+            beach={beachDetailsModal}
+          />
+
+        </CustomModal>
+
+      )}
+      <SectionList
+        contentContainerStyle={{ paddingBottom: 150 }}
+        sections={data}
+        showsVerticalScrollIndicator={false}
+
+        keyExtractor={(item, index) => item.latitude}
+        renderItem={({ item }) => (
+          <BeachCard
+            beach={item}
+            onPressFavorite={() => toggleFavorite(item)}
+            onPressCard={() => handleShowBeachDetails(item)}
+          />)}
+        renderSectionHeader={({ section }) => (
+          <View style={styles.sectionHeaderContainer}>
+            <Text style={styles.headerTitle}>{section.title}</Text>
+            <Text style={styles.sectionFooterText}>{section.data.length} {section.data.length > 1 ? "praias" : "praia"}</Text>
+            {/* <TouchableOpacity style={styles.mapButtonContainer}
             onPress={() => navigateToBeachLocalizationMap(section.title)}
           >
-            <Text style={styles.mapButtonText}>Visitar</Text>
+          <Text style={styles.mapButtonText}>Visitar</Text>
           </TouchableOpacity> */}
-        </View>
-      )}
-      stickySectionHeadersEnabled
-      initialNumToRender={7}
-      maxToRenderPerBatch={10}
-      windowSize={7}
-      removeClippedSubviews
+          </View>
+        )}
+        stickySectionHeadersEnabled
+        initialNumToRender={7}
+        maxToRenderPerBatch={10}
+        windowSize={7}
+        removeClippedSubviews
 
-      {...rest}
+        {...rest}
 
 
-    />
+      />
+    </>
   )
 }
 

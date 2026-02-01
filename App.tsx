@@ -9,6 +9,7 @@ import { UserBeachsProvider } from './src/contexts/UserBeachsContext';
 import ToastManager, { Toast } from 'toastify-react-native'
 import { toastConfig } from './src/components/Toast';
 import { useFonts } from "expo-font";
+import { PaperProvider } from 'react-native-paper';
 export default function App() {
 
   const [openApp, setOpenApp] = useState(false)
@@ -46,16 +47,18 @@ export default function App() {
   return (
     <SafeAreaProvider style={styles.container}>
       <UserBeachsProvider>
-        <ToastManager
-          config={toastConfig}
-          showProgressBar={true}
-          position='top'
-          bottomOffset={80}
-          duration={10000}
-          useModal={false}
+        <PaperProvider>
+          <ToastManager
+            config={toastConfig}
+            showProgressBar={true}
+            position='top'
+            bottomOffset={80}
+            duration={10000}
+            useModal={false}
 
-        />
-        <Routes />
+          />
+          <Routes />
+        </PaperProvider>
       </UserBeachsProvider>
     </SafeAreaProvider>
   );

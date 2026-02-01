@@ -9,8 +9,9 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   container: {
-    width: "90%",
-    backgroundColor: "#fff",
+    width: "95%",
+    // flex: 1,
+    backgroundColor: "#f9f9f9",
     borderRadius: 12,
     padding: 20,
     elevation: 5,
@@ -26,7 +27,14 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
   content: {
-    marginBottom: 20,
+    marginBottom: 10,
+  },
+  buttonArea: {
+    // backgroundColor: "red",
+    // position: 'absolute',
+    // bottom: 0,
+    // width: "100%",
+    // alignSelf: 'center',
   },
   button: {
     backgroundColor: COLORS.BLUE_ENABLE,

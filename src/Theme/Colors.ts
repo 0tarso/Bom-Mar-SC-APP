@@ -14,5 +14,14 @@ export const COLORS = {
   FULL_WHITE: "#ffff",
 
   TEXT_WHITE: "#ffff",
-  TEXT_GRAY: "#acacac"
+  TEXT_GRAY: "#acacac",
+
+
+  BUTTON_BORDER_COLOR: "#4085CB",
+
+  BUTTON_FIRST_BACKGROUND: "#4085CB",
+  BUTTON_FIRST_TEXT: "#ffff",
+
+  BUTTON_SECOND_BACKGROUND: "#82b7ee",
+  BUTTON_SECOND_TEXT: "#fff"
 }

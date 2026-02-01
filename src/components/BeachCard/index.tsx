@@ -11,7 +11,8 @@ import { shareText } from '@/src/services/shareText'
 
 interface Props {
   beach: Beach
-  onPress: () => void
+  onPressFavorite: () => void
+  onPressCard: () => void
 }
 
 const BeachCard = memo((props: Props) => {
@@ -48,7 +49,9 @@ const BeachCard = memo((props: Props) => {
     <TouchableOpacity style={[
       styles.container,
       (props.beach.situacao === "IMPRÓPRIA") && { borderColor: COLORS.RED_CAUTION }
-    ]}>
+    ]}
+      onPress={props.onPressCard}
+    >
 
       <TouchableOpacity style={{
         position: "absolute",
@@ -90,7 +93,7 @@ const BeachCard = memo((props: Props) => {
         <View style={styles.navigationMapButtonContainer}>
           <TouchableOpacity
             // style={}
-            onPress={props.onPress}
+            onPress={props.onPressFavorite}
             onPressOut={() => timeoutLoadingAction()}
             hitSlop={10}
             style={{ flexDirection: "row", columnGap: 5, alignItems: 'baseline' }}

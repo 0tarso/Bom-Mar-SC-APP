@@ -6,6 +6,9 @@ import {
   TouchableOpacity
 } from "react-native";
 import { styles } from "./styles";
+import CustomButton from "../CustomButton";
+import { COLORS } from "@/src/Theme/Colors";
+import { Portal } from "react-native-paper";
 
 
 type Props = {
@@ -22,29 +25,33 @@ export function CustomModal({
   children,
 }: Props) {
   return (
-    <Modal
-      visible={visible}
-      transparent
-      animationType="fade"
-      statusBarTranslucent
-    >
-      <View style={styles.overlay}>
-        <View style={styles.container}>
-          {title && <Text style={styles.title}>{title}</Text>}
+    <Portal>
+      <Modal
+        visible={visible}
+        transparent
+        animationType="fade"
+        statusBarTranslucent
+      >
+        <View style={styles.overlay}>
+          <View style={styles.container}>
+            {title && <Text style={styles.title}>{title}</Text>}
 
-          <View style={styles.content}>
-            {children}
+            <View style={styles.content}>
+              {children}
+            </View>
+
+            <View style={styles.buttonArea}>
+              <CustomButton
+                onPress={onClose}
+                backgroundColor={COLORS.BUTTON_SECOND_BACKGROUND}
+                title="Fechar"
+                titleColor={COLORS.BUTTON_SECOND_TEXT}
+              />
+
+            </View>
           </View>
-
-          <TouchableOpacity
-            style={styles.button}
-            activeOpacity={0.7}
-            onPress={onClose}
-          >
-            <Text style={styles.buttonText}>Fechar</Text>
-          </TouchableOpacity>
         </View>
-      </View>
-    </Modal>
+      </Modal>
+    </Portal>
   );
 }
