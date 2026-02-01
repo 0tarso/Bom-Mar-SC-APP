@@ -1,9 +1,16 @@
-import { View, Text, StyleSheet, Animated, TouchableOpacity, Easing } from 'react-native'
+//React ================================================
+import { View, Text, Animated, TouchableOpacity, Easing } from 'react-native'
 import React, { useEffect, useRef } from 'react'
-import { ToastConfigParams, ToastManagerProps, ToastShowParams } from 'toastify-react-native/utils/interfaces'
-import Ionicons from '@expo/vector-icons/Ionicons'
+
+//Types ================================================
+import { ToastManagerProps, ToastShowParams } from 'toastify-react-native/utils/interfaces'
+
+//Styles ================================================
 import { styles } from './styles'
 import { COLORS } from '@/src/Theme/Colors'
+
+//Comóoents ================================================
+import Ionicons from '@expo/vector-icons/Ionicons'
 
 type ToastType = 'success' | 'info' | 'error'
 

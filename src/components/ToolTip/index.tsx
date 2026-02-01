@@ -55,11 +55,11 @@ const styles = StyleSheet.create({
     maxWidth: '80%',
     backgroundColor: '#222',
     padding: 10,
-    borderRadius: 8,
+    borderRadius: 10,
   },
   text: {
     color: '#fff',
-    fontSize: 12,
+    fontSize: 13,
     textAlign: 'center'
   },
 });

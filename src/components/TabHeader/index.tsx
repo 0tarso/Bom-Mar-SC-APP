@@ -1,9 +1,11 @@
+
+//React ================================================
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
-import { COLORS } from '@/src/Theme/Colors'
 import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
+//Styles ================================================
+import { COLORS } from '@/src/Theme/Colors'
 
 const TabHeader = (props: BottomTabHeaderProps) => {
   enum RouteLabel {

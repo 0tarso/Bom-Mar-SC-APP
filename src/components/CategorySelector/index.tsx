@@ -1,14 +1,14 @@
-import { COLORS } from "@/src/Theme/Colors";
-import { BeachSituation } from "@/src/types";
+//React ================================================
 import React, { useEffect, useRef } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Animated,
-} from "react-native";
+import { View, Text, TouchableOpacity, Animated } from "react-native";
+
+
+//Styles ================================================
+import { COLORS } from "@/src/Theme/Colors";
 import { styles } from "./styles";
+
+//Types ================================================
+import { BeachSituation } from "@/src/types";
 
 
 interface Props {

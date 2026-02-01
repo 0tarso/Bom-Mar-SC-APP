@@ -1,10 +1,18 @@
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+//React
 import React, { memo, useState } from 'react'
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+
+//Style
+import { styles } from "./styles"
 import { COLORS } from '@/src/Theme/Colors'
 
+//Expo
 import { FontAwesome } from "@expo/vector-icons"
+
+//Types
 import { Beach } from '@/src/types'
-import { styles } from "./styles"
+
+//Service
 import { shareText } from '@/src/services/shareText'
 
 interface Props {

@@ -1,12 +1,20 @@
+//React ================================================
 import React, { useCallback, useMemo, useState } from 'react'
 import { View, Text } from 'react-native'
 import { FlashList } from '@shopify/flash-list'
 
+//Components ================================================
 import BeachCard from '../BeachCard'
-import { styles } from './styles'
 import { CustomModal } from '../CustomModal'
 import BeachInfoModal from '../BeachInfoModal'
+
+//Styles ================================================
+import { styles } from './styles'
+
+//Types ================================================
 import { Beach, BeachLocalization } from '@/src/types'
+
+//Context-hook
 import { useUserBeachs } from '@/src/contexts/UserBeachsContext'
 
 interface Props {

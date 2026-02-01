@@ -1,14 +1,19 @@
-import { View, Text } from 'react-native'
+//React ================================================
+import { View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { useUserBeachs } from '@/src/contexts/UserBeachsContext'
-import BeachSectionList from '@/src/components/BeachSectionList'
-import LoadingWave from '@/src/components/LoadingWave'
-import { filterData } from '@/src/components/BeachList/actions'
-import { COLORS } from '@/src/Theme/Colors'
-import EmptyFavorites from '@/src/components/EmptyFavorites'
+
+//Types ================================================
 import { BeachLocalization } from '@/src/types'
+
+
+//Context-hook ================================================
+import { useUserBeachs } from '@/src/contexts/UserBeachsContext'
 import { useLocation } from '@/src/hooks/useLocation'
-import { useNavigation } from '@react-navigation/native'
+
+//Components
+import BeachSectionList from '@/src/components/BeachSectionList'
+import { filterData } from '@/src/components/BeachList/actions'
+import EmptyFavorites from '@/src/components/EmptyFavorites'
 
 const FavoritesScreen = () => {
 

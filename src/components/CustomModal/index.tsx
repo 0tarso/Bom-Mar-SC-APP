@@ -1,14 +1,14 @@
+
+//React ================================================
 import React from "react";
-import {
-  Modal,
-  View,
-  Text,
-  TouchableOpacity
-} from "react-native";
+import { Modal, View, Text } from "react-native";
+
+//Styles ================================================
 import { styles } from "./styles";
-import CustomButton from "../CustomButton";
 import { COLORS } from "@/src/Theme/Colors";
-import { Portal } from "react-native-paper";
+
+//Components ================================================
+import CustomButton from "../CustomButton";
 
 
 type Props = {
@@ -25,33 +25,31 @@ export function CustomModal({
   children,
 }: Props) {
   return (
-    <Portal>
-      <Modal
-        visible={visible}
-        transparent
-        animationType="fade"
-        statusBarTranslucent
-      >
-        <View style={styles.overlay}>
-          <View style={styles.container}>
-            {title && <Text style={styles.title}>{title}</Text>}
+    <Modal
+      visible={visible}
+      transparent
+      animationType="fade"
+      statusBarTranslucent
+    >
+      <View style={styles.overlay}>
+        <View style={styles.container}>
+          {title && <Text style={styles.title}>{title}</Text>}
 
-            <View style={styles.content}>
-              {children}
-            </View>
+          <View style={styles.content}>
+            {children}
+          </View>
 
-            <View style={styles.buttonArea}>
-              <CustomButton
-                onPress={onClose}
-                backgroundColor={COLORS.BUTTON_SECOND_BACKGROUND}
-                title="Fechar"
-                titleColor={COLORS.BUTTON_SECOND_TEXT}
-              />
+          <View style={styles.buttonArea}>
+            <CustomButton
+              onPress={onClose}
+              backgroundColor={COLORS.BUTTON_SECOND_BACKGROUND}
+              title="Fechar"
+              titleColor={COLORS.BUTTON_SECOND_TEXT}
+            />
 
-            </View>
           </View>
         </View>
-      </Modal>
-    </Portal>
+      </View>
+    </Modal>
   );
 }

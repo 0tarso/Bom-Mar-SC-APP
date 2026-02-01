@@ -1,9 +1,15 @@
+//React ================================================
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { Toast } from "toastify-react-native";
+
+//Types
+import { BeachLocalization } from "../types";
+
+
+//Services
 import { getAllBeachs } from "../services/getAllBeachs";
 import { getAllFavorites } from "../services/getAllFavorites";
 import { updateFavorite } from "../services/updateFavorite";
-import { BeachLocalization } from "../types";
-import { Toast } from "toastify-react-native";
 
 interface UserBeachsContext {
   beachs: BeachLocalization[],
@@ -26,8 +32,6 @@ export function useUserBeachs() {
 
   return context
 }
-
-
 
 
 export function UserBeachsProvider({ children }: { children: ReactNode }) {

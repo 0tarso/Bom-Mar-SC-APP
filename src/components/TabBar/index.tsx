@@ -1,10 +1,14 @@
+//React ================================================
 import { View, StyleSheet } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+//COmponents ================================================
 import TabItem from '../TabItem'
 
+//Styles ================================================
 import { COLORS } from '@/src/Theme/Colors'
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function TabBar(props: BottomTabBarProps) {
   const insets = useSafeAreaInsets()

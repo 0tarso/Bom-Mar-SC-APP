@@ -1,13 +1,24 @@
-import { View, Text, FlatList, SectionList } from 'react-native'
+//React ================================================
+import { View, Text, SectionList } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
-import { COLORS } from '@/src/Theme/Colors'
+
+//Components ================================================
 import { CategorySelector } from '../CategorySelector';
 import BeachSectionList from '../BeachSectionList';
 import LoadingWave from '../LoadingWave';
-import { filterData } from './actions';
-import { useUserBeachs } from '@/src/contexts/UserBeachsContext';
-import { BeachLocalization } from '@/src/types';
+
+//Styles ================================================
 import { styles } from './styles';
+
+
+//Actions ================================================
+import { filterData } from './actions';
+
+//Context-hook ================================================
+import { useUserBeachs } from '@/src/contexts/UserBeachsContext';
+
+//Types ================================================
+import { BeachLocalization } from '@/src/types';
 
 
 

@@ -1,6 +1,6 @@
-import { View, Text, ButtonProps, TouchableOpacity, TouchableOpacityProps } from 'react-native'
+//React ================================================
+import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import React from 'react'
-import { COLORS } from '@/src/Theme/Colors'
 
 interface Props extends TouchableOpacityProps {
   onPress: () => void

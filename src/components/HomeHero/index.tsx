@@ -1,17 +1,21 @@
+//React ================================================
+import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import Svg, { ClipPath, Defs, Path } from 'react-native-svg'
 
 
-
+//Assets ================================================
 import beachBackground from "@/assets/beach_background.png"
-import logoTextSC from "@/assets/logoTextSC.png"
 
+//Styles ================================================
 import { styles } from './styles'
+import { COLORS } from '@/src/Theme/Colors'
+
+//Compontes ================================================
 import { CustomModal } from '../CustomModal'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import { COLORS } from '@/src/Theme/Colors'
 import InfoModal from '../InfoModal'
+
+
 const HomeHero = () => {
 
   const [showModal, setShowModal] = useState(false)

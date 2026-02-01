@@ -1,10 +1,17 @@
+//React ================================================
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { COLORS } from '@/src/Theme/Colors'
 import LottieView from 'lottie-react-native'
 
-import empty_animation from "@/assets/animations/empty_favorites_animation.json"
+//Styles ================================================
+import { COLORS } from '@/src/Theme/Colors'
 import { styles } from './styles'
+
+
+//Assets ================================================
+import empty_animation from "@/assets/animations/empty_favorites_animation.json"
+
+//Hooks ================================================
 import { useNavigation } from '@react-navigation/native'
 
 const EmptyFavorites = () => {

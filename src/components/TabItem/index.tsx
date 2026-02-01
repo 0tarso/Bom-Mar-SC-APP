@@ -1,11 +1,15 @@
+//React ================================================
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { Animated, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { Animated, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useEffect, useRef } from "react";
 import LottieView from 'lottie-react-native'
-
 import { NavigationRoute, ParamListBase } from "@react-navigation/native";
+
+
+//Styles ================================================
 import { COLORS } from "@/src/Theme/Colors"
+
+//Assets ================================================
 import praia_icon from "@/assets/animations/praias_icon.json"
 import favorites_icon from "@/assets/animations/favorites_icon.json"
 

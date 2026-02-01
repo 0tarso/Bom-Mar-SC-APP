@@ -1,15 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import Routes from './src/routes';
-import { useCallback, useEffect, useState } from 'react';
-import SplashScreen from './src/screens/Splash';
-import * as NavigationBar from "expo-navigation-bar"
-import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { UserBeachsProvider } from './src/contexts/UserBeachsContext';
-import ToastManager, { Toast } from 'toastify-react-native'
-import { toastConfig } from './src/components/Toast';
+//React
+import { StyleSheet } from 'react-native';
+import { useEffect, useState } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import ToastManager from 'toastify-react-native'
+
+//Expo
 import { useFonts } from "expo-font";
-import { PaperProvider } from 'react-native-paper';
+import * as NavigationBar from "expo-navigation-bar"
+
+//Screens
+import SplashScreen from './src/screens/Splash';
+
+
+//Routes
+import Routes from './src/routes';
+
+//Context
+import { UserBeachsProvider } from './src/contexts/UserBeachsContext';
+
+//Components
+import { toastConfig } from './src/components/Toast';
+
+
+
 export default function App() {
 
   const [openApp, setOpenApp] = useState(false)
@@ -47,18 +60,16 @@ export default function App() {
   return (
     <SafeAreaProvider style={styles.container}>
       <UserBeachsProvider>
-        <PaperProvider>
-          <ToastManager
-            config={toastConfig}
-            showProgressBar={true}
-            position='top'
-            bottomOffset={80}
-            duration={10000}
-            useModal={false}
+        <ToastManager
+          config={toastConfig}
+          showProgressBar={true}
+          position='top'
+          bottomOffset={80}
+          duration={10000}
+          useModal={false}
 
-          />
-          <Routes />
-        </PaperProvider>
+        />
+        <Routes />
       </UserBeachsProvider>
     </SafeAreaProvider>
   );

@@ -1,22 +1,34 @@
+//React ================================================
 import { View, Text, Image } from 'react-native'
 import React, { memo, useEffect, useState } from 'react'
+import { Toast } from 'toastify-react-native'
+
+//Expo ================================================
+import { FontAwesome } from '@expo/vector-icons'
+
+//Services ================================================
 import { getTripDistance } from '@/src/services/getTripDistance'
+import { getWeather } from '@/src/services/getWeather'
+import { openRouteWithCoords } from '@/src/services/openMaps'
+
+//Types ================================================
 import { Beach, Weather } from '@/src/types'
 import { useLocation } from '@/src/hooks/useLocation'
-import { Toast } from 'toastify-react-native'
+
+//Components ================================================
+import LoadingWave from '../LoadingWave'
+import CustomButton from '../CustomButton'
+import CustomTooltip from '../ToolTip'
+
+//Styles ================================================
 import { COLORS } from '@/src/Theme/Colors'
 import { styles } from './styles'
-import { getWeather } from '@/src/services/getWeather'
 
+//Assets ================================================
 import temperature_icon from "@/assets/icons/colored_termometer.png"
 import human_sense_icon from "@/assets/icons/colored_human_sense.png"
 import weather_icon from "@/assets/icons/clear_weather.png"
 import wind_icon from "@/assets/icons/colored_wind.png"
-import LoadingWave from '../LoadingWave'
-import CustomButton from '../CustomButton'
-import { openRouteWithCoords } from '@/src/services/openMaps'
-import { FontAwesome } from '@expo/vector-icons'
-import CustomTooltip from '../ToolTip'
 
 interface Props {
   beach: Beach

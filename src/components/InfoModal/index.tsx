@@ -1,7 +1,12 @@
+//React ================================================
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 
+//Assets ================================================
 import bom_mar_logo from "@/assets/logoTextSC.png"
+
+
+//Styles ================================================
 import { COLORS } from '@/src/Theme/Colors'
 
 const InfoModal = () => {

@@ -1,14 +1,19 @@
+//React ================================================
 import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { StatusBar } from 'expo-status-bar';
+import React, { useEffect } from 'react'
+import { Toast } from 'toastify-react-native';
+
+//Styles
 import { COLORS } from '@/src/Theme/Colors';
+import { styles } from './styles';
+
+//Components
 import HomeHero from '@/src/components/HomeHero';
 import BeachList from '@/src/components/BeachList';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Toast } from 'toastify-react-native';
-import { useLocation } from '@/src/hooks/useLocation';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { styles } from './styles';
+
+//Hooks
+import { useLocation } from '@/src/hooks/useLocation';
 
 const HomeScreen = () => {
 
