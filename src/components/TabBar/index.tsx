@@ -9,10 +9,9 @@ import TabItem from '../TabItem'
 
 //Styles ================================================
 import { COLORS } from '@/src/Theme/Colors'
+import { FontAwesome } from '@expo/vector-icons'
 
 export default function TabBar(props: BottomTabBarProps) {
-  const insets = useSafeAreaInsets()
-
 
   return (
 
@@ -28,7 +27,6 @@ export default function TabBar(props: BottomTabBarProps) {
           route={route}
         />
       ))}
-
 
     </View>
   )

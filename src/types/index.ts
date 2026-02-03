@@ -1,3 +1,4 @@
+
 export type BeachSituation = "PRÓPRIA" | "IMPRÓPRIA"
 
 export type Beach = {
@@ -8,12 +9,39 @@ export type Beach = {
   praia: string,
   situacao: BeachSituation,
   latitude: string,
-  longitude: string
+  longitude: string,
+  score_de_banho: {
+    score: number,
+    label: "Não recomendado" | "Bom" | "Excelente" | "Atenção"
+  },
+  zona_marina_id: string,
+  previsao_marinha: {
+    atualizado_em: string,
+    diario: {
+      manha: {
+        waveHeight_avg: number,
+        wavePeriod_avg: number,
+        waterTemperature_avg: number
+      },
+      tarde: {
+        waveHeight_avg: number,
+        wavePeriod_avg: number,
+        waterTemperature_avg: number
+      },
+      noite: {
+        waveHeight_avg: number,
+        wavePeriod_avg: number,
+        waterTemperature_avg: number
+      },
+    }
+  }
 }
+
 
 export type BeachLocalization = {
   [city: string]: Beach[]
 }
+
 
 export type Weather = {
   localizacao: {

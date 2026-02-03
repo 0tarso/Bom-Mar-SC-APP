@@ -1,5 +1,5 @@
 //React ================================================
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, ScrollView } from 'react-native'
 import React from 'react'
 
 //Assets ================================================
@@ -8,16 +8,18 @@ import bom_mar_logo from "@/assets/logoTextSC.png"
 
 //Styles ================================================
 import { COLORS } from '@/src/Theme/Colors'
+import { styles } from './styles'
 
 const InfoModal = () => {
   return (
 
-    <View style={{
+    <ScrollView style={{
       // flex: 1,
       // justifyContent: "center",
-      alignItems: 'center',
+      // alignItems: 'center',
       // backgroundColor: "green",
-      // padding: 20
+      padding: 20,
+
     }}>
       <Image
         style={{
@@ -28,47 +30,36 @@ const InfoModal = () => {
         source={bom_mar_logo}
       />
 
+      <View style={styles.card}>
+        <Text style={styles.title}>Sobre</Text>
+        <Text style={styles.text}>Bom Mar Sc foi desenvolvido para informar de forma clara e acessível a balneabilidade das praias de Santa Catarina.{'\n'}
+        </Text>
+        <Text style={styles.text}>
+          Os dados apresentados são fornecidos pelo Instituto do Meio Ambiente de Santa Catarina (IMA).
+          O objetivo do app é facilitar o acesso às informações, ajudando o usuário a verificar rapidamente se a praia está própria ou imprópria para banho.{'\n'}
 
-      <Text style={{
-        fontWeight: "800",
-        width: "100%",
-        color: COLORS.CARD_TEXT_PRIMARY,
-        textAlign: 'left',
-        fontSize: 16
-      }}>Sobre
-      </Text>
-      <Text style={{
-        fontWeight: "600",
-        color: COLORS.CARD_TEXT_PRIMARY,
-        textAlign: 'left'
-      }}>Bom Mar Sc foi desenvolvido para informar de forma clara e acessível a balneabilidade das praias de Santa Catarina.{'\n'}
+        </Text>
+      </View>
 
-      </Text>
-      <Text style={{
-        fontWeight: "600",
-        color: COLORS.CARD_TEXT_PRIMARY,
-        textAlign: 'left'
-      }}>
-        Os dados apresentados são fornecidos pelo Instituto do Meio Ambiente de Santa Catarina (IMA).
-        O objetivo do app é facilitar o acesso às informações, ajudando o usuário a verificar rapidamente se a praia está própria ou imprópria para banho.{'\n'}
-      </Text>
-      <Text style={{
-        fontWeight: "800",
-        width: "100%",
-        color: COLORS.CARD_TEXT_PRIMARY,
-        textAlign: 'left',
-        fontSize: 16
-      }}>Uso da Localização
-      </Text>
-      <Text style={{
-        fontWeight: "600",
-        color: COLORS.CARD_TEXT_PRIMARY,
-        textAlign: 'left'
-      }}>A localização do usuário é utilizada exclusivamente dentro do aplicativo para melhorar a experiência, como facilitar a visualização de praias próximas.
-        Nenhum dado de localização é armazenado, compartilhado ou enviado a terceiros.{'\n'}
 
-      </Text>
-    </View>
+      <View style={styles.card}>
+        <Text style={styles.title}>Uso da Localização</Text>
+        <Text style={styles.text}>A localização do usuário é utilizada exclusivamente dentro do aplicativo para melhorar a experiência, como facilitar a visualização de praias próximas e calcular a rota de viagem.{'\n'}
+        </Text>
+
+      </View>
+
+      <View style={styles.card}>
+
+        <Text style={styles.title}>Condições atuais</Text>
+        <Text style={styles.text}>Essa funcionalidade reflete as condições no momento em que se utiliza o aplicativo, sendo atualizada a cada abertura do mesmo.{'\n'}</Text>
+
+        <Text style={styles.title}>Mar do Dia</Text>
+        <Text style={styles.text}>As medições não representam um ponto exato da praia, mas sim uma estimativa média da região onde ela está localizada. Fatores naturais como correntes, ventos locais, marés e relevo costeiro podem causar variações ao longo do dia ou entre praias próximas.</Text>
+
+      </View>
+
+    </ScrollView>
 
   )
 }

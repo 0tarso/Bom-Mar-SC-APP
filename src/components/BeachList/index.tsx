@@ -19,6 +19,7 @@ import { useUserBeachs } from '@/src/contexts/UserBeachsContext';
 
 //Types ================================================
 import { BeachLocalization } from '@/src/types';
+import NotFoundAnimation from '../NotFound';
 
 
 
@@ -28,7 +29,7 @@ export type Beach = {
 
 const BeachList = () => {
 
-  const { beachs, loadingBeachs, loadingFavorites } = useUserBeachs()
+  const { beachs, loadingBeachs, loadingFavorites, errorFetchBeach } = useUserBeachs()
 
   const sectionListRef = useRef<SectionList>(null);
 
@@ -91,12 +92,22 @@ const BeachList = () => {
                 }}
               />
             ) : (
-              <>
-                <Text>.</Text>
-              </>
+              <View style={{ justifyContent: 'center', alignItems: 'center', height: '90%' }}>
+
+              </View>
             )}
 
           </View>
+        )}
+
+        {errorFetchBeach && (
+          <>
+            <NotFoundAnimation />
+            <Text style={{
+              fontFamily: "MontserratBold",
+              marginTop: 40
+            }}>Algo errado aconteceu. Tente novamente.</Text>
+          </>
         )}
 
       </View>

@@ -16,8 +16,8 @@ export const styles = StyleSheet.create({
     left: 5,
     height: "100%",
     backgroundColor: "#3B82F6",
-    borderRadius: 18,
-    zIndex: -10
+    borderRadius: 20,
+    // zIndex: -10
 
   },
 

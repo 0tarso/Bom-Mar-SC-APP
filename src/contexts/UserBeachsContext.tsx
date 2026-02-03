@@ -13,6 +13,7 @@ import { updateFavorite } from "../services/updateFavorite";
 
 interface UserBeachsContext {
   beachs: BeachLocalization[],
+  errorFetchBeach: boolean,
   beachsFavorite: BeachLocalization[],
   loadingFavorites: boolean,
   loadingBeachs: boolean,
@@ -37,7 +38,7 @@ export function useUserBeachs() {
 export function UserBeachsProvider({ children }: { children: ReactNode }) {
 
   const [beachs, setBeachs] = useState<BeachLocalization[]>([]);
-
+  const [errorFetchBeach, setErrorFetchBeach] = useState(false)
   const [beachsFavorite, setBeachsFavorite] = useState<BeachLocalization[]>([]);
 
   const [loadingFavorites, setLoadingFavorites] = useState(false)
@@ -59,7 +60,7 @@ export function UserBeachsProvider({ children }: { children: ReactNode }) {
   const handleGetAllBeachs = async () => {
     let data
 
-    setError(false)
+    setErrorFetchBeach(false)
     setLoadingBeachs(true)
 
     try {
@@ -70,7 +71,7 @@ export function UserBeachsProvider({ children }: { children: ReactNode }) {
       }
 
     } catch (error) {
-      setError(true)
+      setErrorFetchBeach(true)
     }
 
     finally {
@@ -140,6 +141,7 @@ export function UserBeachsProvider({ children }: { children: ReactNode }) {
 
   const value: UserBeachsContext = {
     beachs,
+    errorFetchBeach,
     beachsFavorite,
     handleUpdateFavorite,
     loadingFavorites,
