@@ -4,11 +4,11 @@
     "slug": "bom-mar-sc",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/splash-icon-new.png",
+    "icon": "./assets/splash-new-icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon-new.png",
+      "image": "./assets/splash-new-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,14 +20,15 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/splash-icon-new.png",
+        "foregroundImage": "./assets/splash-new-icon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.x0tarso.bommarsc"
     },
     "web": {
-      "favicon": "./assets/splash-icon-new.png"
+      "favicon": "./assets/splash-new-icon.png"
     },
     "plugins": [
       "expo-secure-store"
