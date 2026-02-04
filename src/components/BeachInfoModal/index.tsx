@@ -20,33 +20,32 @@ import { useLocation } from '@/src/hooks/useLocation'
 import LoadingWave from '../LoadingWave'
 import CustomButton from '../CustomButton'
 import CustomTooltip from '../ToolTip'
+import BeachScore from '../BeachScore';
 
 //Styles ================================================
 import { COLORS } from '@/src/Theme/Colors'
 import { styles } from './styles'
 
 //Assets ================================================
-import temperature_icon from "@/assets/icons/colored_termometer.png"
-import human_sense_icon from "@/assets/icons/colored_human_sense.png"
-import clear_weather_icon from "@/assets/icons/clear_weather.png"
-import cloud_weather_icon from "@/assets/icons/cloud_weather.png"
 import wind_icon from "@/assets/icons/colored_wind.png"
-import drizzle_rain_weather_icon from "@/assets/icons/drizzle_weather_icon.png"
-import rain_weather_icon from "@/assets/icons/rain_weather_icon.png"
-import thunderstorm_weather_icon from "@/assets/icons/thunderstorm_weather_icon.png"
-import mist_weather_icon from "@/assets/icons/mist_weather_icon.png"
 import humidity_icon from "@/assets/icons/colored_humidity.png"
-import sea_water_temp_icon from "@/assets/icons/sea_water_temp_icon.png"
 import sea_wave_height from "@/assets/icons/sea_wave_height.png"
 import sea_wave_period from "@/assets/icons/sea_wave_period.png"
+import clear_weather_icon from "@/assets/icons/clear_weather.png"
+import cloud_weather_icon from "@/assets/icons/cloud_weather.png"
+import mist_weather_icon from "@/assets/icons/mist_weather_icon.png"
+import temperature_icon from "@/assets/icons/colored_termometer.png"
+import rain_weather_icon from "@/assets/icons/rain_weather_icon.png"
+import human_sense_icon from "@/assets/icons/colored_human_sense.png"
+import sea_water_temp_icon from "@/assets/icons/sea_water_temp_icon.png"
 import rain_meter_weather_icon from "@/assets/icons/rain_meter_icon.png"
+import drizzle_rain_weather_icon from "@/assets/icons/drizzle_weather_icon.png"
+import thunderstorm_weather_icon from "@/assets/icons/thunderstorm_weather_icon.png"
 
 
 interface Props {
   beach: Beach,
-  openMap: (coordinates) => Promise<void>
 }
-
 
 
 const WEATHER_ICONS: Record<string, any> = {
@@ -58,6 +57,27 @@ const WEATHER_ICONS: Record<string, any> = {
   'Mist': mist_weather_icon,
   'Fog': mist_weather_icon,
 }
+
+const SCORE_TEXT = {
+  adulto: {
+    Excelente: "Mar calmo e seguro. Ótimo para banho.",
+    Bom: "Condições boas, com pequenos cuidados.",
+    Atenção: "Mar moderado. Banho exige cautela.",
+    "Não recomendado": "Condições desfavoráveis para banho.",
+  },
+  crianca: {
+    Excelente: "Mar bem calmo e seguro para crianças.",
+    Bom: "Condições aceitáveis, com supervisão.",
+    Atenção: "Mar instável. Não indicado para crianças.",
+    "Não recomendado": "Risco elevado para banho infantil.",
+  },
+  surf: {
+    Clássico: "Ondas fortes e bem formadas.",
+    Bom: "Boas condições para surfar.",
+    Regular: "Dá pra entrar, mas não está ideal.",
+    Fraco: "Ondas ruins ou sem formação.",
+  },
+};
 
 const BeachInfoModal = memo((props: Props) => {
   const { location } = useLocation()
@@ -114,8 +134,8 @@ const BeachInfoModal = memo((props: Props) => {
   return (
     <>
       <ScrollView style={{
-        height: 650,
-        padding: 20
+        height: 600,
+        paddingHorizontal: 20
       }}
         showsVerticalScrollIndicator={false}
       >
@@ -123,13 +143,13 @@ const BeachInfoModal = memo((props: Props) => {
           <LoadingWave />
         ) : (
           <>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', alignItems: "flex-end" }}>
               <Text style={styles.distancia}>
                 {distanceToBeach === "" ? "Calculando rota..." : `Aproximadamente: ${distanceToBeach}km`}
               </Text>
 
 
-              <View style={{ marginLeft: 5 }}>
+              <View style={{ marginLeft: 5, marginBottom: 5 }}>
                 <CustomTooltip
                   text='A distância pode variar dependendo do trânsito e da rota no momento.'
                 >
@@ -138,8 +158,10 @@ const BeachInfoModal = memo((props: Props) => {
               </View>
             </View>
 
-
             <Text style={styles.complemento}>{props.beach.complemento}</Text>
+
+            <BeachScore score={props.beach.score_de_banho} situation={props.beach.situacao} />
+
 
             <View style={{
               flexDirection: 'row',
@@ -147,21 +169,6 @@ const BeachInfoModal = memo((props: Props) => {
               alignItems: 'center'
             }}>
               <Text style={styles.cardContainerTitle}>Condições atuais</Text>
-
-
-              <View style={[{
-                backgroundColor: COLORS.BLUE_PRIMARY,
-                padding: 5,
-                borderRadius: 20,
-                paddingHorizontal: 40
-              }, (props.beach.situacao === 'IMPRÓPRIA') && {
-                backgroundColor: COLORS.RED_CAUTION
-              }]}>
-
-                <Text style={{ fontFamily: "MontserratSemiBold", color: COLORS.TEXT_WHITE }}>
-                  {props.beach.situacao === 'PRÓPRIA' ? "própria" : "imprópria"}</Text>
-
-              </View>
 
             </View>
             <View style={styles.cardsContainer}>
@@ -203,7 +210,7 @@ const BeachInfoModal = memo((props: Props) => {
                 <View>
                   <View style={{ flexDirection: 'row', alignItems: "baseline" }}>
                     <Text
-                      style={[styles.textValue, (weather.atual.vento.label === 'Vento forte') && { color: COLORS.RED_CAUTION }]}>
+                      style={[styles.textValue, (weather?.atual?.vento?.label === 'Vento forte') && { color: COLORS.RED_CAUTION }]}>
                       {weather?.atual?.vento?.velocidade_kmh}</Text>
                     <Text style={[styles.textValue, { fontSize: 12 }]}>km/h</Text>
                   </View>
@@ -295,8 +302,7 @@ const BeachInfoModal = memo((props: Props) => {
               color: COLORS.TEXT_GRAY,
               fontSize: 12,
               marginBottom: 25
-            }}>* Mar do dia fala sobre o resumo diário das condições do mar. As condições reais podem variar dependendo do horário. Principalmente durante a manhã e a noite.</Text>
-
+            }}>* Mar do dia resume a previsão de condição do mar feita de hora em hora e agrupa por períodos. As condições reais podem variar dependendo do horário. Principalmente durante a manhã e a noite.</Text>
           </>
         )}
 
@@ -304,7 +310,7 @@ const BeachInfoModal = memo((props: Props) => {
 
       </ScrollView>
 
-      <SafeAreaView style={{ paddingHorizontal: 20, height: 60 }}>
+      <SafeAreaView style={{ paddingHorizontal: 20, height: 60, justifyContent: 'center' }}>
 
         <CustomButton
           backgroundColor={COLORS.BUTTON_FIRST_BACKGROUND}

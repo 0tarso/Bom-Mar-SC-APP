@@ -1,5 +1,5 @@
 //React ================================================
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text, TouchableOpacity, Animated } from "react-native";
 
 
@@ -19,27 +19,36 @@ interface Props {
 export function CategorySelector({ value, onChange }: Props) {
   const translateX = useRef(new Animated.Value(0)).current;
 
-  const BUTTON_WIDTH = 170;
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  const buttonWidth = containerWidth / 2;
 
   useEffect(() => {
+    if (!containerWidth) return;
+
     Animated.timing(translateX, {
-      toValue: value === "PRÓPRIA" ? 0 : BUTTON_WIDTH,
+      toValue: value === "PRÓPRIA" ? 0 : buttonWidth,
       duration: 150,
       useNativeDriver: true,
     }).start();
-  }, [value]);
+  }, [value, containerWidth]);
 
   return (
-    <View style={styles.container}>
+    <View
+      style={styles.container}
+      onLayout={(e) => setContainerWidth(e.nativeEvent.layout.width)}
+    >
       {/* Slider */}
       <Animated.View
         style={[
           styles.slider,
           {
-            width: BUTTON_WIDTH,
+            width: buttonWidth,
             transform: [{ translateX }],
             backgroundColor:
-              value === "PRÓPRIA" ? COLORS.BLUE_ENABLE : COLORS.RED_CAUTION,
+              value === "PRÓPRIA"
+                ? COLORS.BLUE_ENABLE
+                : COLORS.RED_CAUTION,
           },
         ]}
       />
@@ -48,33 +57,27 @@ export function CategorySelector({ value, onChange }: Props) {
         style={styles.button}
         onPress={() => onChange("PRÓPRIA")}
         activeOpacity={0.8}
-        hitSlop={10}
       >
         <Text
           style={[
             styles.text,
             value === "PRÓPRIA" && styles.activeText,
           ]}
-        >
-          próprias
-        </Text>
+        >próprias</Text>
+
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
         onPress={() => onChange("IMPRÓPRIA")}
         activeOpacity={0.8}
-        hitSlop={15}
       >
         <Text
           style={[
             styles.text,
-            { paddingLeft: 5 },
             value === "IMPRÓPRIA" && styles.activeText,
           ]}
-        >
-          impróprias
-        </Text>
+        >impróprias</Text>
       </TouchableOpacity>
     </View>
   );

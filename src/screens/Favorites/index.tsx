@@ -8,18 +8,16 @@ import { BeachLocalization } from '@/src/types'
 
 //Context-hook ================================================
 import { useUserBeachs } from '@/src/contexts/UserBeachsContext'
-import { useLocation } from '@/src/hooks/useLocation'
 
 //Components
 import BeachSectionList from '@/src/components/BeachSectionList'
 import { filterData } from '@/src/components/BeachList/actions'
 import EmptyFavorites from '@/src/components/EmptyFavorites'
+import { styles } from './styles'
 
 const FavoritesScreen = () => {
 
-  const { beachsFavorite, loadingFavorites } = useUserBeachs()
-  const { city, location } = useLocation()
-
+  const { beachsFavorite } = useUserBeachs()
 
   const [filteredBeachs, setFilteredBeachs] = useState<BeachLocalization[] | []>([])
 
@@ -30,24 +28,11 @@ const FavoritesScreen = () => {
 
 
   return (
-    <View
-      style={{
-        flex: 1
-      }}
-    >
+    <View style={styles.container}>
 
-      <View style={{
-        flex: 1,
-        paddingHorizontal: 20
-      }}>
+      <View style={styles.listArea}>
 
-        {/* {loadingFavorites ? (
-          <View style={{ flex: 1, justifyContent: 'center' }}>
-            <LoadingWave />
-          </View>
-        ) : ( */}
-
-        <View style={{ flex: 1 }}>
+        <View style={styles.listContainer}>
 
           {filteredBeachs.length > 0 ? (
             <BeachSectionList
@@ -55,22 +40,16 @@ const FavoritesScreen = () => {
             />
 
           ) : (
-            <View style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: "center"
-            }}>
-
+            <View style={styles.emptyListContainer}>
               <EmptyFavorites />
             </View>
 
           )}
 
         </View>
-        {/* )} */}
-
 
       </View>
+
     </View>
   )
 }

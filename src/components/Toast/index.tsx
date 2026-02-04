@@ -38,7 +38,7 @@ const typeStyles = {
 
 const ToastWithProgress = ({
   text1,
-  text2,
+  text2: subText,
   visibilityTime = 5000,
   type,
   hide,
@@ -108,22 +108,8 @@ const ToastWithProgress = ({
         </TouchableOpacity>
       </View>
 
-      {text2 && <Text style={styles.text}>{text2}</Text>}
+      {subText && <Text style={styles.text}>{subText}</Text>}
 
-      {/* <View style={styles.progressContainer}>
-        <Animated.View
-          style={[
-            styles.progressBar,
-            {
-              backgroundColor: TOAST_THEME_COLORS.bar,
-              width: PROGRESS.interpolate({
-                inputRange: [0, 1],
-                outputRange: ['0%', '100%'],
-              }),
-            },
-          ]}
-        />
-      </View> */}
     </Animated.View>
   )
 }

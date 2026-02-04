@@ -1,5 +1,6 @@
 import { View, Text, Modal, Pressable, StyleSheet } from 'react-native';
 import { useEffect, useState } from 'react';
+import { COLORS } from '@/src/Theme/Colors';
 
 interface CustomTooltipProps {
   text: string;
@@ -16,6 +17,7 @@ export default function CustomTooltip({
       setVisible(false)
     }, 4000)
   }, [])
+
   const [visible, setVisible] = useState(false);
 
   return (
@@ -53,13 +55,17 @@ const styles = StyleSheet.create({
   },
   tooltip: {
     maxWidth: '80%',
-    backgroundColor: '#222',
+    backgroundColor: COLORS.GRAY_BACKGROUND,
     padding: 10,
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: COLORS.BLUE_DISABLE,
+    elevation: 8
   },
   text: {
-    color: '#fff',
+    color: COLORS.TEXT_GRAY,
     fontSize: 13,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: "MontserratSemiBold"
   },
 });

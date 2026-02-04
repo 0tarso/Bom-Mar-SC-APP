@@ -11,12 +11,12 @@ export const styles = StyleSheet.create({
   distancia: {
     fontFamily: "MontserratSemiBold",
     color: COLORS.BLUE_ENABLE,
-    fontSize: 16
+    fontSize: 16,
+    paddingTop: 10
   },
   complemento: {
     fontFamily: "MontserratSemiBold",
     color: "#afafaf",
-    marginBottom: 20
   },
   cardContainerTitle: {
     fontFamily: "MontserratSemiBold",
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     // marginTop: 20,
     marginBottom: 20,
     // backgroundColor: 'red',
-    padding: 5
+    // padding: 5
   },
   card: {
     width: "30%",
@@ -65,7 +65,6 @@ export const styles = StyleSheet.create({
   table: {
     padding: 5,
     backgroundColor: COLORS.FULL_WHITE,
-    marginTop: 10,
     marginBottom: 10,
     // borderBottomWidth: 2,
     // borderColor: '#d0d0d0',

@@ -1,5 +1,5 @@
 //React ================================================
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React, { useEffect } from 'react'
 import { Toast } from 'toastify-react-native';
 
@@ -8,7 +8,7 @@ import { COLORS } from '@/src/Theme/Colors';
 import { styles } from './styles';
 
 //Components
-import HomeHero from '@/src/components/HomeHero';
+import HomeHeader from '@/src/components/HomeHeader';
 import BeachList from '@/src/components/BeachList';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
@@ -17,7 +17,7 @@ import { useLocation } from '@/src/hooks/useLocation';
 
 const HomeScreen = () => {
 
-  const { refreshLocation, location, city, region } = useLocation()
+  const { refreshLocation, location, city, region, loading } = useLocation()
 
   useEffect(() => {
     const handleGetUserLocation = async () => {
@@ -35,25 +35,28 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
 
-      <View style={styles.homeHeroContainer}>
-        <HomeHero />
+      <View style={styles.homeHeaderContainer}>
+        <HomeHeader />
       </View>
-      <View style={{
-        paddingLeft: 30,
-        paddingVertical: 10,
-        // backgroundColor: "#ffff"
-        // flexDirection: "row"
-      }}>
+
+
+      <View style={styles.locationArea}>
 
         <View style={styles.locationContainer}>
 
-          <Text style={styles.locationText}>{city} - {region}</Text>
+          <Text style={styles.locationText}>
+            {loading ? "Localizando" : `${city} - ${region}`}
+          </Text>
           <TouchableOpacity
             style={styles.locationUpdateButton}
             hitSlop={15}
             onPress={(async () => await refreshLocation())}
           >
-            <FontAwesome name="refresh" size={16} color={COLORS.BLUE_ENABLE} />
+            {loading ? (
+              <ActivityIndicator color={COLORS.BLUE_ENABLE} size={16} />
+            ) : (
+              <FontAwesome name="refresh" size={16} color={COLORS.BLUE_ENABLE} />
+            )}
           </TouchableOpacity>
 
         </View>

@@ -7,8 +7,13 @@ export const styles = StyleSheet.create({
     // backgroundColor: 'red'
   },
 
-  homeHeroContainer: {
+  homeHeaderContainer: {
     height: 100
+  },
+
+  locationArea: {
+    paddingLeft: 20,
+    paddingVertical: 10,
   },
 
   locationContainer: {

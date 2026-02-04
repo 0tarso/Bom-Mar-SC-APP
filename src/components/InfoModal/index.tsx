@@ -14,21 +14,20 @@ const InfoModal = () => {
   return (
 
     <ScrollView style={{
-      // flex: 1,
-      // justifyContent: "center",
-      // alignItems: 'center',
-      // backgroundColor: "green",
       padding: 20,
-
     }}>
-      <Image
-        style={{
-          width: 200,
-          resizeMode: 'contain',
-          height: 100
-        }}
-        source={bom_mar_logo}
-      />
+
+      <View style={[styles.card, { width: "50%", marginTop: 30 }]}>
+        <Image
+          style={{
+            width: "100%",
+            resizeMode: 'contain',
+            height: 50
+          }}
+          source={bom_mar_logo}
+        />
+
+      </View>
 
       <View style={styles.card}>
         <Text style={styles.title}>Sobre</Text>

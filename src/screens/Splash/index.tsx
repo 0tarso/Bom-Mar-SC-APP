@@ -5,37 +5,26 @@ import logoTextSC from "@/assets/logoTextSC.png"
 import LottieView from 'lottie-react-native'
 
 import loadingWave from "@/assets/animations/loadingWaves.json"
+import { styles } from './styles'
 
 const SplashScreen = () => {
   return (
-    <View style={{
-      backgroundColor: "#fff",
-      justifyContent: 'center',
-      alignItems: 'center',
-      flex: 1
-    }}>
+    <View style={styles.container}>
+
       <StatusBar backgroundColor='#fff' style='dark' />
+
       <Image
         source={logoTextSC}
-        style={{ marginTop: 100, width: 330, resizeMode: 'contain' }}
+        style={styles.logoImage}
       />
 
-      <View style={{ position: 'relative', width: '100%', height: 150 }}>
+      <View style={styles.animationContainer}>
         <LottieView
           source={loadingWave}
           autoPlay
           loop
           speed={0.7}
-          style={[
-            {
-              width: "100%",
-              height: 100,
-              position: 'absolute',
-              zIndex: 20,
-              top: -20
-            },
-
-          ]}
+          style={styles.animation}
         />
 
       </View>

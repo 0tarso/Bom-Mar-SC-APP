@@ -16,8 +16,8 @@ import { FontAwesome } from "@expo/vector-icons";
 type Props = {
   visible: boolean;
   onClose: () => void;
-  buttonTitle: string,
-  onPressButton: () => void,
+  buttonTitle?: string,
+  onPressButton?: () => void,
   title?: string;
   children?: React.ReactNode;
 };

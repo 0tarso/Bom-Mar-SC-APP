@@ -3,7 +3,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import { Toast } from "toastify-react-native";
 
 //Types
-import { BeachLocalization } from "../types";
+import { Beach, BeachLocalization } from "../types";
 
 
 //Services
@@ -12,13 +12,13 @@ import { getAllFavorites } from "../services/getAllFavorites";
 import { updateFavorite } from "../services/updateFavorite";
 
 interface UserBeachsContext {
-  beachs: BeachLocalization[],
+  beachs: BeachLocalization[] | [],
   errorFetchBeach: boolean,
   beachsFavorite: BeachLocalization[],
   loadingFavorites: boolean,
   loadingBeachs: boolean,
   loadingUpdateFavorite: boolean,
-  handleUpdateFavorite: (item: any) => Promise<void>
+  handleUpdateFavorite: (item: Beach) => Promise<void>
 }
 
 
@@ -37,7 +37,7 @@ export function useUserBeachs() {
 
 export function UserBeachsProvider({ children }: { children: ReactNode }) {
 
-  const [beachs, setBeachs] = useState<BeachLocalization[]>([]);
+  const [beachs, setBeachs] = useState<BeachLocalization[] | []>([]);
   const [errorFetchBeach, setErrorFetchBeach] = useState(false)
   const [beachsFavorite, setBeachsFavorite] = useState<BeachLocalization[]>([]);
 
@@ -119,10 +119,7 @@ export function UserBeachsProvider({ children }: { children: ReactNode }) {
 
 
   const handleUpdateFavorite = async (
-    item: {
-      praia: string,
-      complemento: string
-    }
+    item: Beach
   ) => {
 
     try {

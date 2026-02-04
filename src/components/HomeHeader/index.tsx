@@ -16,7 +16,7 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import InfoModal from '../InfoModal'
 
 
-const HomeHero = () => {
+const HomeHeader = () => {
 
   const [showModal, setShowModal] = useState(false)
 
@@ -34,22 +34,12 @@ const HomeHero = () => {
 
       <View style={styles.container}>
 
-        <CustomModal
-          visible={showModal}
-          onClose={() => setShowModal(false)}
-        >
+        <CustomModal visible={showModal} onClose={() => setShowModal(false)}>
           <InfoModal />
-
         </CustomModal>
 
         <Text style={styles.text}>Vem aproveitar</Text>
-
-
         <Text style={styles.title}>SANTA CATARINA!</Text>
-
-        {/* <View style={{ borderColor: "red", borderWidth: 3, padding: 5, width: '100%' }}>
-          <Image source={logoTextSC} style={{ width: "100%", resizeMode: 'contain', aspectRatio: 1 }} />
-        </View> */}
 
         <Image
           source={beachBackground}
@@ -66,4 +56,4 @@ const HomeHero = () => {
   )
 }
 
-export default HomeHero
+export default HomeHeader

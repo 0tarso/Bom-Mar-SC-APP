@@ -23,5 +23,7 @@ export const COLORS = {
   BUTTON_FIRST_TEXT: "#ffff",
 
   BUTTON_SECOND_BACKGROUND: "#82b7ee",
-  BUTTON_SECOND_TEXT: "#fff"
+  BUTTON_SECOND_TEXT: "#fff",
+
+  GREEN: "#5bc76c"
 }

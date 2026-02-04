@@ -26,8 +26,7 @@ export const mapBeachesByCity = (
   return data.reduce((acc, item) => {
 
     const normalizedBeachName = normalize(item.praia);
-    const city =
-      mapBeachByCity[normalizedBeachName] ?? "Outros";
+    const city = mapBeachByCity[normalizedBeachName] ?? "Outros";
 
     if (!acc[city]) {
       acc[city] = [];

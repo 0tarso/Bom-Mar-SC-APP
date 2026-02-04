@@ -6,7 +6,6 @@ import ToastManager from 'toastify-react-native'
 
 //Expo
 import { useFonts } from "expo-font";
-import * as NavigationBar from "expo-navigation-bar"
 
 //Screens
 import SplashScreen from './src/screens/Splash';
@@ -36,7 +35,7 @@ export default function App() {
   })
 
   useEffect(() => {
-    NavigationBar.setVisibilityAsync('hidden')
+    // NavigationBar.setVisibilityAsync('hidden')
 
     if (fontsLoaded) {
       setTimeout(() => {

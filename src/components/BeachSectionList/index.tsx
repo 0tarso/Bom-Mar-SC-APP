@@ -116,10 +116,7 @@ const BeachSectionList = ({ data }: Props) => {
   return (
     <>
 
-      <CustomModal visible={showModal} onClose={() => setShowModal(false)} title={beachDetailsModal?.praia}
-      // buttonTitle='Visitar'
-      // onPressButton={}
-      >
+      <CustomModal visible={showModal} onClose={() => setShowModal(false)} title={beachDetailsModal?.praia}>
         <BeachInfoModal beach={beachDetailsModal} />
       </CustomModal>
 
