@@ -91,6 +91,8 @@ const BeachInfoModal = memo((props: Props) => {
       return
     }
 
+
+
     const fetchDistanceTrip = async () => {
       try {
         const response = await getTripDistance(props.beach, location)

@@ -15,7 +15,9 @@ const InfoModal = () => {
 
     <ScrollView style={{
       padding: 20,
-    }}>
+    }}
+      showsVerticalScrollIndicator={false}
+    >
 
       <View style={[styles.card, { width: "50%", marginTop: 30 }]}>
         <Image
@@ -48,7 +50,7 @@ const InfoModal = () => {
 
       </View>
 
-      <View style={styles.card}>
+      <View style={[styles.card, { marginBottom: 100 }]}>
 
         <Text style={styles.title}>Condições atuais</Text>
         <Text style={styles.text}>Essa funcionalidade reflete as condições no momento em que se utiliza o aplicativo, sendo atualizada a cada abertura do mesmo.{'\n'}</Text>

@@ -12,6 +12,7 @@ import { COLORS } from '@/src/Theme/Colors';
 import { styles } from './styles';
 import { useIsFocused } from '@react-navigation/native';
 import { Toast } from 'toastify-react-native';
+import { useBeachInterstitial } from '@/src/hooks/useBeachInterstitial';
 
 
 export default function MapScreen() {
@@ -20,6 +21,7 @@ export default function MapScreen() {
   const webViewRef = useRef<WebView>(null);
   const { beachs } = useUserBeachs();
   const { location } = useLocation();
+  const { maybeShowAd } = useBeachInterstitial()
 
   const [selectedBeach, setSelectedBeach] = useState<any>(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -68,13 +70,14 @@ export default function MapScreen() {
 
   }, [beachs, location?.updated_at, webReady]);
 
-  function handleMessage(event: any) {
+  async function handleMessage(event: any) {
     try {
-      const message = JSON.parse(event.nativeEvent.data);
+      const message = JSON.parse(event.nativeEvent.data)
 
       if (message.type === 'MARKER_CLICK') {
-        setSelectedBeach(message.payload);
-        setModalVisible(true);
+        await maybeShowAd()
+        setSelectedBeach(message.payload)
+        setModalVisible(true)
       }
     } catch (e) {
       Toast.info('Erro ao buscar praia :(')

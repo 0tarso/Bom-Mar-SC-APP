@@ -19,13 +19,15 @@ import { UserBeachsProvider } from './src/contexts/UserBeachsContext';
 
 //Components
 import { toastConfig } from './src/components/Toast';
+import { AdEventType } from 'react-native-google-mobile-ads';
 
+//ADMOB
+import { interstitial } from './src/admob';
 
 
 export default function App() {
 
   const [openApp, setOpenApp] = useState(false)
-
   const [fontsLoaded, error] = useFonts({
     JuliusSansRegular: require('./assets/fonts/JuliusSansOne-Regular.ttf'),
     MontserratBold: require('./assets/fonts/Montserrat-Bold.ttf'),
@@ -36,15 +38,37 @@ export default function App() {
 
   useEffect(() => {
     // NavigationBar.setVisibilityAsync('hidden')
-
     if (fontsLoaded) {
       setTimeout(() => {
         setOpenApp(true)
 
       }, 1000)
     }
-
   }, [fontsLoaded])
+
+  useEffect(() => {
+    const unsubscribeLoaded = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        console.log('Interstitial carregado');
+      }
+    );
+
+    const unsubscribeClosed = interstitial.addAdEventListener(
+      AdEventType.CLOSED,
+      () => {
+        console.log('Interstitial fechado, recarregando...');
+        interstitial.load();
+      }
+    );
+
+    interstitial.load();
+
+    return () => {
+      unsubscribeLoaded();
+      unsubscribeClosed();
+    };
+  }, []);
 
   if (!openApp) {
     return (
@@ -61,10 +85,10 @@ export default function App() {
       <UserBeachsProvider>
         <ToastManager
           config={toastConfig}
-          showProgressBar={true}
+          // showProgressBar={true}
           position='top'
           bottomOffset={80}
-          duration={10000}
+          duration={4000}
           useModal={false}
 
         />

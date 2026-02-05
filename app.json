@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "bom-mar-sc",
+    "name": "Bom Mar SC",
     "slug": "bom-mar-sc",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,7 +16,8 @@
       "LOCATION"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "package": "com.tarso.bommarsc"
     },
     "android": {
       "adaptiveIcon": {
@@ -29,9 +30,6 @@
     },
     "web": {
       "favicon": "./assets/splash-new-icon.png"
-    },
-    "plugins": [
-      "expo-secure-store"
-    ]
+    }
   }
 }
