@@ -12,6 +12,8 @@ import { COLORS } from "@/src/Theme/Colors"
 //Assets ================================================
 import praia_icon from "@/assets/animations/praias_icon.json"
 import favorites_icon from "@/assets/animations/favorites_icon.json"
+import map_icon from "@/assets/animations/map_icon.json"
+
 
 interface TabItemProps {
   state: BottomTabBarProps["state"];
@@ -35,6 +37,7 @@ export default function TabItem({
   const lottieIcon = {
     home: praia_icon,
     favorites: favorites_icon,
+    map: map_icon
   }[route.name];
 
   const isFocused = state.index === index;
@@ -117,8 +120,9 @@ export default function TabItem({
           loop={isFocused ? true : false}
           speed={0.7}
           style={[
-            { width: 50, height: 50 },
-            isFocused ? { opacity: 1 } : { opacity: 0.5 },
+            { width: 60, height: 60 },
+            route.name === 'map' && { transform: [{ scale: 2.5 }] },
+            isFocused ? { opacity: 1 } : { opacity: 0.4 },
           ]}
         />
 

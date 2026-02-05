@@ -25,7 +25,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.x0tarso.bommarsc"
+      "package": "com.tarso.bommarsc"
     },
     "web": {
       "favicon": "./assets/splash-new-icon.png"

@@ -9,19 +9,26 @@ import { styles } from './styles'
 const TabHeader = (props: BottomTabHeaderProps) => {
   enum RouteLabel {
     favorites = "Praias Favoritas",
-    home = ""
+    map = "Mapa",
+    home = "",
   }
 
   const routeName = props.route.name as keyof typeof RouteLabel;
   return (
-    <View style={styles.container}>
-
+    <>
+      {RouteLabel[routeName] === "Mapa" && (
+        <View style={[styles.container, { position: 'absolute' }]}>
+          <Text style={styles.text}>Praias de Santa Catarina</Text>
+        </View>
+      )}
       {RouteLabel[routeName] === "Praias Favoritas" && (
-        <Text style={styles.text}>{RouteLabel[routeName]}</Text>
+        <View style={styles.container}>
+          <Text style={styles.text}>Minhas Praias Favoritas</Text>
+        </View>
       )}
 
+    </>
 
-    </View>
   )
 }
 

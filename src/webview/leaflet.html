@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <style>
+    html,
+    body,
+    #map {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Estilo do controle personalizado */
+    .custom-zoom-control {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.272);
+      display: flex;
+      flex-direction: column;
+      filter: blur();
+    }
+
+    .custom-zoom-control button {
+      border: none;
+      background: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .custom-zoom-control button:hover {
+      background-color: #eee;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    // ===== MAP =====
+    const map = L.map('map', {
+      preferCanvas: true
+    }).setView([-27.5, -48.5], 9);
+
+
+    map.zoomControl.remove();
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+    }).addTo(map);
+
+    // ===== CONTROLE PERSONALIZADO =====
+    const CustomZoomControl = L.Control.extend({
+      options: { position: 'bottomleft' }, // posição do controle
+
+      onAdd: function (map) {
+        const container = L.DomUtil.create('div', 'custom-zoom-control');
+
+        // Botão de zoom in
+        const btnIn = L.DomUtil.create('button', '', container);
+        btnIn.innerHTML = '+';
+        btnIn.title = 'Aproximar';
+        L.DomEvent.on(btnIn, 'click', () => map.zoomIn());
+
+        // Botão de zoom out
+        const btnOut = L.DomUtil.create('button', '', container);
+        btnOut.innerHTML = '−';
+        btnOut.title = 'Afastar';
+        L.DomEvent.on(btnOut, 'click', () => map.zoomOut());
+
+        // Previne que clicar no botão arraste o mapa
+        L.DomEvent.disableClickPropagation(container);
+
+        return container;
+      }
+    });
+
+    map.addControl(new CustomZoomControl());
+    const el = document.querySelector('.custom-zoom-control');
+    el.style.position = 'absolute';
+    el.style.bottom = '120px';     // distância do topo
+    el.style.left = '0px';     // distância da esquerda
+    el.style.zIndex = 10;     // acima do mapa
+
+    // ===== CORES =====
+    const SITUATION_COLORS = {
+      'PRÓPRIA': '#27ae60',
+      'IMPRÓPRIA': '#c0392b',
+      'ATENCAO': '#f1c40f'
+    };
+
+    function getColorBySituation(situation) {
+      return SITUATION_COLORS[situation] || '#7f8c8d';
+    }
+
+    // ===== MARKER USUÁRIO =====
+    const userMarker = L.circleMarker([-27.5, -48.5], {
+      radius: 10,
+      fillColor: '#2980b9',
+      fillOpacity: 1,
+      color: '#fff',
+      weight: 5
+    }).addTo(map);
+
+    window.updateUserLocation = (lat, lng, keepCenter = false) => {
+      userMarker.setLatLng([lat, lng]);
+
+      if (keepCenter) {
+        map.panTo([lat, lng], { animate: true });
+      }
+    };
+
+
+    // ===== PRAIAS =====
+    const markersLayer = L.layerGroup().addTo(map);
+    const markersCache = {};
+
+    function getMarkerId(lat, lng) {
+      return `${lat.toFixed(6)}-${lng.toFixed(6)}`;
+    }
+
+    function sendToReactNative(data) {
+      if (window.ReactNativeWebView) {
+        window.ReactNativeWebView.postMessage(JSON.stringify(data));
+      }
+    }
+
+
+    window.setMarkers = (markers) => {
+      markers.forEach(beach => {
+        const id = getMarkerId(beach.latitude, beach.longitude);
+        if (markersCache[id]) return;
+
+        const marker = L.circleMarker([beach.latitude, beach.longitude], {
+          radius: 6,
+          fillColor: getColorBySituation(beach.situacao),
+          fillOpacity: 1,
+          color: '#ffffff',
+          weight: 1
+        });
+
+        marker.on('click', () => {
+          sendToReactNative({
+            type: 'MARKER_CLICK',
+            payload: {
+              ...beach
+            }
+          });
+        });
+        const hitArea = L.circleMarker([beach.latitude, beach.longitude], {
+          radius: 20,
+          fillOpacity: 0,
+          stroke: false,
+          interactive: true
+        })
+
+        hitArea.on('click', () => {
+          sendToReactNative({
+            type: 'MARKER_CLICK',
+            payload: {
+              ...beach
+            }
+          });
+        });
+
+        hitArea.addTo(map);
+        marker.addTo(markersLayer);
+        markersCache[id] = marker;
+      });
+    };
+
+    window.updateMarkers = (markers) => {
+      markers.forEach(beach => {
+        const id = getMarkerId(beach.latitude, beach.longitude);
+        const marker = markersCache[id];
+        if (!marker) return;
+
+        marker.setLatLng([beach.latitude, beach.longitude]);
+        marker.setStyle({
+          fillColor: getColorBySituation(beach.situacao)
+        });
+      });
+    };
+
+    window.refreshMap = () => {
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 100);
+    };
+  </script>
+
+</body>
+
+</html>

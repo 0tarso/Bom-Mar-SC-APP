@@ -2,7 +2,7 @@
 import { View, StyleSheet } from 'react-native'
 import React from 'react'
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 //COmponents ================================================
 import TabItem from '../TabItem'
@@ -15,7 +15,7 @@ export default function TabBar(props: BottomTabBarProps) {
 
   return (
 
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['bottom']}>
 
       {props.state.routes.map((route, index) => (
         <TabItem
@@ -28,7 +28,7 @@ export default function TabBar(props: BottomTabBarProps) {
         />
       ))}
 
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: COLORS.FULL_WHITE,
     paddingBottom: 5,
-    paddingTop: 10,
+    // paddingTop: 10,
     elevation: 2,
     zIndex: 20,
     // borderRadius: 50,

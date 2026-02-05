@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
     fontFamily: "MontserratBold",
     color: COLORS.BLUE_PRIMARY,
     textAlign: 'center'
-
   },
   textLabel: {
     fontSize: 12,

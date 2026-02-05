@@ -3,6 +3,8 @@ import React from 'react'
 import { COLORS } from '@/src/Theme/Colors'
 import AnimatedProgressWheel from 'react-native-progress-wheel'
 import { styles } from './styles';
+import CustomTooltip from '../ToolTip';
+import { FontAwesome } from '@expo/vector-icons';
 
 interface Props {
   score: {
@@ -19,7 +21,8 @@ interface Props {
       label: "Fraco" | "Regular" | "Bom" | "Clássico";
     };
   },
-  situation: "PRÓPRIA" | "IMPRÓPRIA"
+  situation: "PRÓPRIA" | "IMPRÓPRIA",
+  resultado_e_coli: string
 }
 
 
@@ -30,8 +33,21 @@ export default function BeachScore(props: Props) {
 
       <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
 
+
         {props.situation === 'IMPRÓPRIA' && (
           <View style={[styles.container, { width: "100%", flexDirection: 'row', columnGap: 20 }]}>
+            <View style={{
+              position: 'absolute',
+              zIndex: 20,
+              right: 8,
+              top: 5
+            }}>
+              <CustomTooltip
+                text='Um ponto é considerado próprio quando em 4 das últimas 5 coletas o resultado de concentração de E. coli for inferior a 800 NMP/100mL, ressalvada também a condição que o resultado mais recente seja inferior a 2.000 NMP/100mL.'
+              >
+                <FontAwesome name='info-circle' size={18} color={COLORS.BLUE_DISABLE} />
+              </CustomTooltip>
+            </View>
             <AnimatedProgressWheel
               size={100}
               width={20}
@@ -45,7 +61,45 @@ export default function BeachScore(props: Props) {
               showProgressLabel
             />
 
-            <Text style={[styles.textValue, { width: "70%", textAlign: 'left', color: COLORS.TEXT_GRAY }]}>Praia imprópria para banho</Text>
+            <View>
+              <Text style={[styles.textValue, {
+                width: "80%",
+                textAlign: 'left',
+                color: COLORS.TEXT_GRAY,
+                fontSize: 16
+              }]}>Praia imprópria para banho</Text>
+
+              <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+
+                <View>
+
+                  <Text style={[styles.textValue, {
+                    fontSize: 12,
+                    textAlign: 'left',
+                    color: COLORS.TEXT_GRAY,
+                    fontFamily: 'MontserratSemiBold'
+                  }]}>Nível de e.coli:</Text>
+                  <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+                    <Text
+                      style={[styles.textValue, {
+                        fontSize: 16,
+                        marginTop: 0,
+                        textAlign: 'left',
+                        color: COLORS.TEXT_GRAY,
+                        fontFamily: 'MontserratSemiBold'
+                      }]}
+                    >{props.resultado_e_coli}</Text>
+                    <Text style={{
+                      fontFamily: "MontserratRegular",
+                      color: COLORS.TEXT_GRAY,
+                      fontSize: 12
+                    }}> NMP/100ml</Text>
+
+                  </View>
+
+                </View>
+              </View>
+            </View>
           </View>
         )}
 
@@ -73,6 +127,7 @@ export default function BeachScore(props: Props) {
                     : "#aa5151"}
                 duration={1000}
                 labelStyle={{
+                  fontSize: 16,
                   fontFamily: "MontserratSemiBold",
                   color: props.score?.adulto?.label === 'Excelente' || props.score?.adulto?.label === 'Bom'
                     ? COLORS.GREEN
@@ -108,8 +163,9 @@ export default function BeachScore(props: Props) {
                   : props.score.crianca.label === 'Atenção'
                     ? '#968334'
                     : "#aa5151"}
-                duration={1000}
+                duration={1500}
                 labelStyle={{
+                  fontSize: 16,
                   fontFamily: "MontserratSemiBold",
                   color: props.score.crianca.label === 'Excelente' || props.score.crianca.label === 'Bom'
                     ? COLORS.GREEN
@@ -147,6 +203,7 @@ export default function BeachScore(props: Props) {
                     : "#aa5151"}
                 duration={1000}
                 labelStyle={{
+                  fontSize: 16,
                   fontFamily: "MontserratSemiBold",
                   color: props.score?.surf?.label === 'Bom' || props.score?.surf?.label === 'Clássico'
                     ? COLORS.GREEN

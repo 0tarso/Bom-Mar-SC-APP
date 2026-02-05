@@ -26,6 +26,7 @@ export type Beach = {
   local: string;
   praia: string;
   situacao: "PRÓPRIA" | "IMPRÓPRIA";
+  resultado_e_coli: string;
   latitude: string;
   longitude: string;
 
@@ -53,16 +54,37 @@ export type Beach = {
         waveHeight_avg: number;
         wavePeriod_avg: number;
         waterTemperature_avg: number;
+        swellHeight_avg: number;
+        swellPeriod_avg: number;
+        windSpeed_avg: number;
+        currentSpeed_avg: number;
+        rain_avg: number | null;
+        precipitation_avg: number;
+        visibility_avg: number;
       };
       tarde: {
         waveHeight_avg: number;
         wavePeriod_avg: number;
         waterTemperature_avg: number;
+        swellHeight_avg: number;
+        swellPeriod_avg: number;
+        windSpeed_avg: number;
+        currentSpeed_avg: number;
+        rain_avg: number;
+        precipitation_avg: number;
+        visibility_avg: number;
       };
       noite: {
         waveHeight_avg: number;
         wavePeriod_avg: number;
         waterTemperature_avg: number;
+        swellHeight_avg: number;
+        swellPeriod_avg: number;
+        windSpeed_avg: number;
+        currentSpeed_avg: number;
+        rain_avg: number;
+        precipitation_avg: number;
+        visibility_avg: number;
       };
     };
   };

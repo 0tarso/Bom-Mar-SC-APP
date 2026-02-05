@@ -31,14 +31,14 @@ import wind_icon from "@/assets/icons/colored_wind.png"
 import humidity_icon from "@/assets/icons/colored_humidity.png"
 import sea_wave_height from "@/assets/icons/sea_wave_height.png"
 import sea_wave_period from "@/assets/icons/sea_wave_period.png"
-import clear_weather_icon from "@/assets/icons/clear_weather.png"
-import cloud_weather_icon from "@/assets/icons/cloud_weather.png"
 import mist_weather_icon from "@/assets/icons/mist_weather_icon.png"
 import temperature_icon from "@/assets/icons/colored_termometer.png"
 import rain_weather_icon from "@/assets/icons/rain_weather_icon.png"
 import human_sense_icon from "@/assets/icons/colored_human_sense.png"
 import sea_water_temp_icon from "@/assets/icons/sea_water_temp_icon.png"
 import rain_meter_weather_icon from "@/assets/icons/rain_meter_icon.png"
+import clear_weather_icon from "@/assets/icons/clear_weather.png"
+import cloud_weather_icon from "@/assets/icons/cloud_weather.png"
 import drizzle_rain_weather_icon from "@/assets/icons/drizzle_weather_icon.png"
 import thunderstorm_weather_icon from "@/assets/icons/thunderstorm_weather_icon.png"
 
@@ -116,6 +116,7 @@ const BeachInfoModal = memo((props: Props) => {
       }
     }
 
+
     fetchWeather()
     fetchDistanceTrip()
 
@@ -160,7 +161,11 @@ const BeachInfoModal = memo((props: Props) => {
 
             <Text style={styles.complemento}>{props.beach.complemento}</Text>
 
-            <BeachScore score={props.beach.score_de_banho} situation={props.beach.situacao} />
+            <BeachScore
+              score={props.beach?.score_de_banho}
+              situation={props.beach?.situacao}
+              resultado_e_coli={props.beach?.resultado_e_coli}
+            />
 
 
             <View style={{

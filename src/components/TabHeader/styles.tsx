@@ -4,12 +4,13 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     width: "100%",
+    // position: 'absolute',
     padding: 20,
     paddingTop: 60,
     backgroundColor: COLORS.BLUE_PRIMARY,
     borderBottomEndRadius: 25,
-    borderBottomStartRadius: 25
-    // elevation: 3
+    borderBottomStartRadius: 25,
+    elevation: 5
   },
   text: {
     color: COLORS.FULL_WHITE,
