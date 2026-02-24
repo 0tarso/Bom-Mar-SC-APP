@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "Bom Mar SC",
+    "name": "BomMar SC",
     "slug": "bom-mar-sc",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/splash-new-icon.png",
+    "icon": "./assets/splashIcon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-new-icon.png",
+      "image": "./assets/splashIcon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/splash-new-icon.png",
+        "foregroundImage": "./assets/splashIcon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
@@ -29,7 +29,7 @@
       "package": "com.tarso.bommarsc"
     },
     "web": {
-      "favicon": "./assets/splash-new-icon.png"
+      "favicon": "./assets/splashIcon.png"
     }
   }
 }

@@ -16,9 +16,7 @@ import { Beach, BeachLocalization } from '@/src/types'
 
 //Context-hook
 import { useUserBeachs } from '@/src/contexts/UserBeachsContext'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { interstitial } from '@/src/ads/interstitial'
-import { useBeachInterstitial } from '@/src/hooks/useBeachInterstitial'
+// import { useBeachInterstitial } from '@/src/hooks/useBeachInterstitial'
 
 interface Props {
   data: BeachLocalization[]
@@ -33,7 +31,7 @@ const ESTIMATED_HEADER_SIZE = 48
 
 const BeachSectionList = ({ data }: Props) => {
   const { handleUpdateFavorite } = useUserBeachs()
-  const { maybeShowAd } = useBeachInterstitial()
+  // const { maybeShowAd } = useBeachInterstitial()
 
   const [showModal, setShowModal] = useState(false)
   const [beachDetailsModal, setBeachDetailsModal] = useState<Beach | null>(null)
@@ -83,11 +81,12 @@ const BeachSectionList = ({ data }: Props) => {
 
   const handleShowBeachDetails = useCallback(
     async (item: Beach) => {
-      await maybeShowAd()
+      // await maybeShowAd()
       setBeachDetailsModal(item)
       setShowModal(true)
     },
-    [maybeShowAd]
+    //[maybeShowAd]
+    []
   )
 
 

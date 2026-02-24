@@ -12,7 +12,7 @@ import { COLORS } from '@/src/Theme/Colors';
 import { styles } from './styles';
 import { useIsFocused } from '@react-navigation/native';
 import { Toast } from 'toastify-react-native';
-import { useBeachInterstitial } from '@/src/hooks/useBeachInterstitial';
+// import { useBeachInterstitial } from '@/src/hooks/useBeachInterstitial';
 
 
 export default function MapScreen() {
@@ -21,7 +21,7 @@ export default function MapScreen() {
   const webViewRef = useRef<WebView>(null);
   const { beachs } = useUserBeachs();
   const { location } = useLocation();
-  const { maybeShowAd } = useBeachInterstitial()
+  // const { maybeShowAd } = useBeachInterstitial()
 
   const [selectedBeach, setSelectedBeach] = useState<any>(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -75,7 +75,7 @@ export default function MapScreen() {
       const message = JSON.parse(event.nativeEvent.data)
 
       if (message.type === 'MARKER_CLICK') {
-        await maybeShowAd()
+        // await maybeShowAd()
         setSelectedBeach(message.payload)
         setModalVisible(true)
       }

@@ -165,8 +165,9 @@ const BeachInfoModal = memo((props: Props) => {
 
             <BeachScore
               score={props.beach?.score_de_banho}
-              situation={props.beach?.situacao}
+              situacao={props.beach?.situacao}
               resultado_e_coli={props.beach?.resultado_e_coli}
+              ultima_analise={props.beach?.data_coleta}
             />
 
 

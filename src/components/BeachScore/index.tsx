@@ -21,8 +21,9 @@ interface Props {
       label: "Fraco" | "Regular" | "Bom" | "Clássico";
     };
   },
-  situation: "PRÓPRIA" | "IMPRÓPRIA",
-  resultado_e_coli: string
+  situacao: "PRÓPRIA" | "IMPRÓPRIA",
+  resultado_e_coli: string,
+  ultima_analise: string
 }
 
 
@@ -34,7 +35,7 @@ export default function BeachScore(props: Props) {
       <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
 
 
-        {props.situation === 'IMPRÓPRIA' && (
+        {props.situacao === 'IMPRÓPRIA' && (
           <View style={[styles.container, { width: "100%", flexDirection: 'row', columnGap: 20 }]}>
             <View style={{
               position: 'absolute',
@@ -69,7 +70,7 @@ export default function BeachScore(props: Props) {
                 fontSize: 16
               }]}>Praia imprópria para banho</Text>
 
-              <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+              <View style={{ flexDirection: 'column', alignItems: 'baseline' }}>
 
                 <View>
 
@@ -78,7 +79,7 @@ export default function BeachScore(props: Props) {
                     textAlign: 'left',
                     color: COLORS.TEXT_GRAY,
                     fontFamily: 'MontserratSemiBold'
-                  }]}>Nível de e.coli:</Text>
+                  }]}>Nível de E.Coli:</Text>
                   <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
                     <Text
                       style={[styles.textValue, {
@@ -98,13 +99,14 @@ export default function BeachScore(props: Props) {
                   </View>
 
                 </View>
+
               </View>
             </View>
           </View>
         )}
 
 
-        {props.situation === "PRÓPRIA" && (
+        {props.situacao === "PRÓPRIA" && (
           <>
 
             <View style={styles.container}>
@@ -193,6 +195,7 @@ export default function BeachScore(props: Props) {
                     : props.score?.surf?.label === 'Regular'
                       ? '#eaca4b'
                       : COLORS.RED_CAUTION
+
                 }
                 progress={props?.score?.surf?.score}
                 animateFromValue={0}

@@ -1,6 +1,7 @@
 //React
 import React, { memo, useState } from 'react'
 import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+import Svg, { Path } from "react-native-svg"
 
 //Style
 import { styles } from "./styles"
@@ -39,9 +40,9 @@ const BeachCard = memo((props: Props) => {
   return (
     <View style={[
       styles.container,
-      (props.beach.situacao === "IMPRÓPRIA") && {
-        borderColor: COLORS.RED_CAUTION,
-      }
+      // (props.beach.situacao === "IMPRÓPRIA") && {
+      //   borderColor: COLORS.RED_CAUTION,
+      // }
     ]}
     // onPress={props.onPressCard}
     >
@@ -63,7 +64,7 @@ const BeachCard = memo((props: Props) => {
 
       <Text style={styles.praia}>{props.beach.praia}</Text>
       <Text style={styles.complemento}>{props.beach.complemento}</Text>
-      <Text style={styles.dataColeta}>Análise: {props.beach.data_coleta}</Text>
+      {/* <Text style={styles.dataColeta}>Análise: {props.beach.data_coleta}</Text> */}
 
       <View style={{
         flexDirection: 'row',
@@ -92,7 +93,7 @@ const BeachCard = memo((props: Props) => {
             onPress={props.onPressFavorite}
             onPressOut={handleFavorite}
             // hitSlop={10}
-            style={{ flexDirection: "row", columnGap: 5, alignItems: 'baseline' }}
+            style={{ flexDirection: "row", columnGap: 5, alignItems: 'baseline', elevation: 0 }}
           >
             <View style={{ width: 16, height: 16, alignItems: 'center', justifyContent: 'center' }}>
               {loading ? (
@@ -108,7 +109,49 @@ const BeachCard = memo((props: Props) => {
         </View>
 
       </View>
-
+      <View style={{
+        position: 'absolute',
+        zIndex: -10,
+        bottom: 0,
+        width: "100%",
+        transform: [{ rotateX: "180deg" }],
+      }}>
+        <Svg
+          width="120%"
+          height={10}
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+        >
+          <Path
+            d="M0,64 C120,90 240,120 360,112 480,104 600,64 720,48 840,32 960,40 1080,56 1200,72 1320,96 1440,80 L1440,0 L0,0 Z"
+            fill={
+              (props.beach.situacao === "IMPRÓPRIA") ? COLORS.RED_CAUTION : COLORS.BLUE_PRIMARY
+            }
+          />
+        </Svg>
+      </View>
+      <View style={{
+        position: 'absolute',
+        zIndex: -15,
+        bottom: 5,
+        width: "100%",
+        transform: [{ rotateX: "180deg" }],
+        opacity: 0.2
+      }}>
+        <Svg
+          width="120%"
+          height={20}
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+        >
+          <Path
+            d="M0,64 C120,90 240,120 360,112 480,104 600,64 720,48 840,32 960,40 1080,56 1200,72 1320,96 1440,80 L1440,0 L0,0 Z"
+            fill={
+              (props.beach.situacao === "IMPRÓPRIA") ? COLORS.RED_CAUTION : COLORS.BLUE_PRIMARY
+            }
+          />
+        </Svg>
+      </View>
     </View>
   )
 })

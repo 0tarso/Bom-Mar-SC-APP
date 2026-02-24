@@ -19,11 +19,11 @@ const InfoModal = () => {
       showsVerticalScrollIndicator={false}
     >
 
-      <View style={[styles.card, { width: "50%", marginTop: 30 }]}>
+      <View style={[styles.card, { width: "50%", marginTop: 30, overflow: 'hidden' }]}>
         <Image
           style={{
             width: "100%",
-            resizeMode: 'contain',
+            resizeMode: 'cover',
             height: 50
           }}
           source={bom_mar_logo}

@@ -22,7 +22,7 @@ import { toastConfig } from './src/components/Toast';
 import { AdEventType } from 'react-native-google-mobile-ads';
 
 //ADMOB
-import { interstitial } from './src/admob';
+// import { interstitial } from './src/admob';
 
 
 export default function App() {
@@ -46,29 +46,30 @@ export default function App() {
     }
   }, [fontsLoaded])
 
-  useEffect(() => {
-    const unsubscribeLoaded = interstitial.addAdEventListener(
-      AdEventType.LOADED,
-      () => {
-        console.log('Interstitial carregado');
-      }
-    );
+  // Admob effect
+  // useEffect(() => {
+  //   const unsubscribeLoaded = interstitial.addAdEventListener(
+  //     AdEventType.LOADED,
+  //     () => {
+  //       console.log('Interstitial carregado');
+  //     }
+  //   );
 
-    const unsubscribeClosed = interstitial.addAdEventListener(
-      AdEventType.CLOSED,
-      () => {
-        console.log('Interstitial fechado, recarregando...');
-        interstitial.load();
-      }
-    );
+  //   const unsubscribeClosed = interstitial.addAdEventListener(
+  //     AdEventType.CLOSED,
+  //     () => {
+  //       console.log('Interstitial fechado, recarregando...');
+  //       interstitial.load();
+  //     }
+  //   );
 
-    interstitial.load();
+  //   interstitial.load();
 
-    return () => {
-      unsubscribeLoaded();
-      unsubscribeClosed();
-    };
-  }, []);
+  //   return () => {
+  //     unsubscribeLoaded();
+  //     unsubscribeClosed();
+  //   };
+  // }, []);
 
   if (!openApp) {
     return (

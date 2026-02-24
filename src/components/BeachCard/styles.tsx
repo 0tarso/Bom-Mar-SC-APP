@@ -4,13 +4,14 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: COLORS.FULL_WHITE,
-    borderColor: COLORS.BLUE_PRIMARY,
+    // borderColor: COLORS.BLUE_PRIMARY,
     // borderWidth: 0.2,
-    borderBottomWidth: 2.5,
+    // borderBottomWidth: 3.5,
     borderRadius: 18,
     padding: 15,
     marginBottom: 10,
-    minHeight: 160
+    height: 150,
+    overflow: 'hidden'
   },
   sectionHeaderContainer: {
     backgroundColor: '#FFFFFF', // NUNCA transparente
@@ -41,7 +42,8 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     // position: 'absolute',
     // right: 10,
-    // bottom: 10
+    // bottom: 10,
+    elevation: 2
   },
 
   navigationButtonText: {
