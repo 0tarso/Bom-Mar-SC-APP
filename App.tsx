@@ -19,7 +19,7 @@ import { UserBeachsProvider } from './src/contexts/UserBeachsContext';
 
 //Components
 import { toastConfig } from './src/components/Toast';
-import { AdEventType } from 'react-native-google-mobile-ads';
+// import { AdEventType } from 'react-native-google-mobile-ads';
 
 //ADMOB
 // import { interstitial } from './src/admob';
