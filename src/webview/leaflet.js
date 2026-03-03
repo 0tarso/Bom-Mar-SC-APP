@@ -1,3 +1,4 @@
+export const mapHtml = `
 <!DOCTYPE html>
 <html>
 
@@ -18,14 +19,12 @@
       padding: 0;
     }
 
-    /* Estilo do controle personalizado */
     .custom-zoom-control {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 15px;
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.272);
       display: flex;
       flex-direction: column;
-      filter: blur();
     }
 
     .custom-zoom-control button {
@@ -44,17 +43,13 @@
 </head>
 
 <body>
-
   <div id="map"></div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-    // ===== MAP =====
-    const map = L.map('map', {
-      preferCanvas: true
-    }).setView([-27.5, -48.5], 9);
-
+    const map = L.map('map', { preferCanvas: true })
+      .setView([-27.5, -48.5], 9);
 
     map.zoomControl.remove();
 
@@ -62,40 +57,32 @@
       maxZoom: 19,
     }).addTo(map);
 
-    // ===== CONTROLE PERSONALIZADO =====
     const CustomZoomControl = L.Control.extend({
-      options: { position: 'bottomleft' }, // posição do controle
-
+      options: { position: 'bottomleft' },
       onAdd: function (map) {
         const container = L.DomUtil.create('div', 'custom-zoom-control');
 
-        // Botão de zoom in
         const btnIn = L.DomUtil.create('button', '', container);
         btnIn.innerHTML = '+';
-        btnIn.title = 'Aproximar';
         L.DomEvent.on(btnIn, 'click', () => map.zoomIn());
 
-        // Botão de zoom out
         const btnOut = L.DomUtil.create('button', '', container);
         btnOut.innerHTML = '−';
-        btnOut.title = 'Afastar';
         L.DomEvent.on(btnOut, 'click', () => map.zoomOut());
 
-        // Previne que clicar no botão arraste o mapa
         L.DomEvent.disableClickPropagation(container);
-
         return container;
       }
     });
 
     map.addControl(new CustomZoomControl());
+
     const el = document.querySelector('.custom-zoom-control');
     el.style.position = 'absolute';
-    el.style.bottom = '120px';     // distância do topo
-    el.style.left = '0px';     // distância da esquerda
-    el.style.zIndex = 10;     // acima do mapa
+    el.style.bottom = '120px';
+    el.style.left = '0px';
+    el.style.zIndex = 10;
 
-    // ===== CORES =====
     const SITUATION_COLORS = {
       'PRÓPRIA': '#27ae60',
       'IMPRÓPRIA': '#c0392b',
@@ -106,7 +93,6 @@
       return SITUATION_COLORS[situation] || '#7f8c8d';
     }
 
-    // ===== MARKER USUÁRIO =====
     const userMarker = L.circleMarker([-27.5, -48.5], {
       radius: 10,
       fillColor: '#2980b9',
@@ -115,21 +101,18 @@
       weight: 5
     }).addTo(map);
 
-    window.updateUserLocation = (lat, lng, keepCenter = false) => {
+    window.updateUserLocation = function (lat, lng, keepCenter) {
       userMarker.setLatLng([lat, lng]);
-
       if (keepCenter) {
         map.panTo([lat, lng], { animate: true });
       }
     };
 
-
-    // ===== PRAIAS =====
     const markersLayer = L.layerGroup().addTo(map);
     const markersCache = {};
 
     function getMarkerId(lat, lng) {
-      return `${lat.toFixed(6)}-${lng.toFixed(6)}`;
+      return lat.toFixed(6) + "-" + lng.toFixed(6);
     }
 
     function sendToReactNative(data) {
@@ -138,9 +121,8 @@
       }
     }
 
-
-    window.setMarkers = (markers) => {
-      markers.forEach(beach => {
+    window.setMarkers = function (markers) {
+      markers.forEach(function (beach) {
         const id = getMarkerId(beach.latitude, beach.longitude);
         if (markersCache[id]) return;
 
@@ -152,27 +134,24 @@
           weight: 1
         });
 
-        marker.on('click', () => {
+        marker.on('click', function () {
           sendToReactNative({
             type: 'MARKER_CLICK',
-            payload: {
-              ...beach
-            }
+            payload: beach
           });
         });
+
         const hitArea = L.circleMarker([beach.latitude, beach.longitude], {
           radius: 20,
           fillOpacity: 0,
           stroke: false,
           interactive: true
-        })
+        });
 
-        hitArea.on('click', () => {
+        hitArea.on('click', function () {
           sendToReactNative({
             type: 'MARKER_CLICK',
-            payload: {
-              ...beach
-            }
+            payload: beach
           });
         });
 
@@ -182,8 +161,8 @@
       });
     };
 
-    window.updateMarkers = (markers) => {
-      markers.forEach(beach => {
+    window.updateMarkers = function (markers) {
+      markers.forEach(function (beach) {
         const id = getMarkerId(beach.latitude, beach.longitude);
         const marker = markersCache[id];
         if (!marker) return;
@@ -195,13 +174,13 @@
       });
     };
 
-    window.refreshMap = () => {
-      setTimeout(() => {
+    window.refreshMap = function () {
+      setTimeout(function () {
         map.invalidateSize();
       }, 100);
     };
   </script>
-
 </body>
 
 </html>
+`;

@@ -92,7 +92,7 @@ const BeachList = () => {
                 }}
               />
             ) : (
-              <View style={{ justifyContent: 'center', alignItems: 'center', height: '90%' }}>
+              <View style={{}}>
 
               </View>
             )}
@@ -105,7 +105,6 @@ const BeachList = () => {
             <NotFoundAnimation />
             <Text style={{
               fontFamily: "MontserratBold",
-              marginTop: 40
             }}>Algo errado aconteceu. Tente novamente.</Text>
           </>
         )}

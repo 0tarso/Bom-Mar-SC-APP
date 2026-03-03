@@ -2,7 +2,7 @@ import { useLocation } from '@/src/hooks/useLocation';
 import { useEffect, useRef, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { WebView } from 'react-native-webview';
-import map from "@/src/webview/leaflet.html"
+import { mapHtml } from "@/src/webview/leaflet.js"
 import { useUserBeachs } from '@/src/contexts/UserBeachsContext';
 import { transformBeachesToLeaflet } from '@/src/utils/transformBeachesToLeaflet';
 import { CustomModal } from '@/src/components/CustomModal';
@@ -50,6 +50,7 @@ export default function MapScreen() {
       true;
     `);
     }
+    // console.log(typeof mapHtml)
   }, [isFocused, webReady])
 
   useEffect(() => {
@@ -108,7 +109,12 @@ export default function MapScreen() {
       </View>
       <WebView
         ref={webViewRef}
-        source={map}
+        originWhitelist={['*']}
+        mixedContentMode='always'
+        source={{
+          html: mapHtml,
+          baseUrl: "https://localhost"
+        }}
         javaScriptEnabled
         domStorageEnabled
         onLoadEnd={() => setWebReady(true)}
