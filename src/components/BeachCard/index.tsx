@@ -40,11 +40,8 @@ const BeachCard = memo((props: Props) => {
   return (
     <View style={[
       styles.container,
-      // (props.beach.situacao === "IMPRÓPRIA") && {
-      //   borderColor: COLORS.RED_CAUTION,
-      // }
+
     ]}
-    // onPress={props.onPressCard}
     >
 
       <TouchableOpacity style={{
@@ -89,9 +86,9 @@ const BeachCard = memo((props: Props) => {
         </View>
         <View style={styles.navigationMapButtonContainer}>
           <TouchableOpacity
-            // style={}
-            onPress={props.onPressFavorite}
-            onPressOut={handleFavorite}
+            delayPressIn={100}
+            onPress={handleFavorite}
+            // onPressOut={handleFavorite}
             // hitSlop={10}
             style={{ flexDirection: "row", columnGap: 5, alignItems: 'baseline', elevation: 0 }}
           >

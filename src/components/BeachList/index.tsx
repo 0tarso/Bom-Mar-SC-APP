@@ -1,11 +1,12 @@
 //React ================================================
-import { View, Text, SectionList } from 'react-native'
+import { View, Text, SectionList, TouchableOpacity, Keyboard, TextInput, FlatList, useWindowDimensions } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 
 //Components ================================================
 import { CategorySelector } from '../CategorySelector';
 import BeachSectionList from '../BeachSectionList';
 import LoadingWave from '../LoadingWave';
+import Feather from '@expo/vector-icons/Feather';
 
 //Styles ================================================
 import { styles } from './styles';
@@ -20,16 +21,14 @@ import { useUserBeachs } from '@/src/contexts/UserBeachsContext';
 //Types ================================================
 import { BeachLocalization } from '@/src/types';
 import NotFoundAnimation from '../NotFound';
+import { COLORS } from '@/src/Theme/Colors';
+import { CustomModal } from '../CustomModal';
 
-
-
-export type Beach = {
-
-}
 
 const BeachList = () => {
+  const { height } = useWindowDimensions()
 
-  const { beachs, loadingBeachs, loadingFavorites, errorFetchBeach } = useUserBeachs()
+  const { beachs, loadingBeachs, errorFetchBeach } = useUserBeachs()
 
   const sectionListRef = useRef<SectionList>(null);
 
@@ -38,6 +37,10 @@ const BeachList = () => {
   );
 
   const [filteredBeachs, setFilteredBeachs] = useState<BeachLocalization[] | []>([])
+
+  const [modalVisible, setModalVisible] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const inputRef = useRef(null)
 
   useEffect(() => {
     if (!sectionListRef.current) return;
@@ -56,16 +59,77 @@ const BeachList = () => {
 
 
   useEffect(() => {
-    // console.log(beachs)
-
     filterData(beachs, setFilteredBeachs, beachSituationSelected)
   }, [beachSituationSelected, beachs]);
 
+  useEffect(() => {
+    if (modalVisible) {
+      setTimeout(() => {
+        inputRef.current?.focus()
+      }, 300)
+    }
+  }, [modalVisible])
 
+
+  const handleShowModal = () => {
+    setModalVisible(true)
+    console.log(beachs)
+  }
+
+  const handleCloseModal = () => {
+    setModalVisible(false)
+    setSearchQuery('')
+  }
 
   return (
     <View style={styles.container}>
       {/* <Text style={styles.titleHeader}>Praias</Text> */}
+
+      <CustomModal
+        visible={modalVisible}
+        onClose={handleCloseModal}
+      >
+        <View style={{ backgroundColor: COLORS.GRAY_BACKGROUND }}>
+          <View style={styles.searchModalContainer}>
+            <TextInput
+              ref={inputRef}
+              placeholder="Busque pela cidade..."
+              placeholderTextColor="#aaa"
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              style={styles.searchInput}
+            />
+          </View>
+          <View style={{
+            paddingHorizontal: 10,
+            marginTop: 10
+          }}>
+
+            <CategorySelector value={beachSituationSelected} onChange={setBeachSituationSelected} />
+          </View>
+
+          <View style={{ height: 800, paddingHorizontal: 10 }}>
+            {searchQuery !== '' && (
+              <BeachSectionList
+                data={filteredBeachs.filter(b =>
+                  b.title.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+                )}
+              />
+            )}
+          </View>
+        </View>
+
+      </CustomModal >
+
+      <View style={[styles.searchModalButton, { bottom: height * 0.12, }]}>
+        <TouchableOpacity
+          hitSlop={10}
+          delayPressIn={100}
+          onPress={handleShowModal}
+        >
+          <Feather name="search" size={24} color={COLORS.FULL_WHITE} />
+        </TouchableOpacity>
+      </View>
 
       <CategorySelector value={beachSituationSelected} onChange={setBeachSituationSelected} />
 
@@ -111,7 +175,7 @@ const BeachList = () => {
 
       </View>
 
-    </View>
+    </View >
   )
 }
 

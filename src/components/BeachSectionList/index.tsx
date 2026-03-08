@@ -16,6 +16,8 @@ import { Beach, BeachLocalization } from '@/src/types'
 
 //Context-hook
 import { useUserBeachs } from '@/src/contexts/UserBeachsContext'
+import NotFoundAnimation from '../NotFound'
+import { COLORS } from '@/src/Theme/Colors'
 // import { useBeachInterstitial } from '@/src/hooks/useBeachInterstitial'
 
 interface Props {
@@ -133,6 +135,17 @@ const BeachSectionList = ({ data }: Props) => {
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         stickyHeaderIndices={stickyHeaderIndices}
+        ListEmptyComponent={() => (
+          <>
+            <NotFoundAnimation />
+            <Text style={{
+              fontFamily: 'MontserratBold',
+              textAlign: 'center',
+              marginTop: 20,
+              color: COLORS.TEXT_GRAY
+            }}>Nada encontrado</Text>
+          </>
+        )}
         estimatedItemSize={ESTIMATED_ITEM_SIZE}
         contentContainerStyle={{ paddingBottom: 150 }}
         showsVerticalScrollIndicator={false}

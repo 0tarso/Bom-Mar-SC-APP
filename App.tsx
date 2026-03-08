@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ToastManager from 'toastify-react-native'
+import * as NavigationBar from 'expo-navigation-bar'
 
 //Expo
 import { useFonts } from "expo-font";
@@ -37,7 +38,8 @@ export default function App() {
   })
 
   useEffect(() => {
-    // NavigationBar.setVisibilityAsync('hidden')
+    NavigationBar.setVisibilityAsync('hidden')
+    NavigationBar.setBehaviorAsync('overlay-swipe')
     if (fontsLoaded) {
       setTimeout(() => {
         setOpenApp(true)

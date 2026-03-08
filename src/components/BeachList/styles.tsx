@@ -13,6 +13,32 @@ export const styles = StyleSheet.create({
     color: COLORS.BLUE_PRIMARY,
     marginBottom: 10,
     marginTop: 10
+  },
+  searchModalContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f0f4f8',
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    columnGap: 8,
+    marginTop: 40
+  },
+  searchInput: {
+    flex: 1,
+    fontFamily: 'MontserratBold',
+    fontSize: 14,
+    color: COLORS.TEXT_GRAY,
+  },
+  searchModalButton: {
+    position: 'absolute',
+    zIndex: 40,
+
+    left: 10,
+    elevation: 2,
+    backgroundColor: COLORS.BLUE_ENABLE,
+    padding: 9,
+    borderRadius: 15
   }
 
 })

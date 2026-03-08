@@ -1,10 +1,12 @@
 import axios from 'axios'
 import Constants from 'expo-constants'
-import * as SecureStore from 'expo-secure-store'
 
-const baseURL = Constants?.expoConfig?.extra?.API_URL ?? undefined
-const secret = Constants?.expoConfig?.extra?.API_SECRET_KEY
+const extra =
+  Constants.expoConfig?.extra ||
+  Constants.manifest?.extra
 
+const baseURL = extra?.API_URL
+const secret = extra?.API_SECRET_KEY
 // console.log(baseURL)
 // console.log(secret)
 
