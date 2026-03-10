@@ -86,13 +86,13 @@ const BeachInfoModal = memo((props: Props) => {
 
   const [sea, setSea] = useState(props.beach.previsao_marinha)
 
+
   useEffect(() => {
     if (!props.beach || !location) {
       return
     }
 
-
-
+    if (distanceToBeach !== "") return
     const fetchDistanceTrip = async () => {
       try {
         const response = await getTripDistance(props.beach, location)
@@ -102,7 +102,9 @@ const BeachInfoModal = memo((props: Props) => {
       }
     }
 
+    if (weather !== null) return
     const fetchWeather = async () => {
+
       try {
         const response = await getWeather(
           Number(props.beach.latitude),
@@ -174,10 +176,9 @@ const BeachInfoModal = memo((props: Props) => {
             <View style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              alignItems: 'center'
+              alignItems: 'baseline'
             }}>
               <Text style={styles.cardContainerTitle}>Condições atuais</Text>
-
             </View>
             <View style={styles.cardsContainer}>
 
@@ -309,8 +310,23 @@ const BeachInfoModal = memo((props: Props) => {
               fontFamily: 'MontserratSemiBold',
               color: COLORS.TEXT_GRAY,
               fontSize: 12,
-              marginBottom: 25
-            }}>* Mar do dia resume a previsão de condição do mar feita de hora em hora e agrupa por períodos. As condições reais podem variar dependendo do horário. Principalmente durante a manhã e a noite.</Text>
+              marginBottom: 4
+            }}>* Mar do dia resume a previsão de condição do mar feita de hora em hora e agrupa por períodos. As condições reais podem variar dependendo do horário. Principalmente durante a manhã e a noite.
+            </Text>
+            <Text style={{
+              marginBottom: 4,
+              fontFamily: 'MontserratSemiBold',
+              color: COLORS.TEXT_GRAY,
+              fontSize: 12
+            }}>Clima atualizado em: {new Date(weather.atual?.atualizado_em).toLocaleDateString('pt-br')}
+            </Text>
+            <Text style={{
+              marginBottom: 25,
+              fontFamily: 'MontserratSemiBold',
+              color: COLORS.TEXT_GRAY,
+              fontSize: 12
+            }}>Última coleta de análise: {props.beach?.data_coleta}
+            </Text>
           </>
         )}
 

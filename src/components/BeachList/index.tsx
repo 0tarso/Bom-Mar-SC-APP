@@ -23,6 +23,7 @@ import { BeachLocalization } from '@/src/types';
 import NotFoundAnimation from '../NotFound';
 import { COLORS } from '@/src/Theme/Colors';
 import { CustomModal } from '../CustomModal';
+import { normalize } from '@/src/utils/mapPraiaCidade';
 
 
 const BeachList = () => {
@@ -73,7 +74,7 @@ const BeachList = () => {
 
   const handleShowModal = () => {
     setModalVisible(true)
-    console.log(beachs)
+    // console.log(beachs)
   }
 
   const handleCloseModal = () => {
@@ -112,7 +113,7 @@ const BeachList = () => {
             {searchQuery !== '' && (
               <BeachSectionList
                 data={filteredBeachs.filter(b =>
-                  b.title.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+                  normalize(b.title).includes(normalize(searchQuery))
                 )}
               />
             )}

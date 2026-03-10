@@ -2,7 +2,7 @@ import beachByCity from "../data/praia_por_cidade.json"
 import { Beach, BeachLocalization } from "../types";
 
 
-const normalize = (text: string) =>
+export const normalize = (text: string) =>
   text
     .normalize("NFD")               // remove acentos
     .replace(/[\u0300-\u036f]/g, "")

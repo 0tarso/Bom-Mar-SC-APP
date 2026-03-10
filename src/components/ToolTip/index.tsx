@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     paddingBottom: 150
   },
   tooltip: {
-    maxWidth: '80%',
+    maxWidth: '90%',
     backgroundColor: COLORS.GRAY_BACKGROUND,
     padding: 10,
     borderRadius: 10,
