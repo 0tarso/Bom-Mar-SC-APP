@@ -1,6 +1,6 @@
 //React ================================================
 import { View, Text, SectionList, TouchableOpacity, Keyboard, TextInput, FlatList, useWindowDimensions } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 //Components ================================================
 import { CategorySelector } from '../CategorySelector';
@@ -24,11 +24,13 @@ import NotFoundAnimation from '../NotFound';
 import { COLORS } from '@/src/Theme/Colors';
 import { CustomModal } from '../CustomModal';
 import { normalize } from '@/src/utils/mapPraiaCidade';
+import { useLocation } from '@/src/hooks/useLocation';
+import { getNearestBeaches } from '@/src/utils/getNearestBeaches';
 
 
 const BeachList = () => {
   const { height } = useWindowDimensions()
-
+  const { location } = useLocation()
   const { beachs, loadingBeachs, errorFetchBeach } = useUserBeachs()
 
   const sectionListRef = useRef<SectionList>(null);
@@ -42,6 +44,17 @@ const BeachList = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const inputRef = useRef(null)
+
+  const praiasProximas = useMemo(() => {
+    if (!location) return [];
+
+    return getNearestBeaches(
+      beachs,
+      location.latitude,
+      location.longitude,
+      50 // raio em km
+    );
+  }, [beachs, location]);
 
   useEffect(() => {
     if (!sectionListRef.current) return;
@@ -89,6 +102,8 @@ const BeachList = () => {
       <CustomModal
         visible={modalVisible}
         onClose={handleCloseModal}
+        animationIn={'fadeIn'}
+        animationOut={'fadeOutUp'}
       >
         <View style={{ backgroundColor: COLORS.GRAY_BACKGROUND }}>
           <View style={styles.searchModalContainer}>
@@ -117,18 +132,24 @@ const BeachList = () => {
                 )}
               />
             )}
+
+            {searchQuery === '' && (
+              <BeachSectionList
+                data={praiasProximas}
+              />
+            )}
           </View>
         </View>
 
       </CustomModal >
 
-      <View style={[styles.searchModalButton, { bottom: height * 0.12, }]}>
+      <View style={[styles.searchModalButton]}>
         <TouchableOpacity
           hitSlop={10}
           delayPressIn={100}
           onPress={handleShowModal}
         >
-          <Feather name="search" size={24} color={COLORS.FULL_WHITE} />
+          <Feather name="search" size={24} color={COLORS.BLUE_ENABLE} />
         </TouchableOpacity>
       </View>
 

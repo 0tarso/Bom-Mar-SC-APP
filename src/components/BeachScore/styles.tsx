@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     // columnGap: 20,
     backgroundColor: COLORS.FULL_WHITE,
-    padding: 15,
+    paddingVertical: 15,
     elevation: 2,
     borderRadius: 15,
     marginBottom: 25,

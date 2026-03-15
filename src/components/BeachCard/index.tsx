@@ -15,6 +15,7 @@ import { Beach } from '@/src/types'
 
 //Service
 import { shareText } from '@/src/services/shareText'
+import { normalizeFontScale } from '@/src/utils/normalizeFontScalling'
 
 interface Props {
   beach: Beach
@@ -59,7 +60,7 @@ const BeachCard = memo((props: Props) => {
         <FontAwesome name='send' size={18} color={COLORS.BLUE_PRIMARY} />
       </TouchableOpacity>
 
-      <Text style={styles.praia}>{props.beach.praia}</Text>
+      <Text style={[styles.praia, { fontSize: normalizeFontScale(14) }]}>{props.beach.praia}</Text>
       <Text style={styles.complemento}>{props.beach.complemento}</Text>
       {/* <Text style={styles.dataColeta}>Análise: {props.beach.data_coleta}</Text> */}
 

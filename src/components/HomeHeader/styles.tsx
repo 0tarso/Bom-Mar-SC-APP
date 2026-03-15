@@ -1,4 +1,5 @@
 import { COLORS } from "@/src/Theme/Colors";
+import { normalizeFontScale } from "@/src/utils/normalizeFontScalling";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -30,13 +31,13 @@ export const styles = StyleSheet.create({
     elevation: 10
   },
   text: {
-    fontSize: 16,
+    fontSize: normalizeFontScale(12),
     color: COLORS.FULL_WHITE,
     zIndex: 50,
     fontFamily: "MontserratSemiBold"
   },
   title: {
-    fontSize: 26,
+    fontSize: normalizeFontScale(22),
     // fontWeight: "800",
     color: COLORS.FULL_WHITE,
     letterSpacing: 1.5,

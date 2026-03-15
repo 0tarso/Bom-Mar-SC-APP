@@ -1,6 +1,6 @@
 import { useLocation } from '@/src/hooks/useLocation';
 import { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { mapHtml } from "@/src/webview/leaflet.js"
 import { useUserBeachs } from '@/src/contexts/UserBeachsContext';
@@ -12,11 +12,13 @@ import { COLORS } from '@/src/Theme/Colors';
 import { styles } from './styles';
 import { useIsFocused } from '@react-navigation/native';
 import { Toast } from 'toastify-react-native';
+import { normalize } from '@/src/utils/mapPraiaCidade';
+import { normalizeFontScale } from '@/src/utils/normalizeFontScalling';
 // import { useBeachInterstitial } from '@/src/hooks/useBeachInterstitial';
 
 
 export default function MapScreen() {
-
+  const { height } = Dimensions.get('window')
   const isFocused = useIsFocused()
   const webViewRef = useRef<WebView>(null);
   const { beachs } = useUserBeachs();
@@ -97,14 +99,14 @@ export default function MapScreen() {
         <BeachInfoModal beach={selectedBeach} />
       </CustomModal>
 
-      <View style={styles.subtitleContainer}>
+      <View style={[styles.subtitleContainer, { top: height - 140 }]}>
         <View style={styles.subTitle}>
           <FontAwesome name='map-marker' color={COLORS.GREEN} size={24} />
-          <Text style={styles.subTitleText}>PRÓPRIA</Text>
+          <Text style={[styles.subTitleText, { fontSize: normalizeFontScale(13) }]}>PRÓPRIA</Text>
         </View>
         <View style={styles.subTitle}>
           <FontAwesome name='map-marker' color={COLORS.RED_CAUTION} size={24} />
-          <Text style={styles.subTitleText}>IMPRÓPRIA</Text>
+          <Text style={[styles.subTitleText, { fontSize: normalizeFontScale(13) }]}>IMPRÓPRIA</Text>
         </View>
       </View>
       <WebView

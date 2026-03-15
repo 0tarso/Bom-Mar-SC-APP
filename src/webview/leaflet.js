@@ -58,7 +58,7 @@ export const mapHtml = `
     }).addTo(map);
 
     const CustomZoomControl = L.Control.extend({
-      options: { position: 'bottomleft' },
+      options: { position: 'topright' },
       onAdd: function (map) {
         const container = L.DomUtil.create('div', 'custom-zoom-control');
 
@@ -79,8 +79,8 @@ export const mapHtml = `
 
     const el = document.querySelector('.custom-zoom-control');
     el.style.position = 'absolute';
-    el.style.bottom = '120px';
-    el.style.left = '0px';
+    el.style.top = '120px';
+    el.style.right = '0px';
     el.style.zIndex = 10;
 
     const SITUATION_COLORS = {

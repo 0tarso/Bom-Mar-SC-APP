@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "MontserratBold",
-    fontSize: 22,
+    // fontSize: 22,
     color: COLORS.FULL_WHITE,
     // fontWeight: "600",
     // marginBottom: 12,

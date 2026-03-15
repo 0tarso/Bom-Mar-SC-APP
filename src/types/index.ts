@@ -1,3 +1,22 @@
+export interface WeatherAlert {
+  id: number;
+  codigo: string;
+  data_inicio: string;
+  hora_inicio: string;
+  data_fim: string;
+  hora_fim: string;
+  descricao: string;
+  severidade: string;
+  aviso_cor: string;
+  riscos: string[];
+  instrucoes: string[];
+  estados: string;
+  regioes: string;
+  mesorregioes: string;
+  inicio: string;
+  fim: string;
+}
+
 
 export type BeachSituation = "PRÓPRIA" | "IMPRÓPRIA"
 

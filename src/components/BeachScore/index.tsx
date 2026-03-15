@@ -30,13 +30,16 @@ interface Props {
 export default function BeachScore(props: Props) {
   return (
     <View style={{ marginTop: 15 }}>
-      <Text style={styles.cardContainerTitle}>Tipos de banho</Text>
+      {props.situacao === 'PRÓPRIA' && (
+
+        <Text style={styles.cardContainerTitle}>Tipos de banho</Text>
+      )}
 
       <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
 
 
         {props.situacao === 'IMPRÓPRIA' && (
-          <View style={[styles.container, { width: "100%", flexDirection: 'row', columnGap: 20 }]}>
+          <View style={[styles.container, { width: "100%", flexDirection: 'row', columnGap: 20, paddingHorizontal: 12 }]}>
             <View style={{
               position: 'absolute',
               zIndex: 20,
@@ -66,7 +69,7 @@ export default function BeachScore(props: Props) {
               <Text style={[styles.textValue, {
                 width: "80%",
                 textAlign: 'left',
-                color: COLORS.TEXT_GRAY,
+                color: COLORS.BLUE_PRIMARY,
                 fontSize: 16
               }]}>Praia imprópria para banho</Text>
 
@@ -86,13 +89,13 @@ export default function BeachScore(props: Props) {
                         fontSize: 16,
                         marginTop: 0,
                         textAlign: 'left',
-                        color: COLORS.TEXT_GRAY,
+                        color: COLORS.BLUE_PRIMARY,
                         fontFamily: 'MontserratSemiBold'
                       }]}
                     >{props.resultado_e_coli}</Text>
                     <Text style={{
                       fontFamily: "MontserratRegular",
-                      color: COLORS.TEXT_GRAY,
+                      color: COLORS.BLUE_PRIMARY,
                       fontSize: 12
                     }}> NMP/100ml</Text>
 

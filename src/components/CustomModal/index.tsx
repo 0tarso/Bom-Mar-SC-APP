@@ -2,7 +2,7 @@
 //React ================================================
 import React from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
-import Modal from "react-native-modal"
+import Modal, { Animations, ModalProps } from "react-native-modal"
 
 //Styles ================================================
 import { styles } from "./styles";
@@ -11,6 +11,8 @@ import { COLORS } from "@/src/Theme/Colors";
 //Components ================================================
 import CustomButton from "../CustomButton";
 import { FontAwesome } from "@expo/vector-icons";
+import { normalizeFontScale } from "@/src/utils/normalizeFontScalling";
+
 
 
 type Props = {
@@ -20,6 +22,9 @@ type Props = {
   onPressButton?: () => void,
   title?: string;
   children?: React.ReactNode;
+  animationIn?: ModalProps['animationIn'] | 'slideInUp',
+  animationOut?: ModalProps['animationOut'] | 'slideOutDown',
+  headerBackgroundColor?: string
 };
 
 export function CustomModal({
@@ -29,12 +34,15 @@ export function CustomModal({
   onPressButton,
   title,
   children,
+  animationIn,
+  animationOut,
+  headerBackgroundColor = COLORS.BLUE_PRIMARY
 }: Props) {
   return (
     <Modal
       isVisible={visible}
-      animationIn={'slideInUp'}
-      animationOut={'slideOutDown'}
+      animationIn={animationIn}
+      animationOut={animationOut}
       statusBarTranslucent
       onBackButtonPress={onClose}
       style={{ margin: 0 }}
@@ -44,7 +52,7 @@ export function CustomModal({
 
           {title && (
             <View style={{
-              backgroundColor: COLORS.BLUE_PRIMARY,
+              backgroundColor: headerBackgroundColor,
               // flex: 1,
               height: 115,
               justifyContent: "flex-end",
@@ -55,7 +63,7 @@ export function CustomModal({
               elevation: 5
             }}>
 
-              <Text style={styles.title}>{title}</Text>
+              <Text style={[styles.title, { fontSize: normalizeFontScale(20) }]}>{title}</Text>
             </View>
           )}
 

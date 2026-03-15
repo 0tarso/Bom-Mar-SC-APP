@@ -62,7 +62,7 @@ export const styles = StyleSheet.create({
   },
   praia: {
     color: COLORS.BLUE_PRIMARY,
-    fontSize: 14,
+    // fontSize: 14,
     fontFamily: "MontserratBold",
     // fontWeight: "700",
     letterSpacing: 0.5,

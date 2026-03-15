@@ -5,10 +5,10 @@ export const styles = StyleSheet.create({
 
   subtitleContainer: {
     position: 'absolute',
-    bottom: 125,
+    // bottom: 125,
     right: 5,
     zIndex: 50,
-    width: 150,
+    // width: 160,
     // height: 100,
     backgroundColor: 'rgba(255,255,255,0.95)',
     borderRadius: 20,
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
   subTitle: {
     flexDirection: 'row',
     alignItems: 'baseline',
-    marginBottom: 5
+    marginBottom: 5,
   },
   subTitleText: {
     color: COLORS.TEXT_GRAY,

@@ -1,5 +1,5 @@
 //React ================================================
-import { View, Text, Image, ScrollView } from 'react-native'
+import { View, Text, Image, ScrollView, Dimensions } from 'react-native'
 import React, { memo, useEffect, useState } from 'react'
 import { Toast } from 'toastify-react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -78,6 +78,7 @@ const SCORE_TEXT = {
     Fraco: "Ondas ruins ou sem formação.",
   },
 };
+const { height } = Dimensions.get('window')
 
 const BeachInfoModal = memo((props: Props) => {
   const { location } = useLocation()
@@ -139,7 +140,7 @@ const BeachInfoModal = memo((props: Props) => {
   return (
     <>
       <ScrollView style={{
-        height: 600,
+        height: height - 130,
         paddingHorizontal: 20
       }}
         showsVerticalScrollIndicator={false}
@@ -334,7 +335,7 @@ const BeachInfoModal = memo((props: Props) => {
 
       </ScrollView>
 
-      <SafeAreaView style={{ paddingHorizontal: 20, height: 60, justifyContent: 'center' }}>
+      <SafeAreaView style={{ paddingHorizontal: 20, height: 60, justifyContent: 'center', zIndex: 20 }}>
 
         <CustomButton
           backgroundColor={COLORS.BUTTON_FIRST_BACKGROUND}

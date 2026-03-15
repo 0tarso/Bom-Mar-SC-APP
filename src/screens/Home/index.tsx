@@ -1,6 +1,6 @@
 //React ================================================
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
-import React, { useEffect } from 'react'
+import { View, Text, TouchableOpacity, ActivityIndicator, Dimensions } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { Toast } from 'toastify-react-native';
 
 //Styles
@@ -14,10 +14,16 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 //Hooks
 import { useLocation } from '@/src/hooks/useLocation';
+import api from '@/src/api/api';
+import AlertWeatherModal from '@/src/components/AlertWeatherModal';
+import { WeatherAlert } from '@/src/types';
 
 const HomeScreen = () => {
 
+  const { height } = Dimensions.get("window")
   const { refreshLocation, location, city, region, loading } = useLocation()
+
+  const [weatherAlert, setWeatherAlert] = useState<WeatherAlert | null>(null)
 
   useEffect(() => {
     const handleGetUserLocation = async () => {
@@ -31,6 +37,22 @@ const HomeScreen = () => {
     handleGetUserLocation()
   }, [])
 
+  useEffect(() => {
+    const getWeatherAlerts = async () => {
+      try {
+        const response = await api.get('/alertas')
+
+        if (response.data['dados']) {
+          setWeatherAlert(response.data['dados'][0])
+          // console.log(response.data)
+        }
+      } catch (error) {
+        Toast.error("Erro ao obter alertas")
+      }
+    }
+
+    getWeatherAlerts()
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -39,6 +61,12 @@ const HomeScreen = () => {
         <HomeHeader />
       </View>
 
+
+
+      {weatherAlert && (
+
+        <AlertWeatherModal props={weatherAlert} />
+      )}
 
       <View style={styles.locationArea}>
 

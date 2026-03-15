@@ -18,6 +18,7 @@ import { Beach, BeachLocalization } from '@/src/types'
 import { useUserBeachs } from '@/src/contexts/UserBeachsContext'
 import NotFoundAnimation from '../NotFound'
 import { COLORS } from '@/src/Theme/Colors'
+import { normalizeFontScale } from '@/src/utils/normalizeFontScalling'
 // import { useBeachInterstitial } from '@/src/hooks/useBeachInterstitial'
 
 interface Props {
@@ -39,6 +40,7 @@ const BeachSectionList = ({ data }: Props) => {
   const [beachDetailsModal, setBeachDetailsModal] = useState<Beach | null>(null)
 
   const { listData, stickyHeaderIndices } = useMemo(() => {
+
     const flatData: ListItem[] = []
     const stickyIndices: number[] = []
 
@@ -92,12 +94,14 @@ const BeachSectionList = ({ data }: Props) => {
   )
 
 
+
+
   const renderItem = useCallback(
     ({ item }: { item: ListItem }) => {
       if (item.type === 'header') {
         return (
           <View style={styles.sectionHeaderContainer}>
-            <Text style={styles.headerTitle}>{item.title}</Text>
+            <Text style={[styles.headerTitle, { fontSize: normalizeFontScale(20) }]}>{item.title}</Text>
             <Text style={styles.sectionFooterText}>
               {item.count} {item.count > 1 ? 'praias' : 'praia'}
             </Text>
@@ -120,7 +124,7 @@ const BeachSectionList = ({ data }: Props) => {
     if (item.type === 'header') {
       return `header-${item.title}-${index}`
     }
-    return `${item.beach.latitude}-${item.beach.longitude}`
+    return `${item.beach.latitude}-${item.beach.longitude}-${index}`
   }, [])
 
   return (
@@ -135,6 +139,7 @@ const BeachSectionList = ({ data }: Props) => {
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         stickyHeaderIndices={stickyHeaderIndices}
+        extraData={listData}
         ListEmptyComponent={() => (
           <>
             <NotFoundAnimation />

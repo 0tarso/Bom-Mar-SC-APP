@@ -26,17 +26,17 @@ const HomeHeader = () => {
 
   return (
     <>
-      <TouchableOpacity style={styles.infoButton}
+      {/* <TouchableOpacity style={styles.infoButton}
         onPress={() => setShowModal(true)}
       >
         <FontAwesome5 name="info-circle" size={24} color={COLORS.BLUE_ENABLE} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <View style={styles.container}>
 
-        <CustomModal visible={showModal} onClose={() => setShowModal(false)}>
+        {/* <CustomModal visible={showModal} onClose={() => setShowModal(false)}>
           <InfoModal />
-        </CustomModal>
+        </CustomModal> */}
 
         <Text style={styles.text}>Vem aproveitar</Text>
         <Text style={styles.title}>SANTA CATARINA!</Text>

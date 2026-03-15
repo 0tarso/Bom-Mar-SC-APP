@@ -33,11 +33,11 @@ export const styles = StyleSheet.create({
   searchModalButton: {
     position: 'absolute',
     zIndex: 40,
-
-    left: 10,
+    top: -100,
+    right: 20,
     elevation: 2,
-    backgroundColor: COLORS.BLUE_ENABLE,
-    padding: 9,
+    backgroundColor: COLORS.GRAY_BACKGROUND,
+    padding: 7,
     borderRadius: 15
   }
 

@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     paddingBottom: 10
   },
   headerTitle: {
-    fontSize: 20,
+    // fontSize: 20,
     paddingLeft: 10,
     // fontWeight: "900",
     color: COLORS.BLUE_PRIMARY,

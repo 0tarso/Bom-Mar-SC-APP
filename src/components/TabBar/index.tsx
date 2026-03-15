@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.FULL_WHITE,
     paddingBottom: 5,
     // paddingTop: 10,
-    elevation: 2,
+    elevation: 20,
     zIndex: 20,
     // borderRadius: 50,
     position: 'absolute',

@@ -1,5 +1,5 @@
 //React
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text, TextInput } from 'react-native';
 import { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ToastManager from 'toastify-react-native'
@@ -25,8 +25,18 @@ import { toastConfig } from './src/components/Toast';
 //ADMOB
 // import { interstitial } from './src/admob';
 
+//@ts-ignore
+Text.defaultProps = Text.defaultProps || {};
+//@ts-ignore
+Text.defaultProps.allowFontScaling = false;
+
+//@ts-ignore
+TextInput.defaultProps = TextInput.defaultProps || {};
+//@ts-ignore
+TextInput.defaultProps.allowFontScaling = false;
 
 export default function App() {
+
 
   const [openApp, setOpenApp] = useState(false)
   const [fontsLoaded, error] = useFonts({
