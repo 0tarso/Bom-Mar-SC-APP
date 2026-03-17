@@ -47,7 +47,6 @@ export function UserBeachsProvider({ children }: { children: ReactNode }) {
 
   const [error, setError] = useState(false)
 
-
   useEffect(() => {
     const fetch = async () => {
       await handleGetAllBeachs()

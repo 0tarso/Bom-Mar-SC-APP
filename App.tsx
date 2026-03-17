@@ -20,6 +20,8 @@ import { UserBeachsProvider } from './src/contexts/UserBeachsContext';
 
 //Components
 import { toastConfig } from './src/components/Toast';
+import { AppVersionProvider } from './src/contexts/AppVersionProvider';
+import { InternetProvider } from './src/contexts/InternetProvider';
 // import { AdEventType } from 'react-native-google-mobile-ads';
 
 //ADMOB
@@ -39,6 +41,7 @@ export default function App() {
 
 
   const [openApp, setOpenApp] = useState(false)
+
   const [fontsLoaded, error] = useFonts({
     JuliusSansRegular: require('./assets/fonts/JuliusSansOne-Regular.ttf'),
     MontserratBold: require('./assets/fonts/Montserrat-Bold.ttf'),
@@ -95,18 +98,22 @@ export default function App() {
 
   return (
     <SafeAreaProvider style={styles.container}>
-      <UserBeachsProvider>
-        <ToastManager
-          config={toastConfig}
-          // showProgressBar={true}
-          position='top'
-          bottomOffset={80}
-          duration={4000}
-          useModal={false}
+      <InternetProvider>
+        <AppVersionProvider>
+          <UserBeachsProvider>
+            <ToastManager
+              config={toastConfig}
+              // showProgressBar={true}
+              position='top'
+              bottomOffset={80}
+              duration={4000}
+              useModal={false}
 
-        />
-        <Routes />
-      </UserBeachsProvider>
+            />
+            <Routes />
+          </UserBeachsProvider>
+        </AppVersionProvider>
+      </InternetProvider>
     </SafeAreaProvider>
   );
 }

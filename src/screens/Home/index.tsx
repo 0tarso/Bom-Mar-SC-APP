@@ -17,13 +17,21 @@ import { useLocation } from '@/src/hooks/useLocation';
 import api from '@/src/api/api';
 import AlertWeatherModal from '@/src/components/AlertWeatherModal';
 import { WeatherAlert } from '@/src/types';
+import { useAppVersion } from '@/src/contexts/AppVersionProvider';
+import { UpdateModal } from '@/src/components/UpdateModal';
+import { useInternet } from '@/src/contexts/InternetProvider';
+import NotFoundAnimation from '@/src/components/NotFound';
 
 const HomeScreen = () => {
-
-  const { height } = Dimensions.get("window")
-  const { refreshLocation, location, city, region, loading } = useLocation()
+  const { isConnected } = useInternet()
+  const { versionData, isForceUpdate, isOptionalUpdate } = useAppVersion()
+  const { refreshLocation, city, region, loading } = useLocation()
 
   const [weatherAlert, setWeatherAlert] = useState<WeatherAlert | null>(null)
+
+  const [showOptionalUpdateModal, setShowOptionalUpdateModal] = useState(true);
+
+  const visible = isForceUpdate || (isOptionalUpdate && showOptionalUpdateModal);
 
   useEffect(() => {
     const handleGetUserLocation = async () => {
@@ -36,6 +44,16 @@ const HomeScreen = () => {
 
     handleGetUserLocation()
   }, [])
+
+  useEffect(() => {
+    console.log('======================')
+    console.log('versionDataa > ', versionData)
+    // console.log(versionData)
+    console.log('force Update: ', isForceUpdate)
+    console.log('optional Update: ', isOptionalUpdate)
+  }, [versionData])
+
+
 
   useEffect(() => {
     const getWeatherAlerts = async () => {
@@ -54,14 +72,21 @@ const HomeScreen = () => {
     getWeatherAlerts()
   }, [])
 
+
   return (
     <View style={styles.container}>
+
+
 
       <View style={styles.homeHeaderContainer}>
         <HomeHeader />
       </View>
 
-
+      <UpdateModal
+        visible={visible}
+        force={isForceUpdate}
+        onClose={() => setShowOptionalUpdateModal(false)}
+      />
 
       {weatherAlert && (
 
@@ -91,7 +116,25 @@ const HomeScreen = () => {
 
       </View>
 
-      <BeachList />
+
+      {isConnected === false ? (
+        <View style={{
+          flexDirection: 'column',
+          alignItems: "center",
+          justifyContent: 'center',
+        }}>
+          <NotFoundAnimation />
+          <Text style={{
+            fontFamily: "MontserratBold",
+            marginTop: 24
+          }}>Sem conexão</Text>
+        </View>
+
+      ) : (
+        <>
+          <BeachList />
+        </>
+      )}
 
     </View>
   )
