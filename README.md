@@ -16,8 +16,16 @@
   <a href="#sobre">Sobre</a> •
   <a href="#funcionalidades">Funcionalidades</a> •
   <a href="#roadmap">Roadmap</a> •
-  <a href="#stack">Stack</a> •
   <a href="#download">Download</a>
+</p>
+
+<br>
+<p align="center">
+  <img src="https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/TypeScript-20232A?style=for-the-badge&logo=typescript&logoColor=3178C6" />
+  <img src="https://img.shields.io/badge/Expo-20232A?style=for-the-badge&logo=expo&logoColor=white" />
+  <img src="https://img.shields.io/badge/Python-20232A?style=for-the-badge&logo=python&logoColor=FFDE21" />
+  <img src="https://img.shields.io/badge/FastAPI-20232A?style=for-the-badge&logo=fastapi&logoColor=009688" />
 </p>
 
 ---
@@ -51,19 +59,7 @@
 - [x] Alertas sobre eventos climáticos  
 - [x] Versão Android  
 - [ ] Versão iOS  
-- [ ] Publicação na Play Store  
-
----
-
-## Stack
-
-<p align="center">
-  <img src="https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
-  <img src="https://img.shields.io/badge/TypeScript-20232A?style=for-the-badge&logo=typescript&logoColor=3178C6" />
-  <img src="https://img.shields.io/badge/Expo-20232A?style=for-the-badge&logo=expo&logoColor=white" />
-  <img src="https://img.shields.io/badge/Python-20232A?style=for-the-badge&logo=python&logoColor=FFDE21" />
-  <img src="https://img.shields.io/badge/FastAPI-20232A?style=for-the-badge&logo=fastapi&logoColor=009688" />
-</p>
+- [ ] Publicação Play Store e Apple Store  
 
 ---
 
@@ -72,5 +68,5 @@
 🔗 Landing Page:  
 https://bommarsc.vercel.app  
 
-📱 APK:  
+📱 APK v1.2.0:  
 https://github.com/0tarso/Bom-Mar-SC-APP/releases/download/v1.2.0/bom-mar-sc-v1.2.0.apk
