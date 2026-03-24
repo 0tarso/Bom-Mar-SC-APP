@@ -68,5 +68,5 @@
 🔗 Landing Page:  
 https://bommarsc.vercel.app  
 
-📱 APK v1.2.0:  
-https://github.com/0tarso/Bom-Mar-SC-APP/releases/download/v1.2.0/bom-mar-sc-v1.2.0.apk
+📱 APK v1.2.2:  
+https://github.com/0tarso/Bom-Mar-SC-APP/releases/download/v1.2.2/bom-mar-sc-v1.2.2.apk
