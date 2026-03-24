@@ -49,8 +49,8 @@ export const AppVersionProvider = ({ children }: { children: React.ReactNode; })
   const [isOptionalUpdate, setIsOptionalUpdate] = useState(false);
 
   const fetchVersion = async () => {
-    console.log('=========================================')
-    console.log('current version >> ', currentVersion)
+    // console.log('=========================================')
+    // console.log('current version >> ', currentVersion)
     try {
       setLoading(true);
       setError(null);
@@ -77,7 +77,7 @@ export const AppVersionProvider = ({ children }: { children: React.ReactNode; })
     } finally {
       setLoading(false);
     }
-    console.log(versionData)
+    // console.log(versionData)
   };
 
   useEffect(() => {

@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     color: "#afafaf",
   },
   title: {
-    fontFamily: "MontserratSemiBold",
+    fontFamily: "MontserratBold",
     fontSize: 20,
     // letterSpacing: 1,
     color: COLORS.BLUE_ENABLE
@@ -40,12 +40,15 @@ export const styles = StyleSheet.create({
     color: COLORS.BLUE_ENABLE
   },
   infoContainer: {
-    borderColor: COLORS.BLUE_PRIMARY,
-    borderWidth: 1,
+    // borderColor: COLORS.BLUE_PRIMARY,
+    // borderWidth: 1,
     paddingHorizontal: 15,
     paddingVertical: 20,
-    borderRadius: 10,
-    marginTop: 30
+    marginBottom: 10,
+    borderRadius: 20,
+    elevation: 2,
+    marginTop: 20,
+    backgroundColor: '#fff'
   }
 
 

@@ -14,11 +14,13 @@ import { COLORS } from '@/src/Theme/Colors'
 import { CustomModal } from '../CustomModal'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import InfoModal from '../InfoModal'
+import { useAppVersion } from '@/src/contexts/AppVersionProvider'
 
 
 const HomeHeader = () => {
 
   const [showModal, setShowModal] = useState(false)
+  const { currentVersion } = useAppVersion()
 
   // useEffect(() => {
   //   setShowModal(true)
@@ -38,6 +40,7 @@ const HomeHeader = () => {
           <InfoModal />
         </CustomModal> */}
 
+        <Text style={[styles.text, { position: 'absolute', right: 25, textAlign: 'center', top: 40 }]}>v{currentVersion}</Text>
         <Text style={styles.text}>Vem aproveitar</Text>
         <Text style={styles.title}>SANTA CATARINA!</Text>
 

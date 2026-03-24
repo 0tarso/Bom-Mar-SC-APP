@@ -45,27 +45,32 @@ const HomeScreen = () => {
     handleGetUserLocation()
   }, [])
 
-  useEffect(() => {
-    console.log('======================')
-    console.log('versionDataa > ', versionData)
-    // console.log(versionData)
-    console.log('force Update: ', isForceUpdate)
-    console.log('optional Update: ', isOptionalUpdate)
-  }, [versionData])
+  // useEffect(() => {
+  //   console.log('======================')
+  //   console.log('versionDataa > ', versionData)
+  //   // console.log(versionData)
+  //   console.log('force Update: ', isForceUpdate)
+  //   console.log('optional Update: ', isOptionalUpdate)
+  // }, [versionData])
 
 
 
   useEffect(() => {
     const getWeatherAlerts = async () => {
       try {
-        const response = await api.get('/alertas')
+        const response = await api.get('/alertas', {
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache'
+          }
+        })
 
         if (response.data['dados']) {
-          setWeatherAlert(response.data['dados'][0])
-          // console.log(response.data)
+          setWeatherAlert({ ...response.data['dados'][0] })
+          console.log(response.data)
         }
       } catch (error) {
-        Toast.error("Erro ao obter alertas")
+        Toast.error("Erro ao obter alertas.")
       }
     }
 
@@ -90,7 +95,7 @@ const HomeScreen = () => {
 
       {weatherAlert && (
 
-        <AlertWeatherModal props={weatherAlert} />
+        <AlertWeatherModal props={weatherAlert} key={weatherAlert.codigo} />
       )}
 
       <View style={styles.locationArea}>

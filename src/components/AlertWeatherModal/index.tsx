@@ -6,9 +6,26 @@ import { WeatherAlert } from '@/src/types'
 import { styles } from './styles'
 import { FontAwesome } from '@expo/vector-icons'
 
+
+const formatDate = (dateStr: string) => {
+  const date = new Date(dateStr)
+  // console.log('input:', dateStr)
+  // console.log('getDate:', date.getDate())
+  // console.log('getUTCDate:', date.getUTCDate())
+  return `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
+}
+
+
 const AlertWeatherModal = ({ props }: { props: WeatherAlert }) => {
   const { height } = Dimensions.get('window')
   const [isVisible, setIsVisible] = useState(false)
+
+  // useEffect(() => {
+  //   console.log(props.data_inicio)
+  //   console.log(props.data_fim)
+
+  // }, [props])
+
 
   return (
     <View style={[styles.buttonContainer, {
@@ -38,7 +55,6 @@ const AlertWeatherModal = ({ props }: { props: WeatherAlert }) => {
           <View
             style={{
               paddingHorizontal: 10,
-
             }}
           >
             <Text style={[styles.title, { textAlign: 'center', marginTop: 24, fontSize: 24 }]}>{props.descricao}</Text>
@@ -47,19 +63,23 @@ const AlertWeatherModal = ({ props }: { props: WeatherAlert }) => {
             <View style={{
               marginTop: 12,
               flexDirection: 'row',
-              justifyContent: 'space-around'
+              justifyContent: 'space-around',
+              backgroundColor: '#fff',
+              borderRadius: 15,
+              paddingVertical: 10,
+              elevation: 1
             }}>
               <View style={{}}>
                 <Text style={styles.alertPeriod}
                 >Início
                 </Text>
-                <Text style={styles.alertDate}>{new Date(props.data_inicio).toLocaleString('pt-br').slice(0, 10)}</Text>
+                <Text style={styles.alertDate}>{formatDate(props.data_inicio)}</Text>
               </View>
               <View style={{}}>
                 <Text style={styles.alertPeriod}
                 >Fim
                 </Text>
-                <Text style={styles.alertDate}>{new Date(props.data_fim).toLocaleString('pt-br').slice(0, 10)}</Text>
+                <Text style={styles.alertDate}>{formatDate(props.data_fim)}</Text>
               </View>
             </View>
 
