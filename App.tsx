@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ToastManager from 'toastify-react-native'
 import * as NavigationBar from 'expo-navigation-bar'
+import { useNotifications } from './src/hooks/useNotifications'
 
 //Expo
 import { useFonts } from "expo-font";
@@ -50,6 +51,7 @@ export default function App() {
     MontserratRegular: require('./assets/fonts/Montserrat-Regular.ttf'),
   })
 
+  useNotifications()
   useEffect(() => {
     NavigationBar.setVisibilityAsync('hidden')
     NavigationBar.setBehaviorAsync('overlay-swipe')
@@ -85,6 +87,7 @@ export default function App() {
   //     unsubscribeClosed();
   //   };
   // }, []);
+
 
   if (!openApp) {
     return (

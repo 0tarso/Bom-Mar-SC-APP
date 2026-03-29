@@ -17,6 +17,13 @@ export default ({ config }: { config: any }) => {
       },
 
       plugins: [
+        "@react-native-firebase/app",
+        [
+          "expo-notifications",
+          {
+            "icon": "./assets/splashIcon.png",
+          }
+        ],
         "expo-secure-store",
         "expo-font",
         [

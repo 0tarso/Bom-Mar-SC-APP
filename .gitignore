@@ -41,6 +41,7 @@ yarn-error.*
 /ios
 /android
 
+google-services.json
 
 var.txt
 
