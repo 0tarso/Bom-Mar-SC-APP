@@ -55,7 +55,7 @@
 - [x] Exibição de praias no mapa  
 - [x] Balneabilidade da costa catarinense  
 - [ ] Balneabilidade de toda a costa sul  
-- [ ] Notificações  
+- [x] Notificações  
 - [x] Alertas sobre eventos climáticos  
 - [x] Versão Android  
 - [ ] Versão iOS  
@@ -68,5 +68,5 @@
 🔗 Landing Page:  
 https://bommarsc.vercel.app  
 
-📱 APK v1.2.2:  
-https://github.com/0tarso/Bom-Mar-SC-APP/releases/download/v1.2.2/bom-mar-sc-v1.2.2.apk
+📱 APK v1.3.0:  
+https://github.com/0tarso/Bom-Mar-SC-APP/releases/tag/v1.3.0

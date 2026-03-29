@@ -40,7 +40,6 @@ TextInput.defaultProps.allowFontScaling = false;
 
 export default function App() {
 
-
   const [openApp, setOpenApp] = useState(false)
 
   const [fontsLoaded, error] = useFonts({
