@@ -15,6 +15,10 @@ export default ({ config }: { config: any }) => {
           "projectId": "fc4b5a44-3c96-482d-a4b0-8212d6d1b3d7"
         }
       },
+      android: {
+        ...config.android,
+        googleServicesFile: process.env.GOOGLE_SERVICES_JSON ?? "./google-services.json",
+      },
 
       plugins: [
         "@react-native-firebase/app",
