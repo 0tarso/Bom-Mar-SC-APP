@@ -43,6 +43,7 @@ const BeachCard = memo((props: Props) => {
       styles.container,
 
     ]}
+      testID='beach-card'
     >
 
       <TouchableOpacity style={{
@@ -56,6 +57,7 @@ const BeachCard = memo((props: Props) => {
       }}
         hitSlop={15}
         onPress={() => handleShareBeachLocal()}
+        testID='share-button'
       >
         <FontAwesome name='send' size={18} color={COLORS.BLUE_PRIMARY} />
       </TouchableOpacity>
@@ -74,17 +76,22 @@ const BeachCard = memo((props: Props) => {
         right: 20
 
       }}>
+
+
         <View style={styles.navigationMapButtonContainer}>
           <TouchableOpacity
             // style={}
             onPress={props.onPressShowDetail}
             // hitSlop={10}
             style={{ flexDirection: "row", columnGap: 5, alignItems: 'baseline' }}
+            testID='beach-details-button'
           >
             <FontAwesome name='map-marker' size={14} color={COLORS.FULL_WHITE} />
             <Text style={styles.navigationButtonText}>Visualizar</Text>
           </TouchableOpacity>
         </View>
+
+
         <View style={styles.navigationMapButtonContainer}>
           <TouchableOpacity
             delayPressIn={100}
@@ -92,6 +99,7 @@ const BeachCard = memo((props: Props) => {
             // onPressOut={handleFavorite}
             // hitSlop={10}
             style={{ flexDirection: "row", columnGap: 5, alignItems: 'baseline', elevation: 0 }}
+            testID='favorite-button'
           >
             <View style={{ width: 16, height: 16, alignItems: 'center', justifyContent: 'center' }}>
               {loading ? (

@@ -44,6 +44,7 @@ const EmptyFavorites = () => {
           marginTop: 30,
           elevation: 5
         }}
+        testID='go-home-button'
       >
         <Text style={{
           fontFamily: "MontserratSemiBold",

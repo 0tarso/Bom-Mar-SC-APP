@@ -67,8 +67,8 @@ const HomeScreen = () => {
 
         if (response.data['dados']) {
           setWeatherAlert({ ...response.data['dados'][0] })
-          console.log('response.data de weatheralerts')
-          console.log(response.data[0])
+          // console.log('response.data de weatheralerts')
+          // console.log(response.data[0])
         }
       } catch (error) {
         Toast.error("Erro ao obter alertas.")

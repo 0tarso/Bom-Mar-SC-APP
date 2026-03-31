@@ -37,6 +37,7 @@ export function CategorySelector({ value, onChange }: Props) {
     <View
       style={styles.container}
       onLayout={(e) => setContainerWidth(e.nativeEvent.layout.width)}
+      testID="category-select"
     >
       {/* Slider */}
       <Animated.View
@@ -57,6 +58,7 @@ export function CategorySelector({ value, onChange }: Props) {
         style={styles.button}
         onPress={() => onChange("PRÓPRIA")}
         activeOpacity={0.8}
+        testID={`option-propria-${value === "PRÓPRIA" ? "selected" : "default"}`}
       >
         <Text
           style={[
@@ -71,6 +73,7 @@ export function CategorySelector({ value, onChange }: Props) {
         style={styles.button}
         onPress={() => onChange("IMPRÓPRIA")}
         activeOpacity={0.8}
+        testID={`option-impropria-${value === "IMPRÓPRIA" ? "selected" : "default"}`}
       >
         <Text
           style={[

@@ -22,6 +22,7 @@ const CustomButton = (props: Props) => {
       // borderBottomColor: COLORS.BUTTON_BORDER_COLOR
     }}
       onPress={props.onPress}
+      testID='custom-button'
     >
       <Text style={{
         color: props.titleColor,

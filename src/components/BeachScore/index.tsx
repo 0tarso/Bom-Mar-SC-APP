@@ -6,7 +6,8 @@ import { styles } from './styles';
 import CustomTooltip from '../ToolTip';
 import { FontAwesome } from '@expo/vector-icons';
 
-interface Props {
+
+export interface BeachScoreProps {
   score: {
     adulto: {
       score: number;
@@ -27,9 +28,9 @@ interface Props {
 }
 
 
-export default function BeachScore(props: Props) {
+export default function BeachScore(props: BeachScoreProps) {
   return (
-    <View style={{ marginTop: 15 }}>
+    <View style={{ marginTop: 15 }} testID='beach-score'>
       {props.situacao === 'PRÓPRIA' && (
 
         <Text style={styles.cardContainerTitle}>Tipos de banho</Text>
